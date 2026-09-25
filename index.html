@@ -742,7 +742,7 @@ svg{display:block}
   <button class="btn" id="unitReset" style="margin-top:12px">↺ ابدأ الوحدة المفتوحة من الأول</button>
   <button class="btn" id="allReset" style="margin-top:8px;background:rgba(255,91,79,.12);color:#FF8A80">امسح كل التقدم على الموبايل ده</button>
   <button class="btn" id="admEnter" style="margin-top:8px">🔒 دخول لوحة التحكم</button>
-  <div class="about">تطوير <b>Mohamed _ Eldawly</b><br>الإصدار <span id="verLbl">1.6.0</span></div>
+  <div class="about">تطوير <b>Mohamed _ Eldawly</b><br>الإصدار <span id="verLbl">1.7.0</span></div>
   <button class="btn" data-close>تمام</button></div></div>
 </div>
 
@@ -1761,6 +1761,7 @@ function linFit(pts){ const n=pts.length, sx=pts.reduce((a,p)=>a+p[0],0), sy=pts
 function renderBenchPaper(){ const host=$("#bpaperSheet");
   if(B.view==="graph"){ host.innerHTML=(B.readings.length||X.graphAlways)?X.graph():`<div class="paper-empty">لسه مفيش قراءات. ارجع لـ 3D، وصّل الأجهزة صح، واضغط "سجّل" كذا مرة.</div>`;
     if(B.readings.length>=4&&!B.graphSeen){ B.graphSeen=true; benchLatch(B.res||benchSolve()); benchSteps(); } return; }
+  if(X.schSVG){ host.innerHTML=X.schSVG(B.res||benchSolve()); return; }
   const iec=P.id==="IEC", s=B.res||benchSolve(), ink="#1B2730", S2=X.sch, R=schRoute(S2.pts,S2.boxes,B.wires);
   const T=(x,y,t,a="middle",sz=12,w=500,c=ink)=>`<text x="${x}" y="${y}" text-anchor="${a}" font-size="${sz}" font-weight="${w}" fill="${c}" font-family="Readex Pro,Tahoma">${t}</text>`;
   let d=`<svg viewBox="0 0 360 430" direction="ltr" role="img" aria-label="مخطط توصيلك"><defs><pattern id="gd2" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0H0V10" fill="none" stroke="#E7E3D8" stroke-width=".8"/></pattern></defs><rect width="360" height="430" fill="url(#gd2)"/>`;
@@ -3805,7 +3806,7 @@ function buildWDev(R,c){ const P0=wsPos(c), ty=c.ty, p=wsParam(c), zt=ty==="sup"
   if(ty==="lamp"||ty==="bal"||ty==="mcb"){ const lb=decal(.7,.12,(x,w,h)=>{ txt(x,0,44,"#6B5A3C",700)(ty==="mcb"?`B${p}`:`${p} W`,w/2,h/2+2); }); lb.position.set(ty==="lamp"?.3:0,ty==="lamp"?-.08:-.12,zt+.002); lb.position.x+=P0.x; lb.position.y+=P0.y; R.scene.add(lb); }
   return H; }
 /* ---------- experiment ---------- */
-EXPS.house={ wireOpen:w=>dgWireOpen(w), onTermTap:t=>dgOn()?dgTerm(t):false, onWireTap:id=>{ const d=dgBox().diag; if(dgOn()&&d.tool==="pick") return dgPick(id,"wire"); return dgOn(); }, id:"house", key:"ws", doneKey:"done_house", title:"ورشة التمديدات", formula:"اختار، ووصّل، واختبر", dynamic:true, maxStep:.05, timeScale:1, wireR:.005, graphAlways:true,
+EXPS.house={ schSVG:s=>ladderSVG(s), wireOpen:w=>dgWireOpen(w), onTermTap:t=>dgOn()?dgTerm(t):false, onWireTap:id=>{ const d=dgBox().diag; if(dgOn()&&d.tool==="pick") return dgPick(id,"wire"); return dgOn(); }, id:"house", key:"ws", doneKey:"done_house", title:"ورشة التمديدات", formula:"اختار، ووصّل، واختبر", dynamic:true, maxStep:.05, timeScale:1, wireR:.005, graphAlways:true,
   get C(){ const o={}; wsComps().forEach(c=>{ const q=wsPos(c); o[c.id]={c:[q.x,q.y],w:q.w,h:q.h,zt:c.ty==="sup"?.36:c.ty==="lamp"?.26:.12}; }); return o; },
   get T(){ const o={}; wsComps().forEach(c=>WT[c.ty].t.forEach((n,i)=>{ o[`${c.id}.${n}`]=[c.id,[tx(c,i),-.9/2+.17],3]; })); return o; },
   get terms(){ return wsComps().flatMap(c=>WT[c.ty].t.map(n=>`${c.id}.${n}`)); },
@@ -3940,7 +3941,7 @@ function initWs(){
 /* ============================================================
    ADMIN PANEL, MEMBERSHIP, SCHEDULED CLOSING, FORCED UPDATE, PWA, STARTUP SOUND
    ============================================================ */
-const APP_VERSION="1.6.0";
+const APP_VERSION="1.7.0";
 function sha256(str){ // compact pure-JS SHA-256 (works even where crypto.subtle is unavailable)
   const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
   const b=unescape(encodeURIComponent(str)), l=b.length, w=[]; for(let i=0;i<l;i++) w[i>>2]|=b.charCodeAt(i)<<(24-(i%4)*8); w[l>>2]|=0x80<<(24-(l%4)*8); w[((l+8>>6)<<4)+15]=l*8;
@@ -4317,6 +4318,76 @@ function initAch(){ document.addEventListener("click",e=>{ const t=e.target.clos
     if(t.id==="achOpen") openAch(); if(t.id==="achExamGo"||t.id==="exAgain") examStart(); if(t.id==="exNext") examNext(); if(t.id==="achCert"||t.id==="exCert") openCert(); if(t.id==="certGo") certRender();
     if(t.id==="exQuit"){ if(EX&&!EX.done){ if(!t.dataset.sure){ t.dataset.sure=1; t.textContent="متأكد؟"; setTimeout(()=>{ delete t.dataset.sure; t.textContent="إنهاء"; },3000); return; } examFinish(); } else closeModal(); } });
   document.addEventListener("keydown",e=>{ if(e.key==="Enter"&&e.target.id==="exIn") examNext(); if(e.key==="Enter"&&e.target.id==="certName") certRender(); }); }
+
+/* ============================================================
+   WORKSHOP SCHEMATIC — a real circuit diagram generated from the student's connections:
+   every net is a horizontal bus (phase at the top, neutral and earth at the bottom),
+   every component is drawn with its standard symbol between the buses it joins.
+   ============================================================ */
+const LD_CANON={ s1:[["L"],["L1"]], pb:[["1"],["2"]], s2g:[["L"],["L1","L2"]], sw2:[["C"],["L1","L2"]], swi:[["A1","A2"],["B1","B2"]], mcb:[["1"],["2"]], fuse:[["1"],["2"]],
+  rcd:[["L1","N1"],["L2","N2"]], lamp:[["L"],["N"]], neon:[["1"],["2"]], bell:[["1"],["2"]], sock:[["L"],["N","PE"]], heat:[["L"],["N","PE"]], fan:[["L"],["N"]],
+  bal:[["1"],["2"]], st:[["1"],["2"]], tube:[["A1","A2"],["B1","B2"]], am:[["A"],["COM"]], vm:[["V"],["COM"]] };
+function ldSym(ty,x,yT,yB,st,on,iec,flip){ const ym=(yT+yB)/2, K="#1B2730", L=(a,b,c,d)=>`<path d="M${a} ${b}L${c} ${d}"/>`; let g="";
+  const tops=LD_CANON[ty][0].length, bots=LD_CANON[ty][1].length, off=n=>n===1?[0]:n===2?[-12,12]:[-14,0,14];
+  const T=off(tops).map(o=>x+o), Bx=off(bots).map(o=>x+o);
+  const A=flip?yB:yT, Z=flip?yT:yB, dir=flip?-1:1, Y=v=>A+dir*v;   // Y(0)=canonical top, Y(40)=canonical bottom
+  const blade=(px,py,cx,cy,closed)=>closed?L(px,py,cx,cy):L(px,py,cx+(cx>=px?9:-9)+(cx===px?9:0),cy-dir*9);
+  if(ty==="s1"||ty==="pb"||ty==="mcb"){ g+=L(x,Y(0),x,Y(12))+L(x,Y(40),x,Y(28)); g+=`<circle cx="${x}" cy="${Y(12)}" r="2.2" fill="${K}"/>`; g+=blade(x,Y(12),x,Y(28),!!st);
+    if(ty==="pb") g+=L(x+4,Y(20),x+14,Y(20))+L(x+14,Y(16),x+14,Y(24)); if(ty==="mcb"){ g+=L(x-4,Y(24),x+4,Y(32))+L(x+4,Y(24),x-4,Y(32)); g+=`<rect x="${x+8}" y="${Math.min(Y(14),Y(22))}" width="7" height="8" fill="none"/>`; } }
+  else if(ty==="s2g"){ g+=L(x,Y(0),x,Y(10))+L(x-12,Y(10),x+12,Y(10)); [-12,12].forEach((o,i)=>{ g+=`<circle cx="${x+o}" cy="${Y(10)}" r="2" fill="${K}"/>`+L(x+o,Y(40),x+o,Y(28))+blade(x+o,Y(10),x+o,Y(28),!!(st&(1<<i))); }); }
+  else if(ty==="sw2"){ g+=L(x,Y(0),x,Y(12))+`<circle cx="${x}" cy="${Y(12)}" r="2.2" fill="${K}"/>`; [-12,12].forEach(o=>g+=L(x+o,Y(40),x+o,Y(28))+`<circle cx="${x+o}" cy="${Y(28)}" r="1.6" fill="${K}"/>`); g+=L(x,Y(12),x+(st?12:-12),Y(28)); }
+  else if(ty==="swi"){ g+=`<rect x="${x-19}" y="${Math.min(Y(8),Y(32))}" width="38" height="24" fill="none" stroke-dasharray="3 2"/>`; [-12,12].forEach(o=>g+=L(x+o,Y(0),x+o,Y(10))+L(x+o,Y(40),x+o,Y(30)));
+    g+=st?L(x-12,Y(10),x+12,Y(30))+L(x+12,Y(10),x-12,Y(30)):L(x-12,Y(10),x-12,Y(30))+L(x+12,Y(10),x+12,Y(30)); }
+  else if(ty==="fuse"){ g+=L(x,Y(0),x,Y(40))+`<rect x="${x-5}" y="${ym-12}" width="10" height="24" fill="#fff"/>`+L(x,ym-12,x,ym+12); }
+  else if(ty==="rcd"){ [-12,12].forEach(o=>g+=L(x+o,Y(0),x+o,Y(40))); g+=`<rect x="${x-19}" y="${ym-11}" width="38" height="22" fill="#fff"/><text x="${x}" y="${ym+4}" text-anchor="middle" font-size="10" font-weight="700" fill="${K}" stroke="none">IΔ</text>`; }
+  else if(["lamp","neon","fan","am","vm","st"].includes(ty)){ const r=ty==="neon"?8:11; g+=L(x,Y(0),x,ym-dir*r)+L(x,Y(40),x,ym+dir*r);
+    g+=`<circle cx="${x}" cy="${ym}" r="${r}" fill="${on?(ty==="neon"?"#FF8A3C":"#FFD66B"):"#fff"}"/>`;
+    if(ty==="lamp") g+=iec?L(x-7.8,ym-7.8,x+7.8,ym+7.8)+L(x+7.8,ym-7.8,x-7.8,ym+7.8):`<path d="M${x-6} ${ym+4}q6-12 12 0" fill="none"/>`;
+    if(ty==="neon") g+=`<circle cx="${x-3}" cy="${ym}" r="1.6" fill="${K}"/><circle cx="${x+3}" cy="${ym}" r="1.6" fill="${K}"/>`;
+    if(ty!=="lamp"&&ty!=="neon") g+=`<text x="${x}" y="${ym+4}" text-anchor="middle" font-size="11" font-weight="700" fill="${K}" stroke="none">${{fan:"M",am:"A",vm:"V",st:"S"}[ty]}</text>`; }
+  else if(ty==="bell"){ g+=L(x,Y(0),x,ym-dir*6)+L(x,Y(40),x,ym+dir*6); g+=`<path d="M${x-10} ${ym+6}H${x+10}M${x-8} ${ym+6}V${ym}a8 8 0 0 1 16 0V${ym+6}" fill="${on?"#FFD66B":"#fff"}"/>`; }
+  else if(ty==="sock"){ g+=L(x,Y(0),x,ym-4); g+=`<path d="M${x-11} ${ym+6}a11 11 0 0 1 22 0" fill="none"/>`+L(x-11,ym+6,x+11,ym+6); g+=L(x-12,Y(40),x-12,ym+6)+L(x+12,Y(40),x+12,ym+6); g+=L(x+6,ym-6,x+16,ym-6); }
+  else if(ty==="heat"){ g+=L(x,Y(0),x,ym-12)+L(x-12,Y(40),x-12,ym+12)+L(x+12,Y(40),x+12,ym+12)+L(x-12,ym+12,x,ym+12);
+    g+=iec?`<rect x="${x-6}" y="${ym-12}" width="12" height="24" fill="${on?"#FFB36B":"#fff"}"/>`+L(x-6,ym-4,x+6,ym-4)+L(x-6,ym+4,x+6,ym+4):`<path d="M${x} ${ym-12}l5 3-10 5 10 5-10 5 10 5-5 1" fill="none"/>`; }
+  else if(ty==="bal"){ g+=L(x,Y(0),x,ym-dir*14)+L(x,Y(40),x,ym+dir*14); g+=`<path d="M${x} ${ym-14}${[0,1,2,3].map(()=>"a3.5 3.5 0 0 1 0 7").join("")}" fill="none"/>`+L(x+8,ym-14,x+8,ym+14)+L(x+11,ym-14,x+11,ym+14); }
+  else if(ty==="tube"){ [-12,12].forEach(o=>g+=L(x+o,Y(0),x+o,Y(8))+L(x+o,Y(40),x+o,Y(32))); g+=`<rect x="${x-18}" y="${Math.min(Y(8),Y(32))}" width="36" height="24" rx="3" fill="${on?"#EAF4FF":"#fff"}"/>`;
+    [Y(8),Y(32)].forEach(yy=>g+=`<path d="M${x-12} ${yy}v${-dir*0+(yy===Y(8)?dir*5:-dir*5)}h24v${yy===Y(8)?-dir*5:dir*5}" fill="none"/>`); }
+  return `<g fill="none" stroke="${K}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${g}</g>`;
+  function _(){} }
+function ldTermX(ty,x,flip){ const [t,b]=LD_CANON[ty], off=n=>n===1?[0]:n===2?[-12,12]:[-14,0,14], m={}; t.forEach((n,i)=>m[n]={x:x+off(t.length)[i],side:flip?1:0}); b.forEach((n,i)=>m[n]={x:x+off(b.length)[i],side:flip?0:1}); return m; }
+function ladderSVG(s){ const cs=wsComps(), st=wsSt(), iec=P.id==="IEC", r=s&&s.r, K="#1B2730";
+  const p={}; X.terms.forEach(t=>p[t]=t); const f=x=>p[x]===x?x:(p[x]=f(p[x])); B.wires.forEach(w=>{ p[f(w.a)]=f(w.b); });
+  const used=new Set(); B.wires.forEach(w=>{ used.add(w.a); used.add(w.b); });
+  const nL=f("sup.L"), nN=f("sup.N"), nPE=f("sup.PE"), parts=cs.filter(c=>c.ty!=="sup"&&LD_CANON[c.ty]);
+  const adj={}; parts.forEach(c=>{ const ns=[...new Set(WT[c.ty].t.filter(t=>used.has(`${c.id}.${t}`)).map(t=>f(`${c.id}.${t}`)))]; ns.forEach(a=>{ adj[a]=adj[a]||new Set(); ns.forEach(b=>{ if(a!==b) adj[a].add(b); }); }); });
+  const neu=new Set([nN]); for(let k=0;k<3;k++) parts.filter(c=>c.ty==="rcd").forEach(c=>{ const a=f(`${c.id}.N1`), b=f(`${c.id}.N2`); if(used.has(`${c.id}.N1`)&&used.has(`${c.id}.N2`)){ if(neu.has(a)) neu.add(b); if(neu.has(b)) neu.add(a); } });
+  const lvl={}; lvl[nL]=0; const q=[nL]; while(q.length){ const a=q.shift(); (adj[a]||[]).forEach(b=>{ if(neu.has(b)||b===nPE) return; if(lvl[b]==null){ lvl[b]=lvl[a]+1; q.push(b); } }); }
+  const nets=new Set(); parts.forEach(c=>WT[c.ty].t.forEach(t=>{ const k=`${c.id}.${t}`; if(used.has(k)) nets.add(f(k)); })); [nL,nN,nPE].forEach(n=>nets.add(n));
+  let mx=0; for(const n of nets) if(lvl[n]!=null&&!neu.has(n)&&n!==nPE) mx=Math.max(mx,lvl[n]); for(const n of nets) if(lvl[n]==null&&!neu.has(n)&&n!==nPE) lvl[n]=Math.max(1,Math.ceil(mx/2)); neu.forEach(n=>{ if(n!==nN) lvl[n]=mx+.5; });
+  lvl[nN]=mx+1; lvl[nPE]=mx+2; if(nPE===nN) lvl[nN]=mx+1;
+  const peUsed=[...used].some(t=>f(t)===nPE&&t!=="sup.PE");
+  const order=[...nets].filter(n=>n!==nPE||peUsed).sort((a,b)=>lvl[a]-lvl[b]||(a===nL?-1:0)); const row={}; order.forEach((n,i)=>row[n]=i);
+  const RH=74, TOP=34, LEFT=54, yRow=n=>TOP+row[n]*RH;
+  const items=parts.map(c=>{ const ts=WT[c.ty].t, rows=ts.filter(t=>used.has(`${c.id}.${t}`)).map(t=>row[f(`${c.id}.${t}`)]).filter(v=>v!=null); if(!rows.length) return null;
+    const [ct,cb]=LD_CANON[c.ty], avg=a=>{ const v=a.filter(t=>used.has(`${c.id}.${t}`)).map(t=>row[f(`${c.id}.${t}`)]); return v.length?v.reduce((x,y)=>x+y,0)/v.length:null; };
+    const at=avg(ct), ab=avg(cb), flip=at!=null&&ab!=null&&at>ab; return {c,top:Math.min(...rows),bot:Math.max(...rows),flip,w:Math.max(58,LD_CANON[c.ty].flat().length*16)}; }).filter(Boolean)
+    .sort((a,b)=>a.top-b.top||a.bot-b.bot||(wsPos(a.c).x-wsPos(b.c).x));
+  let xc=LEFT+30; items.forEach(it=>{ it.x=xc+it.w/2; xc+=it.w+14; }); const W=Math.max(340,xc+24), H=TOP+order.length*RH+44;
+  const live=n=>{ if(!r||!B.out) return false; const t=[...used].find(k=>f(k)===n)||(n===nL?"sup.L":null); return t?Math.abs(r.V[t]||0)>P.V*.3:false; };
+  const stubs={}; let body="", lines="";
+  items.forEach(it=>{ const c=it.c, yT=yRow(order[it.top])+16, yB=yT+40, tx=ldTermX(c.ty,it.x,it.flip), o=r&&r.c[c.id]||{}, on=c.ty==="tube"?!!wsDev(c.id).lit:(o.on||0)>.3;
+    body+=ldSym(c.ty,it.x,yT,yB,st[c.id]||0,on,iec,it.flip);
+    body+=`<text x="${it.x+it.w/2-4}" y="${yT+6}" text-anchor="end" font-size="9.5" font-weight="700" fill="#3A4A55" font-family="Readex Pro,Tahoma">${c.id}</text>`;
+    WT[c.ty].t.forEach(t=>{ const k=`${c.id}.${t}`, pt=tx[t]; if(!pt) return; const y0=pt.side===0?yT:yB;
+      if(!used.has(k)){ lines+=`<circle cx="${pt.x}" cy="${y0}" r="2.6" fill="#fff" stroke="${K}" stroke-width="1.4"/>`; return; }
+      const n=f(k), yb=yRow(n), hot=live(n); lines+=`<path d="M${pt.x} ${y0}V${yb}" stroke="${hot?"#D9480F":K}" stroke-width="${hot?2.2:1.6}" fill="none"/>`; (stubs[n]=stubs[n]||[]).push(pt.x); }); });
+  let bus=""; order.forEach(n=>{ const xs=(stubs[n]||[]).slice(); const sup=n===nL||n===nN||n===nPE; if(sup) xs.push(LEFT); if(!xs.length) return; const y=yRow(n), a=Math.min(...xs), b=Math.max(...xs), hot=live(n);
+    const col=n===nL?"#8A5A33":n===nN?"#2E6BD1":n===nPE?"#3E9E4F":K; bus+=`<path d="M${a} ${y}H${b}" stroke="${hot?"#D9480F":col}" stroke-width="${sup?2.6:1.8}" ${n===nPE?'stroke-dasharray="6 3"':""} fill="none"/>`;
+    (stubs[n]||[]).forEach(x=>{ if(x>a+.5&&x<b-.5||xs.filter(v=>Math.abs(v-x)<.5).length>1) bus+=`<circle cx="${x}" cy="${y}" r="3" fill="${hot?"#D9480F":col}"/>`; });
+    if(sup) bus+=`<text x="${LEFT-8}" y="${y+4}" text-anchor="end" font-size="12" font-weight="700" fill="${col}" font-family="Readex Pro,Tahoma">${n===nL?HT_LBL("L"):n===nN?"N":HT_LBL("PE")}</text>`; });
+  const tb=`<g font-family="Readex Pro,Tahoma"><rect x="10" y="${H-32}" width="${W-20}" height="24" fill="none" stroke="${K}" stroke-width="1.1"/><text x="${W-20}" y="${H-16}" text-anchor="end" font-size="10.5" fill="${K}">${(wsCh()||FREE).n}</text><text x="20" y="${H-16}" font-size="10" fill="${K}">${iec?"IEC 60617":"ANSI / IEEE 315"}</text></g>`;
+  return `<div style="overflow-x:auto;background:#fff;border-radius:12px"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="max-width:none;display:block" direction="ltr" role="img" aria-label="المخطط الكهربي"><defs><pattern id="gdL" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0H0V10" fill="none" stroke="#EEEAE0" stroke-width=".7"/></pattern></defs><rect width="${W}" height="${H}" fill="url(#gdL)"/>${bus}${lines}${body}${tb}</svg></div>
+    <p class="paper-note">ده المخطط الكهربي لتوصيلك: الخط البني فوق هو الفاز، والأزرق تحت هو النيوترال، والأخضر المتقطع هو الأرضي. كل خط أفقي في النص نقطة توصيل واحدة، وكل مكون مرسوم برمزه القياسي بين النقط اللي متوصل بيها. ${B.out?"الخطوط البرتقالي فيها فاز دلوقتي.":"شغّل اللوحة عشان تشوف الفاز واصل لحد فين."}</p>`; }
 
 /* ---------- focus mode, step pill, collapsible notes ---------- */
 const NOTE_OPEN={notes:false,bnotes:false};
