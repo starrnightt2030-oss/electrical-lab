@@ -65,9 +65,9 @@
       "state": "premium"
     }
   },
-  "version": 43,
+  "version": 44,
   "closed_until": null,
-  "min_version": null,
+  "min_version": "1.6.0",
   "challenges": {
     "c5": {
       "state": "premium"
@@ -140,5 +140,5 @@
   "admin_hash": "f3cf958d2d5116610a292fb83e697207ec6897bc58d09c246870ec904c39a9c8",
   "member_salt": "anfsxf2nehg8djm9",
   "revoked_devices": [],
-  "updated": "2026-09-25T12:25:27.761Z"
+  "updated": "2026-09-25T17:15:57.380Z"
 }
