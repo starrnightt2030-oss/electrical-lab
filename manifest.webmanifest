@@ -1,0 +1,31 @@
+{
+  "name": "المعمل الكهربي الافتراضي",
+  "short_name": "المعمل الكهربي",
+  "description": "محاكاة كهربية تفاعلية للطلاب: وصّل، شغّل، قيس، واكتشف الأعطال",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0A1426",
+  "theme_color": "#0A1426",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
