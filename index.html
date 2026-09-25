@@ -428,6 +428,60 @@ svg{display:block}
 .codebox b{display:block;font-size:1.6rem;letter-spacing:.12em;color:#9CF5CB;direction:ltr}.codebox small{color:#93A5C4}
 .devrow{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.8rem}.devrow span{flex:1}.devrow code{direction:ltr;color:#FFE08A;font-family:inherit}
 .devrow button{height:32px;padding:0 10px;border-radius:9px;font-size:.74rem;background:rgba(255,91,79,.14);color:#FF8A80}.devrow button.un{background:rgba(47,208,138,.14);color:#9CF5CB}
+.wires{position:relative;flex:1;min-width:0}
+.wsel{display:flex;align-items:center;gap:8px;height:46px;padding:0 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);font-size:.8rem;font-weight:600;color:#EEF3FB;max-width:100%}
+.wsel i{width:22px;height:22px;border-radius:50%;flex:none;box-shadow:inset 0 -3px 5px rgba(0,0,0,.3),0 0 0 2px rgba(255,255,255,.2)}
+.wpop{position:absolute;bottom:56px;inset-inline-start:0;display:flex;gap:6px;padding:8px;border-radius:16px;background:rgba(11,22,42,.96);border:1px solid rgba(160,190,255,.16);box-shadow:0 12px 30px rgba(0,0,0,.4);z-index:9}
+.wpop[hidden]{display:none}
+.wpop .sw{width:auto;height:auto;padding:8px 10px;flex-direction:column;gap:4px;display:flex;align-items:center}
+.wpop .sw b{font-size:.7rem;font-weight:600;color:#C9D6E6}
+.sw[data-c="Y"] i{background:#F2C230}
+.movebtn[aria-pressed="true"]{background:rgba(255,199,44,.18);color:#FFD86B;border:1px solid #FFC72C}
+
+/* focus mode: step as a small side arrow tab */
+.focus .fstep{top:50%!important;transform:translateY(-50%);inset-inline:auto!important;right:0;left:auto;max-width:48px;min-height:70px;padding:10px 7px;border-radius:16px 0 0 16px;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.focus .fstep span{display:none}
+.focus .fstep::after{content:"‹";font-size:1.5rem;line-height:1;color:#FFD86B}
+.focus .fstep[data-open="true"]{max-width:min(80%,440px);flex-direction:row;align-items:flex-start;padding:12px 14px;gap:10px}
+.focus .fstep[data-open="true"] span{display:block;white-space:normal}
+.focus .fstep[data-open="true"]::after{content:"›"}
+/* landscape board, like a game */
+@media (orientation:landscape) and (max-height:560px){
+  .screen.focus .bottom{inset-inline:auto;left:8px;right:auto;top:62px;bottom:8px;width:auto;display:flex;flex-direction:column;justify-content:center;max-width:none}
+  .screen.focus .dock{flex-direction:column;padding:6px;gap:8px;width:66px}
+  .screen.focus .dock .wires{flex:none}
+  .screen.focus .wsel{width:52px;padding:0;justify-content:center}.screen.focus .wsel span{display:none}
+  .screen.focus .wpop{bottom:auto;top:0;left:62px;inset-inline-start:auto}
+  .screen.focus .power{min-width:0;width:52px;padding:0;justify-content:center}.screen.focus .power span:not(.knob){display:none}
+  .screen.focus.tools-open .ctrl{position:fixed;left:86px;right:auto;top:62px;width:min(380px,48vw);max-height:calc(100% - 74px);overflow:auto;display:block}
+  .screen.focus .notes{top:62px}
+  .screen.focus .lab-head{display:none}
+  .screen.focus .hud{inset-inline:auto;top:10px;left:84px;right:auto;width:auto;justify-content:flex-end;flex-direction:row-reverse;gap:8px;max-width:calc(100% - 440px)}
+  .screen.focus .hud .status{max-width:220px}
+  .screen.focus .lab-top{justify-content:flex-start;gap:8px}
+  .screen.focus .hud .meter,.screen.focus .bhud .meter{transform:scale(.88);transform-origin:top right}
+}
+#bstage.moving canvas{cursor:grab}
+[data-move].pulse{animation:mpulse 1s ease-in-out 6;border:1px solid #FFC72C}
+@keyframes mpulse{50%{box-shadow:0 0 0 8px rgba(255,199,44,.25);color:#FFD86B}}
+.dgbar{display:flex;flex-direction:column;gap:8px}
+.dglog{max-height:92px;overflow:auto;border-radius:12px;background:rgba(0,0,0,.25);padding:6px 10px;font-size:.78rem;line-height:1.7;color:#DDE7F5}
+.dglog div+div{opacity:.6;border-top:1px solid rgba(255,255,255,.06)}
+.achcard{display:flex;gap:10px;margin:0 0 18px;width:100%;padding:14px;border-radius:20px;background:linear-gradient(135deg,#1E3F8F,#132341);border:1px solid rgba(255,199,44,.25);align-items:center;text-align:right}
+.achcard .ai{font-size:1.9rem}.achcard div{flex:1}.achcard b{display:block;font-size:.95rem}.achcard small{color:#C9D6E6;font-size:.76rem}
+.achcard .an{display:flex;gap:12px;font-weight:700;color:#FFE08A;font-size:.9rem;flex:none}
+.ustar{display:block;font-size:.72rem;color:#FFC72C;letter-spacing:.1em;margin-top:2px}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.badge{padding:10px 6px;border-radius:14px;text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(160,190,255,.1);opacity:.45;filter:grayscale(1)}
+.badge.on{opacity:1;filter:none;background:rgba(255,199,44,.1);border-color:rgba(255,199,44,.45)}
+.badge i{display:block;font-style:normal;font-size:1.6rem;line-height:1.4}.badge b{display:block;font-size:.76rem}.badge small{display:block;font-size:.64rem;color:#93A5C4;line-height:1.5;margin-top:2px}
+.exam-card{max-height:92vh;overflow:auto}
+.extime{font-weight:700;color:#FFE08A;background:rgba(255,199,44,.12);padding:4px 12px;border-radius:10px;direction:ltr}
+.exbar{height:6px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;margin:6px 0 6px}.exbar i{display:block;height:100%;width:0;background:#FFC72C;transition:width .3s}
+.exq{font-size:1rem!important;line-height:1.9!important;margin:12px 0!important;color:#EEF3FB!important}
+.exres{text-align:center;padding:18px;border-radius:18px;margin-top:10px}.exres.ok{background:rgba(47,208,138,.12);border:1px solid rgba(47,208,138,.4)}.exres.no{background:rgba(255,91,79,.1);border:1px solid rgba(255,91,79,.4)}
+.exres b{display:block;font-size:2.6rem;color:#FFE08A}.exres span{display:block;font-weight:600;margin:4px 0}.exres small{color:#93A5C4}
+.exrev{margin-top:12px}.exrev summary{cursor:pointer;color:#FFD86B;font-size:.86rem}.exrev div{font-size:.8rem;line-height:1.8;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}.exrev .ok b{color:#2FD08A}.exrev .no b{color:#FF8A80}.exrev small{color:#93A5C4}
 </style>
 </head>
 <body>
@@ -465,6 +519,7 @@ svg{display:block}
       <div><b id="stOpen">1</b><span>متاحة دلوقتي</span></div>
       <div><b id="stStd">IEC</b><span>المواصفة</span></div>
     </div>
+    <button class="achcard" id="achOpen"><span class="ai">🏆</span><div><b>إنجازاتي والامتحان النهائي</b><small>النجوم، والشارات، والشهادة: <span id="achExam">جاهز؟</span></small></div><span class="an"><span>⭐ <span id="achStars">0</span></span><span>🏅 <span id="achBadges">0</span></span></span></button>
     <div class="path-head"><h3>مسار التعلم</h3><span id="pathCount"></span></div>
     <div class="track" id="track"></div>
     <div id="groups"></div>
@@ -504,11 +559,13 @@ svg{display:block}
         <div class="task-foot"><button id="resetBtn">فضّي اللوحة وابدأ من جديد</button><span>نموذج تعليمي بقيم فعالة RMS</span></div></div>
     </div>
     <div class="dock glass" id="dock">
-      <div class="wires" role="group" aria-label="لون السلك">
-        <button class="sw" data-c="L" aria-pressed="true" aria-label="بني، فاز"><i></i></button>
-        <button class="sw" data-c="N" aria-pressed="false" aria-label="أزرق، نيوترال"><i></i></button>
-        <button class="sw" data-c="PE" aria-pressed="false" aria-label="أخضر وأصفر، أرضي"><i></i></button>
+      <div class="wires" role="group" aria-label="لون السلك"><button class="wsel" aria-label="لون السلك"><i></i><span>لون السلك</span></button>
+        <div class="wpop" hidden><button class="sw" data-c="L" aria-pressed="true" aria-label="بني، فاز"><i></i><b>فاز</b></button>
+        <button class="sw" data-c="N" aria-pressed="false" aria-label="أزرق، نيوترال"><i></i><b>نيوترال</b></button>
+        <button class="sw" data-c="Y" aria-pressed="false" aria-label="أصفر، راجع"><i></i><b>راجع</b></button>
+        <button class="sw" data-c="PE" aria-pressed="false" aria-label="أخضر وأصفر، أرضي"><i></i><b>أرضي</b></button></div>
       </div>
+      <button class="tool movebtn" data-move="1" aria-pressed="false" aria-label="حرّك المكونات"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg></button>
       <button class="tool" id="wipeBtn" aria-label="شيل كل الأسلاك"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></button>
       <button class="tool" data-focus="lab" aria-pressed="false" aria-label="اللوحة بكل الشاشة"><svg class="i-on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg class="i-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button>
       <button class="power" id="powerBtn" aria-pressed="false"><span class="knob"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v8"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/></svg></span><span id="powerTxt">تشغيل</span></button>
@@ -544,7 +601,7 @@ svg{display:block}
         <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 15l6-6 6 6"/></svg>
       </button>
       <div class="task-body"><ol class="steps" id="bsteps"></ol>
-        <div class="task-foot"><button id="bResetAll">ابدأ التجربة من الأول</button><button id="bIntro">الفكرة</button></div><p class="foot-note" id="bFootNote"></p></div>
+        <div class="task-foot"><button id="bResetAll">ابدأ التجربة من الأول</button><button id="bPosReset">رجّع أماكن المكونات</button><button id="bIntro">الفكرة</button></div><p class="foot-note" id="bFootNote"></p></div>
     </div>
     <div class="ctrl glass">
       <div class="ctrl-row"><span id="bCtrlLbl">جهد المصدر</span><b class="tnum" id="bVval">6.0 V</b><div class="mini"><button id="bRec">سجّل</button><button id="bQuiz">التحدي</button></div></div>
@@ -556,11 +613,13 @@ svg{display:block}
       <div class="eq tnum" id="bEq"></div>
     </div>
     <div class="dock glass" id="bdock">
-      <div class="wires" role="group" aria-label="لون السلك">
-        <button class="sw bsw" data-c="R" aria-pressed="true" aria-label="أحمر، موجب"><i style="background:#C62828"></i></button>
-        <button class="sw bsw" data-c="K" aria-pressed="false" aria-label="أسود، سالب"><i style="background:#1E1F22"></i></button>
-        <button class="sw bsw" data-c="X" aria-pressed="false" hidden><i></i></button>
+      <div class="wires" role="group" aria-label="لون السلك"><button class="wsel" aria-label="لون السلك"><i></i><span>لون السلك</span></button>
+        <div class="wpop" hidden><button class="sw bsw" data-c="R" aria-pressed="true" aria-label="أحمر، موجب"><i style="background:#C62828"></i><b></b></button>
+        <button class="sw bsw" data-c="K" aria-pressed="false" aria-label="أسود، سالب"><i style="background:#1E1F22"></i><b></b></button>
+        <button class="sw bsw" data-c="X" aria-pressed="false" hidden><i></i><b></b></button>
+        <button class="sw bsw" data-c="X2" aria-pressed="false" hidden><i></i><b></b></button></div>
       </div>
+      <button class="tool movebtn" data-move="1" aria-pressed="false" aria-label="حرّك المكونات"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg></button>
       <button class="tool ftools" id="bTools" aria-pressed="false" aria-label="أدوات التحكم"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
       <button class="tool" data-focus="bench" aria-pressed="false" aria-label="اللوحة بكل الشاشة"><svg class="i-on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg class="i-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button>
       <button class="tool" id="bWipe" aria-label="شيل كل الأسلاك"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></button>
@@ -646,6 +705,11 @@ svg{display:block}
 <div class="modal" id="upd" hidden><div class="card" role="dialog" aria-modal="true" aria-label="تحديث"><div class="grab"></div><header><h3>فيه تحديث جديد لازم</h3></header>
   <p>نزل إصدار جديد من التطبيق، ولازم تحدّثه عشان تكمل.</p><button class="btn primary" id="updGo">حدّث دلوقتي</button></div></div>
 
+<div class="modal" id="ach" hidden><div class="card" role="dialog" aria-modal="true" aria-label="إنجازاتي"><div class="grab"></div><header><h3>🏆 إنجازاتي</h3></header><div id="achBody"></div><button class="btn" data-close style="margin-top:12px">اقفل</button></div></div>
+<div class="modal" id="exam" hidden><div class="card exam-card" role="dialog" aria-modal="true" aria-label="الامتحان النهائي"><header style="display:flex;align-items:center;justify-content:space-between;gap:10px"><h3>🎓 الامتحان النهائي</h3><span class="extime" id="exTime">15:00</span></header>
+  <div class="exbar"><i id="exProg"></i></div><small id="exNum" style="color:#93A5C4"></small><div id="exBody"></div><button class="btn" id="exQuit" style="margin-top:10px">إنهاء</button></div></div>
+<div class="modal" id="cert" hidden><div class="card" role="dialog" aria-modal="true" aria-label="الشهادة"><div class="grab"></div><header><h3>📜 شهادتي</h3></header><div id="certBody"></div><button class="btn" data-close style="margin-top:12px">اقفل</button></div></div>
+
 <div class="modal" id="info" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
   <div class="grab"></div>
   <header><div class="sym" id="infoSym"></div><div><h3 id="infoTitle"></h3><small id="infoEn"></small></div></header>
@@ -656,6 +720,7 @@ svg{display:block}
   <div class="grab"></div><header><h3>الإعدادات</h3></header>
   <div class="set"><div><b>الأصوات</b><small>أصوات المفاتيح والفيوز والأعطال</small></div><button class="tg" id="tgSound" aria-label="الأصوات"></button></div>
   <div class="set"><div><b>الاهتزاز</b><small>إحساس لمس مع التوصيل والتشغيل</small></div><button class="tg" id="tgHaptic" aria-label="الاهتزاز"></button></div>
+  <div class="set"><div><b>رسومات عالية الجودة</b><small>ظلال ونعومة أعلى. اقفلها لو الموبايل تقيل</small></div><button class="tg" id="tgGfx" aria-label="رسومات عالية الجودة"></button></div>
   <div class="set" id="stdRow"><div><b>المواصفة</b><small id="stdSub"></small></div>
     <div class="seg" style="background:rgba(255,255,255,.06)"><button data-std="IEC">IEC مصر</button><button data-std="US">أمريكي</button></div></div>
 <div class="modal" id="quiz" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="qTitle">
@@ -677,7 +742,7 @@ svg{display:block}
   <button class="btn" id="unitReset" style="margin-top:12px">↺ ابدأ الوحدة المفتوحة من الأول</button>
   <button class="btn" id="allReset" style="margin-top:8px;background:rgba(255,91,79,.12);color:#FF8A80">امسح كل التقدم على الموبايل ده</button>
   <button class="btn" id="admEnter" style="margin-top:8px">🔒 دخول لوحة التحكم</button>
-  <div class="about">تطوير <b>Mohamed _ Eldawly</b><br>الإصدار <span id="verLbl">1.0.0</span></div>
+  <div class="about">تطوير <b>Mohamed _ Eldawly</b><br>الإصدار <span id="verLbl">1.6.0</span></div>
   <button class="btn" data-close>تمام</button></div></div>
 </div>
 
@@ -771,7 +836,7 @@ document.getElementById("splashArt").innerHTML=mascotSVG("220","s");
 
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 const store={ get(k,d){try{const v=localStorage.getItem("evl:"+k);return v==null?d:JSON.parse(v);}catch(e){return d;}}, set(k,v){try{localStorage.setItem("evl:"+k,JSON.stringify(v));}catch(e){}} };
-const PREF={ sound:store.get("sound",true), haptic:store.get("haptic",true) };
+const PREF={ sound:store.get("sound",true), haptic:store.get("haptic",true), gfx:store.get("gfx",true) };
 const vibrate=ms=>{ if(!PREF.haptic) return; try{navigator.vibrate&&navigator.vibrate(ms);}catch(e){} };
 
 async function loadConfig(){
@@ -886,15 +951,15 @@ const Sound={ ctx:null,master:null,hg:null,
 /* ---------- standard profiles: IEC (Egypt/Europe) and US (ANSI/NEC) ---------- */
 const PROFILES={
   IEC:{ id:"IEC", name:"IEC", place:"مصر وأوروبا", V:220, f:50, fuseA:6, fuseTag:"6A  gG", cable:"1.5 mm²", sym:"IEC 60617", colorStd:"IEC 60445",
-    wire:{L:{hex:0x7F4E28,css:"#8B5A32",name:"بني"},N:{hex:0x245EC6,css:"#2F6BD3",name:"أزرق"},PE:{hex:0x3E9E4F,css:"repeating-linear-gradient(135deg,#3E9E4F 0 6px,#E8C930 6px 12px)",name:"أخضر/أصفر",stripe:true}},
+    wire:{L:{hex:0x7F4E28,css:"#8B5A32",name:"بني"},N:{hex:0x245EC6,css:"#2F6BD3",name:"أزرق"},PE:{hex:0x3E9E4F,css:"repeating-linear-gradient(135deg,#3E9E4F 0 6px,#E8C930 6px 12px)",name:"أخضر/أصفر",stripe:true},Y:{hex:0xE8B820,css:"#F2C230",name:"أصفر"}},
     lbl:{"src.L":"L","src.N":"N","fuse.1":"1","fuse.2":"2","sw.L":"L","sw.L1":"L1","lamp.L":"L","lamp.N":"N"},
     ref:{src:"G1",fuse:"F1",sw:"S1",lamp:"E1"}, hot:"الفاز L", neu:"النيوترال N", swName:"مفتاح اتجاه واحد",
-    colorNote:"ألوان الأسلاك حسب IEC 60445: الفاز بني والنيوترال أزرق.", peNote:"السلك الأخضر/الأصفر للأرضي PE بس، ومينفعش يوصّل فاز أو نيوترال." },
+    colorNote:"ألوان الأسلاك: الفاز بني، والنيوترال أزرق، والراجع بين المكونات أصفر.", peNote:"السلك الأخضر/الأصفر للأرضي PE بس، ومينفعش يوصّل فاز أو نيوترال." },
   US:{ id:"US", name:"US", place:"الكود الأمريكي", V:120, f:60, fuseA:15, fuseTag:"15A", cable:"14 AWG", sym:"ANSI Y32.2 / IEEE 315", colorStd:"NEC",
-    wire:{L:{hex:0x1C1C1E,css:"#1E1F22",name:"أسود"},N:{hex:0xE9EAE6,css:"#ECEDE9",name:"أبيض"},PE:{hex:0x2E8B3E,css:"#2E8B3E",name:"أخضر"}},
+    wire:{L:{hex:0x1C1C1E,css:"#1E1F22",name:"أسود"},N:{hex:0xE9EAE6,css:"#ECEDE9",name:"أبيض"},PE:{hex:0x2E8B3E,css:"#2E8B3E",name:"أخضر"},Y:{hex:0xE8B820,css:"#F2C230",name:"أصفر"}},
     lbl:{"src.L":"H","src.N":"N","fuse.1":"LINE","fuse.2":"LOAD","sw.L":"LINE","sw.L1":"LOAD","lamp.L":"H","lamp.N":"N"},
     ref:{src:"G1",fuse:"F1",sw:"S1",lamp:"DS1"}, hot:"الفاز Hot", neu:"النيوترال N", swName:"مفتاح Single-pole",
-    colorNote:"ألوان الأسلاك حسب NEC: الفاز أسود (أو أحمر) والنيوترال أبيض.", peNote:"السلك الأخضر للأرضي Ground بس، ومينفعش يوصّل فاز أو نيوترال." }
+    colorNote:"ألوان الأسلاك: الفاز أسود، والنيوترال أبيض، والراجع بين المكونات أصفر.", peNote:"السلك الأخضر للأرضي Ground بس، ومينفعش يوصّل فاز أو نيوترال." }
 };
 let P=PROFILES.IEC;
 let V_SRC,R_INT=.05,R_FUSE=.02,R_SW=.001,R_WIRE=.01,P_LAMP=60,R_LAMP,FUSE_A,SRC_TRIP;
@@ -961,7 +1026,7 @@ function safetyNotes(){
     if(Math.max(Math.abs(r.V["sw.L"]),Math.abs(r.V["sw.L1"]))<20) out.push("المفتاح متركب على النيوترال. لما تطفيه اللمبة هتفضل مكهربة وخطر تلمسها. مكانه الصح على الفاز.");
   }
   if(r&&S.power&&!S.switchOn&&Math.abs(r.V["lamp.L"])>150&&Math.abs(r.V["lamp.N"])>150) out.push("المفتاح مطفي بس أطراف اللمبة لسه عليها جهد. راجع مكان المفتاح.");
-  let bad=false,pe=false; S.wires.forEach(w=>{ if(w.c==="PE"){pe=true;return;} const nn=same(w.a,"src.N"); if((nn&&w.c==="L")||(!nn&&w.c==="N")) bad=true; });
+  let bad=false,pe=false; S.wires.forEach(w=>{ if(w.c==="PE"){pe=true;return;} const nn=same(w.a,"src.N"); if((nn&&(w.c==="L"||w.c==="Y"))||(!nn&&w.c==="N")) bad=true; });
   if(bad) out.push(P.colorNote);
   if(pe) out.push(P.peNote);
   return out;
@@ -1003,8 +1068,9 @@ function simplify(pts){ const o=[pts[0]]; for(let i=1;i<pts.length-1;i++){ const
 /* ============================================================
    3D SCENE
    ============================================================ */
-const BW=4.6,BH=5.2,STEP=.1,X0=-BW/2,Y0=-BH/2,WZ=.045;
+let BW=4.6,BH=5.2,STEP=.1,X0=-BW/2,Y0=-BH/2,WZ=.045, WIDE=false;
 const C3={ src:{c:[-1.2,1.4],w:1.4,h:1.4,zt:.42}, fuse:{c:[1.2,1.4],w:.6,h:1.4,zt:.5}, lamp:{c:[-1.2,-1.3],w:1.0,h:1.6,zt:.3}, sw:{c:[1.2,-1.4],w:1.0,h:1.4,zt:.16} };
+const C3B=JSON.parse(JSON.stringify(C3));
 const T3={ "src.L":["src",[.3,-.42],3], "src.N":["src",[-.3,-.42],3], "fuse.1":["fuse",[0,.5],1], "fuse.2":["fuse",[0,-.5],3],
   "lamp.L":["lamp",[.3,-.6],3], "lamp.N":["lamp",[-.3,-.6],3], "sw.L":["sw",[-.2,-.55],3], "sw.L1":["sw",[.2,-.55],3] };
 let R3=null;  // renderer bundle
@@ -1028,13 +1094,13 @@ function roundPoly(pts,r){ // round corners of a 3D polyline
   out.push(pts[pts.length-1].clone()); return out;
 }
 
-function initScene(){
+function initScene(){ labLayout();
   const stage=$("#stage");
   const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); renderer.setClearColor(0x000000,0);
   renderer.outputEncoding=THREE.sRGBEncoding; renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.0;
   renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-  stage.appendChild(renderer.domElement);
+  stage.appendChild(renderer.domElement); gfxApply(renderer);
   const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(34,1,.1,60);
 
   // studio environment for realistic reflections
@@ -1045,7 +1111,7 @@ function initScene(){
 
   scene.add(new THREE.HemisphereLight(0xEAF1F6,0x1B242C,.35));
   const key=new THREE.DirectionalLight(0xFFF4E6,1.25); key.position.set(-2.5,4.5,7); key.castShadow=true;
-  key.shadow.mapSize.set(2048,2048); Object.assign(key.shadow.camera,{left:-3.2,right:3.2,top:3.4,bottom:-3.4,near:1,far:20}); key.shadow.bias=-.0006; key.shadow.normalBias=.02; key.shadow.radius=5;
+  key.shadow.mapSize.set(2048,2048); Object.assign(key.shadow.camera,{left:-(BW/2+1),right:BW/2+1,top:BH/2+.8,bottom:-(BH/2+.8),near:1,far:20}); key.shadow.bias=-.0006; key.shadow.normalBias=.02; key.shadow.radius=5;
   scene.add(key); const rim=new THREE.DirectionalLight(0x9CC8FF,.35); rim.position.set(4,-2,3); scene.add(rim);
 
   const mat={
@@ -1066,10 +1132,10 @@ function initScene(){
   const bm=new THREE.MeshStandardMaterial({map:panel,roughness:.62,metalness:.25});
   const board=new THREE.Mesh(new THREE.BoxGeometry(BW,BH,.08),[mat.alu,mat.alu,mat.alu,mat.alu,bm,mat.alu]); board.position.z=-.04; board.receiveShadow=true; scene.add(board);
   const fr=(w,h,x,y)=>{ const m=rbox(w,h,.12,.03,mat.alu); m.position.set(x,y,-.06); scene.add(m); };
-  fr(BW+.24,.12,0,BH/2+.06); fr(BW+.24,.12,0,-BH/2-.06); fr(.12,BH,-BW/2-.06,0); fr(.12,BH,BW/2+.06,0);
+  fr(BW+.24,.12,0,BH/2+.06); fr(BW+.24,.12,0,-BH/2-.06); fr(.12,BH,-BW/2-.06,0); fr(.12,BH,BW/2+.06,0); dressBoard(scene,mat);
   // silk-screen titles on the panel
   const silk=(id,x,y)=>{ const c=COMPS[id]; const d=decal(1.3,.22,(ctx,w,h)=>{ txt(ctx,0,72,"#2E3941",600,"right")(c.name,w-10,h/2+4); txt(ctx,0,60,"#5E6B74",600,"left")(c.ref,10,h/2+4); }); d.position.set(x,y,.002); d.receiveShadow=true; scene.add(d); };
-  silk("src",-1.2,2.3); silk("fuse",1.0,2.3); silk("lamp",-1.2,-.3); silk("sw",1.2,-.42);
+  const sk=(id,x,y)=>silk(id,x+C3[id].c[0]-C3B[id].c[0],y+C3[id].c[1]-C3B[id].c[1]); sk("src",-1.2,2.3); sk("fuse",1.0,2.3); sk("lamp",-1.2,-.3); sk("sw",1.2,-.42);
 
   const pick=[], obj={};
   const G3={}; const add=(o,x,y)=>{ o.position.set(x,y,0); scene.add(o); return o; };
@@ -1129,12 +1195,15 @@ function initScene(){
     const prof=[]; for(let i=0;i<=16;i++){ const y=i/16*.18; prof.push(new THREE.Vector2(.125+Math.sin(i*Math.PI/2)*.012,y)); }
     const thread=new THREE.Mesh(new THREE.LatheGeometry(prof,40),mat.nickel); thread.position.set(0,-.05,.17); thread.castShadow=true; g.add(thread);
     const bp=[[.13,0],[.14,.05],[.17,.12],[.23,.22],[.275,.32],[.29,.4],[.28,.48],[.245,.55],[.18,.61],[.1,.645],[0,.66]].map(([r,y])=>new THREE.Vector2(r,y));
-    const glass=new THREE.MeshPhysicalMaterial({color:lin(0xFFFFFF),roughness:.35,clearcoat:1,clearcoatRoughness:.08,transparent:true,opacity:.9,emissive:lin(0xFFC775),emissiveIntensity:0,sheen:0});
+    const glass=new THREE.MeshPhysicalMaterial({color:lin(0xFFFFFF),roughness:.35,clearcoat:1,clearcoatRoughness:.08,transparent:true,opacity:.6,emissive:lin(0xFFB35C),emissiveIntensity:0,sheen:0});
     const bulb=new THREE.Mesh(new THREE.LatheGeometry(bp,48),glass); bulb.position.set(0,.13,.17); bulb.castShadow=true; bulb.userData={t:"comp",id:"lamp"}; g.add(bulb); pick.push(bulb);
     const light=new THREE.PointLight(0xFFC677,0,3.2,2); light.position.set(0,.55,.45); g.add(light);
     const glowT=tex(256,256,(x,w,h)=>{ const r=x.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2); r.addColorStop(0,"rgba(255,226,160,1)"); r.addColorStop(.22,"rgba(255,200,110,.5)"); r.addColorStop(1,"rgba(255,170,70,0)"); x.fillStyle=r; x.fillRect(0,0,w,h); });
-    const glow=new THREE.Sprite(new THREE.SpriteMaterial({map:glowT,blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:0})); glow.position.set(0,.5,.3); glow.scale.set(2,2,1); g.add(glow);
-    add(g,...c.c); obj.lamp={g,glass,light,glow}; }
+    const glow=new THREE.Sprite(new THREE.SpriteMaterial({map:glowT,blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:0})); glow.position.set(0,.46,.32); glow.scale.set(1.05,1.05,1); glow.material.color.setHex(0xFFC98A); g.add(glow);
+    const fil=new THREE.MeshStandardMaterial({color:lin(0x7A5230),emissive:lin(0xFFA040),emissiveIntensity:0,roughness:.5}); { const pts=[]; for(let i=0;i<=48;i++){ const t=i/48; pts.push(new THREE.Vector3(-.075+t*.15,.022*Math.sin(t*Math.PI*12),0)); }
+      const fm=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),72,.0065,6,false),fil); fm.position.set(0,.47,.17); g.add(fm);
+      [-1,1].forEach(sd=>{ const w=new THREE.Mesh(new THREE.CylinderGeometry(.0045,.0045,.22,6),mat.nickel); w.position.set(sd*.075,.36,.17); g.add(w); }); const stem=new THREE.Mesh(new THREE.CylinderGeometry(.018,.03,.14,12),new THREE.MeshPhysicalMaterial({color:0xffffff,transparent:true,opacity:.35,roughness:.1})); stem.position.set(0,.28,.17); g.add(stem); }
+    add(g,...c.c); obj.lamp={g,glass,light,glow,fil}; }
 
   // ---- terminals
   const hitM=new THREE.MeshBasicMaterial({visible:false}), hintM=new THREE.MeshBasicMaterial({color:0xFFC24D,transparent:true,opacity:0,depthWrite:false});
@@ -1151,7 +1220,7 @@ function initScene(){
   const selRing=new THREE.Mesh(new THREE.RingGeometry(.1,.14,40),new THREE.MeshBasicMaterial({color:0xFFC24D,transparent:true,depthWrite:false})); selRing.visible=false; scene.add(selRing);
 
   R3={renderer,scene,camera,pick,obj,term,selRing,wires:{},sparks:[],mat,ro:null,orb:{yaw:0,pitch:.1,zoom:1,base:10,ty:0},
-      glowT:tex(64,64,(x,w,h)=>{ const r=x.createRadialGradient(32,32,0,32,32,32); r.addColorStop(0,"rgba(255,245,210,1)"); r.addColorStop(.35,"rgba(255,200,90,.8)"); r.addColorStop(1,"rgba(255,170,40,0)"); x.fillStyle=r; x.fillRect(0,0,w,h); })};
+      glowT:tex(64,64,(x,w,h)=>{ const r=x.createRadialGradient(32,32,0,32,32,32); r.addColorStop(0,"rgba(255,245,210,1)"); r.addColorStop(.35,"rgba(255,200,90,.8)"); r.addColorStop(1,"rgba(255,170,40,0)"); x.fillStyle=r; x.fillRect(0,0,w,h); })}; contactShadows(scene,C3); R3.sm=[]; { const o=obj; smoothReg(R3,o.lamp.glass,"emissiveIntensity",7); smoothReg(R3,o.lamp.light,"intensity",7); smoothReg(R3,o.lamp.glow,"material.opacity",7); if(o.lamp.fil) smoothReg(R3,o.lamp.fil,"emissiveIntensity",9); labScrews(o,mat); smoothReg(R3,o.src.knob,"rotation.z",12); smoothReg(R3,o.sw.rocker,"rotation.x",16); }
   rebuildWires(); bindPointer(renderer.domElement);
   R3.ro=new ResizeObserver(resize); R3.ro.observe(stage); resize(); if(!loopOn){ loopOn=true; requestAnimationFrame(loop); }
 }
@@ -1196,23 +1265,22 @@ function rebuildWires(){
 function resize(){
   const R=R3; if(!R) return; const st=$("#stage"), W=st.clientWidth, H=st.clientHeight; if(!W||!H) return;
   R.renderer.setSize(W,H,false); const cam=R.camera; cam.aspect=W/H;
-  const fp=$("#fstep"), top=(Math.max($(".hud").getBoundingClientRect().bottom,fp.offsetParent?fp.getBoundingClientRect().bottom:0)-st.getBoundingClientRect().top)+6, bot=st.getBoundingClientRect().bottom-$("#bottom").getBoundingClientRect().top+6;
-  const freeH=Math.max(120,H-top-bot), vf=THREE.MathUtils.degToRad(cam.fov)/2;
-  const dH=((BH+.35)/2)/Math.tan(vf)*(H/freeH), dW=((BW+.35)/2)/(Math.tan(vf)*cam.aspect);
-  R.orb.base=Math.max(dH,dW); cam.setViewOffset(W,H,0,-(top-bot)/2,W,H); cam.updateProjectionMatrix();
+  const {top,bot,left}=viewInsets(st,$("#lab .hud"),$("#bottom")), freeH=Math.max(120,H-top-bot), freeW=Math.max(160,W-left), vf=THREE.MathUtils.degToRad(cam.fov)/2;
+  const dH=((BH+.35)/2)/Math.tan(vf)*(H/freeH), dW=((BW+.35)/2)/(Math.tan(vf)*cam.aspect)*(W/freeW);
+  R.orb.base=Math.max(dH,dW); cam.setViewOffset(W,H,-left/2,-(top-bot)/2,W,H); cam.updateProjectionMatrix();
 }
 function placeCam(){ const R=R3,o=R.orb,d=o.base*o.zoom; R.camera.position.set(d*Math.sin(o.yaw)*Math.cos(o.pitch), d*Math.sin(o.pitch)+o.ty, d*Math.cos(o.yaw)*Math.cos(o.pitch)); R.camera.lookAt(0,o.ty,0); }
 
 function bindPointer(el){
   const pts=new Map(); let st=null,moved=false,p0=0,z0=1;
-  el.addEventListener("pointerdown",e=>{ Sound.init(); el.setPointerCapture(e.pointerId); pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  el.addEventListener("pointerdown",e=>{ Sound.init(); el.setPointerCapture(e.pointerId); if(MOVE&&!pts.size&&dragStart(e)){ pts.set(e.pointerId,{x:e.clientX,y:e.clientY,drag:true}); return; } pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
     if(pts.size===1){ st={x:e.clientX,y:e.clientY,t:performance.now(),yaw:R3.orb.yaw,pitch:R3.orb.pitch}; moved=false; }
     if(pts.size===2){ const [a,b]=[...pts.values()]; p0=Math.hypot(a.x-b.x,a.y-b.y); z0=R3.orb.zoom; moved=true; } });
-  el.addEventListener("pointermove",e=>{ if(!pts.has(e.pointerId)) return; pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  el.addEventListener("pointermove",e=>{ if(!pts.has(e.pointerId)) return; if(DRAG&&pts.get(e.pointerId).drag){ dragMove(e); return; } pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
     if(pts.size===2){ const [a,b]=[...pts.values()]; if(p0) R3.orb.zoom=THREE.MathUtils.clamp(z0*p0/Math.hypot(a.x-b.x,a.y-b.y),.42,1.2); return; }
     if(!st) return; const dx=e.clientX-st.x,dy=e.clientY-st.y; if(Math.hypot(dx,dy)>8) moved=true;
     if(moved){ R3.orb.yaw=THREE.MathUtils.clamp(st.yaw-dx*.005,-.7,.7); R3.orb.pitch=THREE.MathUtils.clamp(st.pitch+dy*.004,-.35,.6); } });
-  const up=e=>{ if(!pts.has(e.pointerId)) return; pts.delete(e.pointerId); if(!pts.size){ if(st&&!moved&&performance.now()-st.t<450) tap(e.clientX,e.clientY); st=null; p0=0; } };
+  const up=e=>{ if(!pts.has(e.pointerId)) return; if(pts.get(e.pointerId).drag){ pts.delete(e.pointerId); dragEnd(); st=null; return; } pts.delete(e.pointerId); if(!pts.size){ if(st&&!moved&&performance.now()-st.t<450) tap(e.clientX,e.clientY); st=null; p0=0; } };
   el.addEventListener("pointerup",up); el.addEventListener("pointercancel",up);
   el.addEventListener("wheel",e=>{ e.preventDefault(); R3.orb.zoom=THREE.MathUtils.clamp(R3.orb.zoom*(1+e.deltaY*.001),.42,1.2); },{passive:false});
 }
@@ -1257,10 +1325,10 @@ function update(){
     toast("قصر مباشر على المصدر من غير فيوز! الحماية فصلت التغذية. لازم الفيوز يبقى في طريق الفاز","danger"); }
   const b=Math.min(1,Math.max(0,r.lampP/P_LAMP)), lit=S.power&&b>.02;
   if(R3){ const o=R3.obj;
-    o.lamp.glass.emissiveIntensity=b*2.2; o.lamp.light.intensity=b*2.4; o.lamp.glow.material.opacity=b*.85;
+    o.lamp.glass.emissiveIntensity=b*.75; o.lamp.light.intensity=b*1.7; o.lamp.glow.material.opacity=b*.38; if(o.lamp.fil) o.lamp.fil.emissiveIntensity=b*9;
     o.src.neon.emissive.setHex(S.power?0xFF3A22:0); o.src.neon.color.setHex(S.power?0xFF5A40:0x5A1C18); o.src.knob.rotation.z=S.power?-Math.PI/2:0;
     o.fuse.cart.color.set(S.fuseBlown?0x3B342C:0xF3EEE4); o.fuse.ind.emissive.setHex(S.fuseBlown?0xFF2A1A:0);
-    o.sw.rocker.rotation.x=S.switchOn?.14:-.14; }
+    o.sw.rocker.rotation.x=S.switchOn?.14:-.14; smoothCapture(R3); }
   Sound.hum(lit?b:0);
   const st=$("#status"); let k="off",t="التغذية مفصولة";
   if(S.fuseBlown){k="fault";t="الفيوز محروق";} else if(lit){k="on";t="اللمبة شغالة";} else if(S.power&&!S.switchOn){k="open";t="المفتاح مفتوح";} else if(S.power){k="open";t="الدائرة مفتوحة";}
@@ -1290,7 +1358,7 @@ let last=performance.now(), loopOn=false;
 function loop(now){
   requestAnimationFrame(loop); const dt=Math.min(.05,(now-last)/1000); last=now;
   if(!R3||S.view!=="3d"||$("#lab").hidden) return;
-  const R=R3; placeCam();
+  const R=R3; placeCam(); smoothStep(R,dt);
   if(R.selRing.visible){ const s=1+Math.sin(now/170)*.12; R.selRing.scale.set(s,s,1); }
   const hintA=S.sel?.35+Math.sin(now/220)*.25:0; for(const id in R.term) R.term[id].hint.material.opacity=(id===S.sel?0:hintA);
   const r=S.result;
@@ -1373,13 +1441,13 @@ function showInfo(id){ Sound.tick(); const c=COMPS[id];
   openModal("info"); }
 function openModal(id){ $("#"+id).hidden=false; }
 function closeModal(){ $$(".modal").forEach(m=>m.hidden=true); }
-function syncSettings(){ const ms=$("#memSt"); if(ms) ms.textContent=isMember()?"⭐ العضوية المميزة مفعّلة على الجهاز ده":"ابعت رقم جهازك للمدرس، وهو هيبعتلك كود التفعيل"; if($("#devId")) $("#devId").textContent=deviceId(); $("#tgSound").setAttribute("aria-pressed",PREF.sound); $("#tgHaptic").setAttribute("aria-pressed",PREF.haptic);
+function syncSettings(){ const ms=$("#memSt"); if(ms) ms.textContent=isMember()?"⭐ العضوية المميزة مفعّلة على الجهاز ده":"ابعت رقم جهازك للمدرس، وهو هيبعتلك كود التفعيل"; if($("#devId")) $("#devId").textContent=deviceId(); $("#tgSound").setAttribute("aria-pressed",PREF.sound); $("#tgHaptic").setAttribute("aria-pressed",PREF.haptic); $("#tgGfx").setAttribute("aria-pressed",PREF.gfx!==false);
   $$("#settings [data-std]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.std===P.id));
   $("#stdRow").hidden = CFG.allow_standard_switch===false;
   $("#stdSub").textContent = P.id==="IEC" ? "220 V و50 Hz، رموز IEC 60617، مقاسات mm²" : "120 V و60 Hz، رموز ANSI، مقاسات AWG وألوان NEC"; }
 
 /* ---------- standard switching ---------- */
-function syncSwatches(){ $$(".sw:not(.bsw)").forEach(b=>{ const w=P.wire[b.dataset.c]; b.querySelector("i").style.background=w.css; b.setAttribute("aria-label",w.name); });
+function syncSwatches(){ $$(".sw:not(.bsw)").forEach(b=>{ const w=P.wire[b.dataset.c]; b.querySelector("i").style.background=w.css; b.setAttribute("aria-label",w.name); }); setTimeout(wselSync,0);
   const f=$("#stdFoot"); if(f) f.textContent = P.id==="IEC" ? "المواصفة: IEC 60617 للرموز، وIEC 60445 لألوان الأسلاك" : "المواصفة: ANSI / IEEE 315 للرموز، وNEC لألوان الأسلاك"; }
 function setStandard(id){
   applyProfile(id); syncSwatches();
@@ -1408,12 +1476,43 @@ function loadState(x){ const k=x.key; return { V:x.slider?x.slider.def:0, R:x.ch
 const BSTATE={};
 function saveKey(n,v){ store.set(X.key+"_"+n,v); }
 
+/* ============================================================
+   VISUAL POLISH — training-panel dressing, contact shadows, smooth motion, quality modes
+   ============================================================ */
+function gfxApply(renderer){ const hi=PREF.gfx!==false; renderer.setPixelRatio(hi?Math.min(window.devicePixelRatio||1,2):1); renderer.shadowMap.enabled=hi; }
+const _texCache={};
+function shadowTex(){ return _texCache.sh||(_texCache.sh=tex(256,256,(x,w,h)=>{ const g=x.createRadialGradient(w/2,h/2,w*.12,w/2,h/2,w*.5); g.addColorStop(0,"rgba(0,0,0,.55)"); g.addColorStop(.6,"rgba(0,0,0,.22)"); g.addColorStop(1,"rgba(0,0,0,0)"); x.fillStyle=g; x.fillRect(0,0,w,h); })); }
+function screwMesh(mat){ const g=new THREE.Group(); const head=new THREE.Mesh(new THREE.CylinderGeometry(.075,.085,.035,24),mat.nickel); head.rotation.x=Math.PI/2; g.add(head);
+  const sl=new THREE.MeshStandardMaterial({color:lin(0x5C646B),metalness:.8,roughness:.4}); [0,Math.PI/2].forEach(a=>{ const b=new THREE.Mesh(new THREE.BoxGeometry(.1,.016,.01),sl); b.rotation.z=a+.4; b.position.z=.019; g.add(b); }); return g; }
+function dressBoard(scene,mat){ const hw=BW/2, hh=BH/2;
+  const back=new THREE.Mesh(new THREE.PlaneGeometry(BW+2.4,BH+2.4),new THREE.MeshBasicMaterial({map:shadowTex(),transparent:true,depthWrite:false,opacity:.8})); back.position.z=-.25; scene.add(back);
+  const rub=new THREE.MeshStandardMaterial({color:lin(0x3A4148),roughness:.8});
+  [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([sx,sy])=>{ const c=rbox(.22,.22,.14,.07,rub); c.position.set(sx*(hw+.05),sy*(hh+.05),-.05); scene.add(c); const s=screwMesh(mat); s.position.set(sx*(hw-.14),sy*(hh-.14),.004); scene.add(s); });
+  const plate=decal(1.7,.2,(x,w,h)=>{ const g=x.createLinearGradient(0,0,0,h); g.addColorStop(0,"#E9ECEE"); g.addColorStop(1,"#B9C0C6"); x.fillStyle=g; x.beginPath(); x.roundRect?x.roundRect(4,4,w-8,h-8,18):x.rect(4,4,w-8,h-8); x.fill();
+    x.strokeStyle="rgba(0,0,0,.25)"; x.lineWidth=3; x.stroke(); txt(x,0,54,"#3A454D",700)("⚡ المعمل الكهربي  |  لوحة تدريب",w/2,h/2+3); });
+  plate.position.set(0,-hh-.06,.07); plate.scale.set(.9,.9,1); scene.add(plate); }
+function labScrews(o,mat){ const put=(g,x,y,z,sc)=>{ if(!g) return; const m=screwMesh(mat); m.scale.set(sc,sc,sc); m.position.set(x,y,z); g.add(m); };
+  const cs=C3; if(o.src){ const c=cs.src; [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>put(o.src.g,a*(c.w/2-.1),b*(c.h/2-.1),c.zt+.004,.7)); }
+  if(o.sw){ const c=cs.sw; [-1,1].forEach(a=>put(o.sw.g,a*.34,.2,c.zt+.02,.6)); }
+  if(o.fuse){ [-1,1].forEach(a=>put(o.fuse.g,a*.43,0,.075,.6)); }
+  if(o.lamp){ const c=cs.lamp; [-1,1].forEach(a=>put(o.lamp.g,a*.42,-.38,c.zt+.004,.6)); } }
+function contactShadows(scene,C){ const t=shadowTex(); for(const k in C){ const c=C[k]; const m=new THREE.Mesh(new THREE.PlaneGeometry(c.w*1.25,c.h*1.25),new THREE.MeshBasicMaterial({map:t,transparent:true,depthWrite:false,opacity:.55})); m.position.set(c.c[0]+.05,c.c[1]-.06,.003); m.renderOrder=1; scene.add(m); } }
+/* smooth motion: 3D code sets final values; we ease the displayed value toward them */
+function smoothReg(R,obj,path,rate){ if(!obj) return; const p=path.split("."), last=p.pop(); let o=obj; for(const k of p){ o=o&&o[k]; } if(!o||typeof o[last]!=="number") return; (R.sm=R.sm||[]).push({o,k:last,rate,v:undefined,t:undefined}); }
+function smoothCapture(R){ if(!R||!R.sm) return; R.sm.forEach(e=>{ const t=e.o[e.k]; if(e.v===undefined) e.v=t; e.t=t; e.o[e.k]=e.v; }); }
+function smoothStep(R,dt){ if(!R||!R.sm) return; const f=r=>1-Math.exp(-r*dt); R.sm.forEach(e=>{ if(e.t===undefined) return; e.v+=(e.t-e.v)*f(e.rate); if(Math.abs(e.t-e.v)<1e-4) e.v=e.t; e.o[e.k]=e.v; }); }
+function smoothAuto(R){ const rot=o=>{ if(o){ smoothReg(R,o,"rotation.x",16); smoothReg(R,o,"rotation.y",16); smoothReg(R,o,"rotation.z",12); } }, lamp=(g,l,w,f)=>{ if(g) smoothReg(R,g,"emissiveIntensity",7); if(l) smoothReg(R,l,"intensity",7); if(w) smoothReg(R,w,"material.opacity",7); if(f) smoothReg(R,f,"emissiveIntensity",9); };
+  rot(R.knob); rot(R.dial); rot(R.toggle); if(R.mcbL) rot(R.mcbL.piv); if(R.rcdL) rot(R.rcdL.piv); if(R.mcbLev) smoothReg(R,R.mcbLev,"position.y",14);
+  lamp(R.lampGlass,R.lampLight,R.lampGlow); if(R.capGlow) smoothReg(R,R.capGlow,"material.opacity",5);
+  (R.hd||[]).concat((R.wd||[]).map(([c,H])=>[c.id,c.ty,H])).forEach(([id,ty,H])=>{ if(!H) return; (H.rk||[]).forEach(rot); if(ty==="lamp") lamp(H.glass,H.light,H.glow,H.fil); });
+  (R.ch||[]).forEach(h=>{ if(h.capGlow) smoothReg(R,h.capGlow,"material.opacity",5); }); }
+
 /* ---------- 3D stage (shared look) ---------- */
 function stageBase(host,old){
   const renderer=old?old.renderer:new THREE.WebGLRenderer({antialias:true,alpha:true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); renderer.setClearColor(0,0);
   renderer.outputEncoding=THREE.sRGBEncoding; renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap; if(!old) host.appendChild(renderer.domElement);
+  renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap; if(!old) host.appendChild(renderer.domElement); gfxApply(renderer);
   const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(34,1,.1,60);
   const pm=new THREE.PMREMGenerator(renderer), env=new THREE.Scene();
   env.add(new THREE.Mesh(new THREE.BoxGeometry(20,20,20),new THREE.MeshBasicMaterial({color:0x3A4652,side:THREE.BackSide})));
@@ -1421,7 +1520,7 @@ function stageBase(host,old){
   const envTex=old&&old.envTex?old.envTex:pm.fromScene(env,.04).texture; scene.environment=envTex;
   scene.add(new THREE.HemisphereLight(0xEAF1F6,0x1B242C,.35));
   const key=new THREE.DirectionalLight(0xFFF4E6,1.25); key.position.set(-2.5,4.5,7); key.castShadow=true; key.shadow.mapSize.set(2048,2048);
-  Object.assign(key.shadow.camera,{left:-3.2,right:3.2,top:3.4,bottom:-3.4,near:1,far:20}); key.shadow.bias=-.0006; key.shadow.normalBias=.02; key.shadow.radius=5; scene.add(key);
+  Object.assign(key.shadow.camera,{left:-(BW/2+1),right:BW/2+1,top:BH/2+.8,bottom:-(BH/2+.8),near:1,far:20}); key.shadow.bias=-.0006; key.shadow.normalBias=.02; key.shadow.radius=5; scene.add(key);
   const rim=new THREE.DirectionalLight(0x9CC8FF,.35); rim.position.set(4,-2,3); scene.add(rim);
   const mat={ white:new THREE.MeshPhysicalMaterial({color:lin(0xF1F1EE),roughness:.34,clearcoat:.5,clearcoatRoughness:.35}),
     grey:new THREE.MeshPhysicalMaterial({color:lin(0xE2E4E6),roughness:.45,clearcoat:.3}),
@@ -1435,24 +1534,27 @@ function stageBase(host,old){
   const bm=new THREE.MeshStandardMaterial({map:panel,roughness:.62,metalness:.25});
   const board=new THREE.Mesh(new THREE.BoxGeometry(BW,BH,.08),[mat.alu,mat.alu,mat.alu,mat.alu,bm,mat.alu]); board.position.z=-.04; board.receiveShadow=true; scene.add(board);
   const fr=(w,h,x,y)=>{ const m=rbox(w,h,.12,.03,mat.alu); m.position.set(x,y,-.06); scene.add(m); };
-  fr(BW+.24,.12,0,BH/2+.06); fr(BW+.24,.12,0,-BH/2-.06); fr(.12,BH,-BW/2-.06,0); fr(.12,BH,BW/2+.06,0);
+  fr(BW+.24,.12,0,BH/2+.06); fr(BW+.24,.12,0,-BH/2-.06); fr(.12,BH,-BW/2-.06,0); fr(.12,BH,BW/2+.06,0); dressBoard(scene,mat);
   const glowT=tex(64,64,(x)=>{ const r=x.createRadialGradient(32,32,0,32,32,32); r.addColorStop(0,"rgba(255,245,210,1)"); r.addColorStop(.35,"rgba(255,200,90,.8)"); r.addColorStop(1,"rgba(255,170,40,0)"); x.fillStyle=r; x.fillRect(0,0,64,64); });
   return {renderer,scene,camera,mat,glowT,envTex,orb:old?old.orb:{yaw:0,pitch:.1,zoom:1,base:10,ty:0},pick:[]};
 }
+function viewInsets(host,hud,bottom){ const hr=host.getBoundingClientRect(), W=hr.width, H=hr.height, pill=host.parentElement.querySelector(".fstep");
+  let pb=0; if(pill&&pill.offsetParent){ const r=pill.getBoundingClientRect(); if(r.width>W*.5) pb=r.bottom; }
+  const top=Math.max(hud.getBoundingClientRect().bottom,pb)-hr.top+6, br=bottom.getBoundingClientRect(); let bot=hr.bottom-br.top+6, left=0;
+  if(br.height>H*.45&&br.width<W*.35){ bot=6; left=br.right-hr.left+6; } return {top:Math.max(0,top),bot:Math.max(0,bot),left}; }
 function fitCam(R,host,hud,bottom){ const W=host.clientWidth,H=host.clientHeight; if(!W||!H) return; R.renderer.setSize(W,H,false); const c=R.camera; c.aspect=W/H;
-  const hr=host.getBoundingClientRect(), pill=host.parentElement.querySelector(".fstep"), pb=pill&&pill.offsetParent?pill.getBoundingClientRect().bottom:0, top=Math.max(hud.getBoundingClientRect().bottom,pb)-hr.top+6, bot=hr.bottom-bottom.getBoundingClientRect().top+6;
-  const freeH=Math.max(120,H-top-bot), vf=THREE.MathUtils.degToRad(c.fov)/2;
-  R.orb.base=Math.max(((BH+.35)/2)/Math.tan(vf)*(H/freeH),((BW+.35)/2)/(Math.tan(vf)*c.aspect)); c.setViewOffset(W,H,0,-(top-bot)/2,W,H); c.updateProjectionMatrix(); }
+  const {top,bot,left}=viewInsets(host,hud,bottom), freeH=Math.max(120,H-top-bot), freeW=Math.max(160,W-left), vf=THREE.MathUtils.degToRad(c.fov)/2;
+  R.orb.base=Math.max(((BH+.35)/2)/Math.tan(vf)*(H/freeH),((BW+.35)/2)/(Math.tan(vf)*c.aspect)*(W/freeW)); c.setViewOffset(W,H,-left/2,-(top-bot)/2,W,H); c.updateProjectionMatrix(); }
 function camPlace(R){ const o=R.orb,d=o.base*o.zoom; R.camera.position.set(d*Math.sin(o.yaw)*Math.cos(o.pitch),d*Math.sin(o.pitch),d*Math.cos(o.yaw)*Math.cos(o.pitch)); R.camera.lookAt(0,0,0); }
 function bindOrbit(el,R0,onTap){ if(el._bound){ el._onTap=onTap; return; } el._bound=true; el._onTap=onTap; const pts=new Map(); let st=null,mv=false,p0=0,z0=1;
-  el.addEventListener("pointerdown",e=>{ Sound.init(); el.setPointerCapture(e.pointerId); pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  el.addEventListener("pointerdown",e=>{ Sound.init(); el.setPointerCapture(e.pointerId); if(MOVE&&!pts.size&&dragStart(e)){ pts.set(e.pointerId,{x:e.clientX,y:e.clientY,drag:true}); return; } pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
     if(pts.size===1){ st={x:e.clientX,y:e.clientY,t:performance.now(),yaw:RB.orb.yaw,pitch:RB.orb.pitch}; mv=false; }
     if(pts.size===2){ const [a,b]=[...pts.values()]; p0=Math.hypot(a.x-b.x,a.y-b.y); z0=RB.orb.zoom; mv=true; } });
-  el.addEventListener("pointermove",e=>{ if(!pts.has(e.pointerId)) return; pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  el.addEventListener("pointermove",e=>{ if(!pts.has(e.pointerId)) return; if(DRAG&&pts.get(e.pointerId).drag){ dragMove(e); return; } pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
     if(pts.size===2){ const [a,b]=[...pts.values()]; if(p0) RB.orb.zoom=THREE.MathUtils.clamp(z0*p0/Math.hypot(a.x-b.x,a.y-b.y),.42,1.2); return; }
     if(!st) return; const dx=e.clientX-st.x,dy=e.clientY-st.y; if(Math.hypot(dx,dy)>8) mv=true;
     if(mv){ RB.orb.yaw=THREE.MathUtils.clamp(st.yaw-dx*.005,-.7,.7); RB.orb.pitch=THREE.MathUtils.clamp(st.pitch+dy*.004,-.35,.6); } });
-  const up=e=>{ if(!pts.has(e.pointerId)) return; pts.delete(e.pointerId); if(!pts.size){ if(st&&!mv&&performance.now()-st.t<450){ const r=el.getBoundingClientRect(), rc=new THREE.Raycaster();
+  const up=e=>{ if(!pts.has(e.pointerId)) return; if(pts.get(e.pointerId).drag){ pts.delete(e.pointerId); dragEnd(); st=null; return; } pts.delete(e.pointerId); if(!pts.size){ if(st&&!mv&&performance.now()-st.t<450){ const r=el.getBoundingClientRect(), rc=new THREE.Raycaster();
       rc.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),RB.camera); const hs=rc.intersectObjects(RB.pick,false); let h=hs[0]; const th=hs.find(x=>x.object.userData.t==="term"); if(th&&h&&th.distance-h.distance<.4) h=th; el._onTap(h?h.object.userData:null); } st=null; p0=0; } };
   el.addEventListener("pointerup",up); el.addEventListener("pointercancel",up);
   el.addEventListener("wheel",e=>{ e.preventDefault(); RB.orb.zoom=THREE.MathUtils.clamp(RB.orb.zoom*(1+e.deltaY*.001),.42,1.2); },{passive:false}); }
@@ -1484,10 +1586,20 @@ function drawLCD(x,val,unit,col){ const w=512,h=200; x.fillStyle=col.bg; x.fillR
   x.fillStyle="rgba(0,0,0,.06)"; for(let i=0;i<h;i+=4) x.fillRect(0,i,w,1);
   x.font='700 118px "Readex Pro",Tahoma'; x.textAlign="right"; x.textBaseline="middle"; x.fillStyle=col.fg; x.fillText(val,w-120,h/2+6);
   x.font='600 58px "Readex Pro",Tahoma'; x.textAlign="left"; x.fillText(unit,w-108,h/2+14); }
+
+/* ---------- shared detail helpers for more realistic components ---------- */
+const _glassMat=()=>_texCache.glass||(_texCache.glass=new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:.05,metalness:0,transparent:true,opacity:.12,clearcoat:1,clearcoatRoughness:.02,depthWrite:false}));
+function lcdGlass(g,w,h,x,y,z){ const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),_glassMat()); m.position.set(x,y,z+.004); m.renderOrder=3; g.add(m);
+  const hl=new THREE.Mesh(new THREE.PlaneGeometry(w*.9,h*.18),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.07,depthWrite:false})); hl.position.set(x,y+h*.3,z+.005); hl.rotation.z=-.04; g.add(hl); }
+function vents(g,x,y,z,n,len,mat){ for(let i=0;i<n;i++){ const v=rbox(len,.025,.012,.01,mat); v.position.set(x,y-i*.055,z); g.add(v); } }
+function rubberCorners(g,c,col){ const m=new THREE.MeshStandardMaterial({color:lin(col||0x2A3036),roughness:.85}); [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([sx,sy])=>{ const k=rbox(.16,.16,c.zt+.02,.05,m); k.position.set(sx*(c.w/2-.06),sy*(c.h/2-.06),.01); g.add(k); }); }
+function stripe(g,c,col,y){ const m=new THREE.MeshStandardMaterial({color:lin(col),roughness:.5}); const b=rbox(c.w-.02,.05,.005,.01,m); b.position.set(0,y,c.zt+.002); g.add(b); }
 function bindingPost(R,col){ const g=new THREE.Group(); const m=new THREE.MeshPhysicalMaterial({color:lin(col),roughness:.35,clearcoat:.6});
   const base=new THREE.Mesh(new THREE.CylinderGeometry(.075,.085,.05,28),m); base.rotation.x=Math.PI/2; base.position.z=.025; g.add(base);
   const cap=new THREE.Mesh(new THREE.CylinderGeometry(.062,.07,.07,28),m); cap.rotation.x=Math.PI/2; cap.position.z=.085; cap.castShadow=true; g.add(cap);
-  const ring=new THREE.Mesh(new THREE.TorusGeometry(.055,.01,8,24),R.mat.nickel); ring.position.z=.12; g.add(ring); return g; }
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(.055,.01,8,24),R.mat.nickel); ring.position.z=.12; g.add(ring);
+  const kg=_texCache.knurl||(_texCache.knurl=new THREE.BoxGeometry(.012,.012,.06)); for(let i=0;i<12;i++){ const a=i/12*Math.PI*2, k=new THREE.Mesh(kg,m); k.position.set(Math.cos(a)*.068,Math.sin(a)*.068,.085); k.rotation.z=a; g.add(k); }
+  const st=new THREE.Mesh(new THREE.CylinderGeometry(.018,.018,.03,12),R.mat.copper); st.rotation.x=Math.PI/2; st.position.z=.13; g.add(st); return g; }
 
 
 /* general MNA over the bench terminals: meters are real elements, so wrong wiring behaves like the real thing */
@@ -1513,7 +1625,8 @@ function buildPSU(R,id,c,ty){ const g=new THREE.Group();
   const body=rbox(c.w,c.h,c.zt,.12,R.mat.graphite); body.userData={t:"comp",id}; g.add(body); R.pick.push(body);
   const bez=rbox(.86,.42,.03,.06,R.mat.dark); bez.position.set(-.2,.22,c.zt); g.add(bez);
   R.psuLCD=lcdTex((x,v,on)=>drawLCD(x,v,"V",on?{bg:"#2B1A05",fg:"#FFB83D"}:{bg:"#1A1206",fg:"#6E5526"}));
-  const scr=new THREE.Mesh(new THREE.PlaneGeometry(.78,.3),new THREE.MeshBasicMaterial({map:R.psuLCD.t,toneMapped:false})); scr.position.set(-.2,.22,c.zt+.032); g.add(scr);
+  const scr=new THREE.Mesh(new THREE.PlaneGeometry(.78,.3),new THREE.MeshBasicMaterial({map:R.psuLCD.t,toneMapped:false})); scr.position.set(-.2,.22,c.zt+.032); g.add(scr); lcdGlass(g,.78,.3,-.2,.22,c.zt+.032);
+  vents(g,-.42,-.1,c.zt+.004,4,.36,R.mat.dark); rubberCorners(g,c); stripe(g,c,0xFFC72C,c.h/2-.04);
   const lab=decal(1.3,.14,(x,w,h)=>{ txt(x,0,46,"#AEBBC4",500,"right")("مصدر جهد مستمر",w-24,h/2+2); txt(x,0,44,"#FFC72C",600,"left")("DC 0–24 V",24,h/2+2); }); lab.position.set(0,.55,c.zt+.001); g.add(lab);
   const kb=new THREE.Group(); kb.position.set(.46,.2,c.zt); g.add(kb);
   const k1=new THREE.Mesh(new THREE.CylinderGeometry(.17,.19,.1,40),new THREE.MeshPhysicalMaterial({color:lin(0x3A434D),roughness:.4,clearcoat:.5})); k1.rotation.x=Math.PI/2; k1.position.z=.05; k1.castShadow=true; kb.add(k1);
@@ -1546,12 +1659,13 @@ function buildToggle(R,id,c,ty){ const g=new THREE.Group();
   g.position.set(...c.c,0); R.scene.add(g); }
 function buildMeter(R,id,c,ty,kind,name){ const g=new THREE.Group(), letter={am:"A",vm:"V",om:"Ω"}[kind], lcdCol={bg:"#0E2A18",fg:"#6CFF9E"};
   const body=rbox(c.w,c.h,c.zt,.12,R.mat.grey); body.userData={t:"comp",id}; g.add(body); R.pick.push(body);
-  const top=c.h/2-.26; const bez=rbox(.92,.42,.03,.06,R.mat.dark); bez.position.set(0,top,c.zt); g.add(bez);
+  const top=c.h/2-.26; const face=rbox(c.w-.1,c.h-.42,.02,.08,new THREE.MeshPhysicalMaterial({color:lin(0xEEF0F1),roughness:.4,clearcoat:.4})); face.position.set(0,.16,c.zt); g.add(face);
+  const bez=rbox(.94,.44,.035,.07,R.mat.dark); bez.position.set(0,top,c.zt+.01); g.add(bez); rubberCorners(g,c,0xE0A21A); stripe(g,c,{am:0xD0312D,vm:0x2F6BD3,om:0x1F9D57}[kind]||0x6C7A82,c.h/2-.06);
   const L=lcdTex((x,v,u)=>drawLCD(x,v,u,lcdCol));
-  const scr=new THREE.Mesh(new THREE.PlaneGeometry(.84,.32),new THREE.MeshBasicMaterial({map:L.t,toneMapped:false})); scr.position.set(0,top,c.zt+.032); g.add(scr);
+  const scr=new THREE.Mesh(new THREE.PlaneGeometry(.84,.32),new THREE.MeshBasicMaterial({map:L.t,toneMapped:false})); scr.position.set(0,top,c.zt+.047); g.add(scr); lcdGlass(g,.84,.32,0,top,c.zt+.047);
   const dl=decal(.9,.3,(x,w,h)=>{ x.strokeStyle="#2B3740"; x.lineWidth=9; x.beginPath(); x.arc(h/2+10,h/2,h/2-12,0,7); x.stroke();
     txt(x,0,88,"#2B3740",700)(letter,h/2+10,h/2+5); txt(x,0,52,"#46525B",600,"right")(name,w-14,h/2-22); txt(x,0,38,"#7A868E",500,"right")({am:"توالي",vm:"توازي",om:"من غير تغذية"}[kind],w-14,h/2+30); });
-  dl.position.set(0,(top-.21+ty+.1)/2,c.zt+.001); g.add(dl);
+  dl.position.set(0,(top-.21+ty+.1)/2,c.zt+.021); g.add(dl);
   const hx=kind==="am"?-.25:.25; termDecal(g,c,[[letter,hx,"#C0392B"],["COM",-hx,"#46525B"]],ty);
   const p1=bindingPost(R,0xD32F2F); p1.position.set(hx,ty,c.zt); g.add(p1); const p2=bindingPost(R,0x1E1F22); p2.position.set(-hx,ty,c.zt); g.add(p2);
   g.position.set(...c.c,0); R.scene.add(g); return L; }
@@ -1582,10 +1696,10 @@ function indEl(a,b,L,i){ const g=SIMDT/L; return {a,b,r:1/g,v:-i/g}; }        //
 function simRun(dt){ const ts=X.timeScale||1, sim=dt*ts, n=Math.max(1,Math.ceil(sim/(X.maxStep||2e-3))); SIMDT=sim/n; let s;
   for(let k=0;k<n;k++){ s=benchSolveOnce(); X.advance(s,SIMDT); }
   const now=performance.now();
-  if(now-simUi>90){ simUi=now; benchUpdate(); } else { B.res=s; if(RB&&X.scene3D) X.scene3D(RB,s); }
+  if(now-simUi>90){ simUi=now; benchUpdate(); } else { B.res=s; if(RB&&X.scene3D) (X.scene3D(RB,s),smoothCapture(RB)); }
   if(B.view==="graph"&&now-simPaper>250){ simPaper=now; renderBenchPaper(); } }
 function benchSolve(){ let s; if(B&&B.wires&&B.wires.length){ const T=new Set(X.terms); if(B.wires.some(w=>!T.has(w.a)||!T.has(w.b))) B.wires=B.wires.filter(w=>T.has(w.a)&&T.has(w.b)); } if(X.iterStart) X.iterStart(); for(let k=0;k<(X.iterate?80:1);k++){ s=benchSolveOnce(); if(!X.iterate||!X.iterate(s)) break; } return s; }
-function benchSolveOnce(){ if(X.ac) return X.solveAC(); const els=X.elements(B), rw=X.wireR||.01; B.wires.forEach(w=>els.push({a:w.a,b:w.b,r:rw}));
+function benchSolveOnce(){ if(X.ac) return X.solveAC(); const els=X.elements(B), rw=X.wireR||.01; B.wires.forEach(w=>{ if(!(X.wireOpen&&X.wireOpen(w))) els.push({a:w.a,b:w.b,r:rw}); });
   const V=mna(X.extraNodes?X.terms.concat(X.extraNodes):X.terms,X.gnd,els), d=(a,b)=>V[a]-V[b], s={V,wI:{}}; B.wires.forEach(w=>s.wI[w.id]=d(w.a,w.b)/rw);
   const m=X.meters; s.Iam=(!m.am||B.amFuse)?0:d(m.am[0],m.am[1])/R_AM; s.Vvm=m.vm?d(m.vm[0],m.vm[1]):0; s.Ivm=s.Vvm/R_VM; s.live=X.isLive(B);
   X.derive(s,d); return s; }
@@ -1608,15 +1722,15 @@ function benchUpdate(){
     if(!B.amFuse&&s.Iam<-1e-5) notes.push("الأميتر معكوس، عشان كده القراية بالسالب. التيار لازم يدخل من A ويطلع من COM."); }
   notes.push(...X.notes(s));
   const hiV=X.hiV(B); let bad=false; if(s.live&&hiV>1) B.wires.forEach(w=>{ const hi=s.V[w.a]>hiV/2&&s.V[w.b]>hiV/2, lo=s.V[w.a]<hiV/2&&s.V[w.b]<hiV/2; if((hi&&w.c==="K")||(lo&&w.c==="R")) bad=true; });
-  if(bad) notes.push("ألوان الأسلاك: في الدوائر المستمرة الأحمر للموجب والأسود للسالب.");
+  if(bad) notes.push("ألوان الأسلاك: في الدوائر المستمرة الأحمر للموجب، والأسود للسالب، والأصفر للراجع بين المكونات.");
   renderNotes("bnotes",notes);
-  if(RB){ RB.vmLCD&&RB.vmLCD.draw(f(s.Vvm,2),"V"); RB.amLCD&&RB.amLCD.draw(B.amFuse?"FUSE":f(amV,amD),B.amFuse?"":X.amUnit); X.scene3D&&X.scene3D(RB,s); }
+  if(RB){ RB.vmLCD&&RB.vmLCD.draw(f(s.Vvm,2),"V"); RB.amLCD&&RB.amLCD.draw(B.amFuse?"FUSE":f(amV,amD),B.amFuse?"":X.amUnit); X.scene3D&&(X.scene3D(RB,s),smoothCapture(RB)); }
   benchLatch(s); benchSteps(); if(B.view!=="3d") renderBenchPaper();
 }
 function benchLatch(s){ const now=X.latchNow(s); let ch=false;
   for(let i=0;i<now.length;i++){ if(!B.latch[i]&&now[i]&&(i===0||B.latch[i-1])){ B.latch[i]=true; ch=true; if(i<now.length-1) Sound.snap(); } }
   if(ch) saveKey("latch",B.latch); }
-function benchSteps(){ const d=B.latch, cur=d.indexOf(false), all=cur<0, n=d.filter(Boolean).length;
+function benchSteps(){ const L=X.steps.length; const d=Array.from({length:L},(_,i)=>!!B.latch[i]); B.latch=d; const cur=d.indexOf(false), all=cur<0, n=d.filter(Boolean).length;
   $("#bsteps").innerHTML=X.steps.map((s,i)=>`<li class="${d[i]?"done":i===cur?"cur":""}"><i>${d[i]?"":i+1}</i><span>${s}</span></li>`).join("");
   $("#bringArc").style.strokeDashoffset=106.8*(1-n/X.steps.length); $("#bringTxt").textContent=all?"✓":cur+1;
   $("#bstepOf").textContent=all?"خلصت التجربة":`الخطوة ${cur+1} من ${X.steps.length}`;
@@ -1652,7 +1766,7 @@ function renderBenchPaper(){ const host=$("#bpaperSheet");
   let d=`<svg viewBox="0 0 360 430" direction="ltr" role="img" aria-label="مخطط توصيلك"><defs><pattern id="gd2" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0H0V10" fill="none" stroke="#E7E3D8" stroke-width=".8"/></pattern></defs><rect width="360" height="430" fill="url(#gd2)"/>`;
   const cnt={}; B.wires.forEach(w=>{cnt[w.a]=(cnt[w.a]||0)+1; cnt[w.b]=(cnt[w.b]||0)+1;});
   B.wires.forEach(w=>{ const p="M"+R[w.id].map(q=>q.join(" ")).join("L"), I=s.wI[w.id]||0;
-    d+=`<path d="${p}" fill="none" stroke="${w.c==="R"?"#B3261E":ink}" stroke-width="2.2" stroke-linejoin="round"/>`;
+    d+=`<path d="${p}" fill="none" stroke="${({R:"#B3261E",Y:"#C9A000",L:"#8A5A33",N:"#2E6BD1",PE:"#3E9E4F"})[w.c]||ink}" stroke-width="2.2" stroke-linejoin="round"/>`;
     if(s.live&&Math.abs(I)>2e-5) d+=`<path class="flow" d="${p}" fill="none" stroke="#F0A416" stroke-width="3.2"${I<0?' style="animation-direction:reverse"':""}/>`; });
   d+=S2.symbols(iec,s,T);
   for(const k in S2.pts){ const [x,y]=S2.pts[k], lp=S2.lbl[k]; d+=(cnt[k]||0)>1?`<circle cx="${x}" cy="${y}" r="4" fill="${ink}"/>`:`<circle cx="${x}" cy="${y}" r="3.6" fill="#fff" stroke="${ink}" stroke-width="1.8"/>`; d+=T(lp[0],lp[1],X.lbl[k],"middle",X.lbl[k].length>1?8.5:10.5,600,"#43525C"); }
@@ -1693,7 +1807,7 @@ function checkAnswer(){ if(QZ.checked){ newQuestion(); $("#qIn").focus(); return
   if(!isFinite(v)){ $("#qFb").hidden=false; $("#qFb").className="qfb no"; $("#qFb").textContent="اكتب رقم الأول."; return; }
   const ok=Math.abs(v-QZ.ans)/Math.abs(QZ.ans)<=.03; QZ.checked=true; const fb=$("#qFb"); fb.hidden=false;
   if(ok){ B.quizOk++; saveKey("quiz",B.quizOk); fb.className="qfb ok"; fb.innerHTML=`إجابة صح! <code>${QZ.sol}</code>`; Sound.chime(); vibrate(15); }
-  else { fb.className="qfb no"; fb.innerHTML=`قريب، بس مش مظبوط. الحل: <code>${QZ.sol}</code>`; Sound.buzz(); }
+  else { fb.className="qfb no"; fb.innerHTML=`قريب، بس مش مظبوط. الحل: <code>${QZ.sol}</code>`; Sound.buzz(); markWrong(); }
   $("#qGo").textContent="السؤال اللي بعده"; benchUpdate(); }
 function showIntro(){ const it=X.intro; $("#introTitle").textContent=it.title;
   $("#introList").innerHTML=it.items.map(([s,t,d])=>`<div class="ci"><b class="tnum">${s}</b><div><strong>${t}</strong><p>${d}</p></div></div>`).join("")+(it.foot?`<p class="ci-foot">${it.foot}</p>`:"");
@@ -1710,21 +1824,21 @@ function bTerm(id){ if(B.selWire!=null) bSelWire(null); if(bLocked()) return;
   B.wires.push({id:(B.wires.reduce((m,w)=>Math.max(m,w.id),0)+1),a,b,c:B.color}); bSave(); Sound.snap(); vibrate(14); hideToast(); benchUpdate(); }
 function bWire(id){ bClearSel(); bSelWire(B.selWire===id?null:id); Sound.tick(); }
 function bSelWire(id){ if(RB) (RB.wireObjs||[]).forEach(o=>o.mesh.material.emissive.setHex(o.id===id?0x4A3710:0)); B.selWire=id; $("#bdock").hidden=id!=null; $("#bwmode").hidden=id==null; }
-function wireHex(){ return X.wireHex?X.wireHex():{R:0xC62828,K:0x1C1C1E}; }
+function wireHex(){ return Object.assign({R:0xC62828,K:0x1C1C1E,Y:0xE8B820},X.wireHex?X.wireHex():{}); }
 function bSave(){ saveKey("wires",B.wires); if(RB) routeWires(RB,X.C,X.T,B.wires,wireHex()); }
 function bWipe(silent){ if(bLocked()) return false; B.wires=[]; bSelWire(null); bClearSel(); bSave(); if(!silent){ Sound.snap(); toast("شلت كل الأسلاك"); } benchUpdate(); return true; }
 
 /* ---------- scene lifecycle ---------- */
 function initBench(old){
   const host=$("#bstage"), R=RB=stageBase(host,old);
-  X.build(R);
+  X.build(R); contactShadows(R.scene,X.C); R.sm=[]; smoothAuto(R);
   R.term={}; const hitM=new THREE.MeshBasicMaterial({visible:false});
   X.terms.forEach(id=>{ const [ci,[lx,ly]]=X.T[id], c=X.C[ci], p=new THREE.Vector3(c.c[0]+lx,c.c[1]+ly,c.zt+.12);
     const hint=new THREE.Mesh(new THREE.RingGeometry(.1,.125,40),new THREE.MeshBasicMaterial({color:0xFFC72C,transparent:true,opacity:0,depthWrite:false})); hint.position.copy(p); R.scene.add(hint);
     const hit=new THREE.Mesh(new THREE.SphereGeometry(.17,12,8),hitM); hit.position.copy(p); hit.userData={t:"term",id}; R.scene.add(hit); R.pick.push(hit); R.term[id]={p,hint,hit}; });
   R.selRing=new THREE.Mesh(new THREE.RingGeometry(.1,.14,40),new THREE.MeshBasicMaterial({color:0xFFC72C,transparent:true,depthWrite:false})); R.selRing.visible=false; R.scene.add(R.selRing);
   routeWires(R,X.C,X.T,B.wires,wireHex());
-  bindOrbit(R.renderer.domElement,R,u=>{ if(!u){ const t=performance.now(); if(t-(R.lastEmpty||0)<350){ Object.assign(R.orb,{yaw:0,pitch:.1,zoom:1}); Sound.tick(); } R.lastEmpty=t; bClearSel(); return; } if(u.t==="term") bTerm(u.id); else if(u.t==="wire") bWire(u.id); else if(u.t==="toggle"){ X.togglePower(B); Sound.click(); vibrate(12); benchUpdate(); } else if(u.t==="reset"||u.t==="rtest"||u.t==="sw"){ if(X.onLever) X.onLever(u); } else if(u.t==="comp"){ if(!(X.onComp&&X.onComp(u.id))) benchInfo(u.id); } });
+  bindOrbit(R.renderer.domElement,R,u=>{ if(!u){ const t=performance.now(); if(t-(R.lastEmpty||0)<350){ Object.assign(R.orb,{yaw:0,pitch:.1,zoom:1}); Sound.tick(); } R.lastEmpty=t; bClearSel(); return; } if(u.t==="term"){ if(!(X.onTermTap&&X.onTermTap(u.id))) bTerm(u.id); } else if(u.t==="wire"){ if(!(X.onWireTap&&X.onWireTap(u.id))) bWire(u.id); } else if(u.t==="toggle"){ X.togglePower(B); Sound.click(); vibrate(12); benchUpdate(); } else if(u.t==="reset"||u.t==="rtest"||u.t==="sw"){ if(X.onLever) X.onLever(u); } else if(u.t==="comp"){ if(!(X.onComp&&X.onComp(u.id))) benchInfo(u.id); } });
   R.ro=new ResizeObserver(()=>fitCam(R,host,$("#bhud"),$("#bbottom"))); R.ro.observe(host); fitCam(R,host,$("#bhud"),$("#bbottom"));
   if(!benchLoopOn){ benchLoopOn=true; requestAnimationFrame(benchLoop); } }
 function disposeBench(){ if(!RB) return; RB.ro&&RB.ro.disconnect(); RB.renderer.dispose(); RB.renderer.domElement.remove(); RB=null; }
@@ -1737,18 +1851,18 @@ function benchLoop(now){ requestAnimationFrame(benchLoop); const dt=Math.min(.05
   (RB.wireObjs||[]).forEach(o=>{ const I=s.wI[o.id]||0, on=s.live&&Math.abs(I)>2e-5, sp=on?(.1+Math.log10(1+Math.abs(I)*1000)*.09):0;
     o.parts.forEach(p=>{ p.visible=on; if(on){ p.userData.t=(p.userData.t+dt*sp*(I>0?1:-1)*(3/o.curve.L)+1)%1; o.curve.getPoint(p.userData.t,p.position); p.position.z+=.035; } }); });
   if(s.hot&&RB.heat) RB.heat.material.opacity=.45+Math.sin(now/120)*.15;
-  if(X.onFrame) X.onFrame(RB,dt);
+  if(X.onFrame) X.onFrame(RB,dt); smoothStep(RB,dt);
   for(let i=(RB.sparks||[]).length-1;i>=0;i--){ const k=RB.sparks[i]; k.life-=dt; if(k.light) k.o.intensity=Math.max(0,5*k.life/k.max); else { k.v.y-=7*dt; k.o.position.addScaledVector(k.v,dt); k.o.material.opacity=Math.max(0,k.life*1.6); } if(k.life<=0){ RB.scene.remove(k.o); RB.sparks.splice(i,1); } }
   RB.renderer.render(RB.scene,RB.camera); }
-function openBench(id){ Sound.init(); const x=EXPS[id];
-  if(X!==x){ disposeBench(); X=x; B=BSTATE[id]=BSTATE[id]||loadState(x); X.initState&&X.initState(B); }
+function openBench(id){ Sound.init(); moveHint(); const x=EXPS[id];
+  if(X!==x){ disposeBench(); X=x; wrapPositions(X); B=BSTATE[id]=BSTATE[id]||loadState(x); X.initState&&X.initState(B); } if(MOVE) setMove(false);
   $("#bTitle").textContent=X.title; benchControls();
   $("#bFootNote").textContent=X.footNote; $$("[data-bv]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.bv===B.view)); $("#bpaper").hidden=B.view==="3d";
   show("bench"); if(!RB) initBench(); fitCam(RB,$("#bstage"),$("#bhud"),$("#bbottom")); bSelWire(null); benchUpdate();
   if(!store.get(X.key+"_intro",false)){ store.set(X.key+"_intro",true); setTimeout(showIntro,500); } }
 function benchControls(){
-  const sw=X.wireSw?X.wireSw():[["R","#C62828","أحمر، موجب"],["K","#1E1F22","أسود، سالب"]]; const bs=$$(".bsw");
-  bs.forEach((b,i)=>{ const d=sw[i]; b.hidden=!d; if(!d) return; b.dataset.c=d[0]; b.querySelector("i").style.background=d[1]; b.setAttribute("aria-label",d[2]); b.setAttribute("aria-pressed",B.color===d[0]); });
+  const sw=X.wireSw?X.wireSw():[["R","#C62828","أحمر، موجب"],["K","#1E1F22","أسود، سالب"],["Y","#F2C230","أصفر، راجع"]]; const bs=$$(".bsw");
+  bs.forEach((b,i)=>{ const d=sw[i]; b.hidden=!d; if(!d) return; b.dataset.c=d[0]; b.querySelector("i").style.background=d[1]; b.querySelector("b").textContent=d[2].split("، ")[1]||d[2]; b.setAttribute("aria-label",d[2]); b.setAttribute("aria-pressed",B.color===d[0]); }); wselSync();
   if(!sw.some(d=>d[0]===B.color)){ B.color=sw[0][0]; bs.forEach((b,i)=>b.setAttribute("aria-pressed",i===0)); }
 $("#bSlider").hidden=!X.slider; $("#bCtrlLbl").textContent=X.slider?X.slider.label:X.chipLabel;
   if(X.slider){ const e=$("#bV"); e.min=X.slider.min; e.max=X.slider.max; e.step=X.slider.step; }
@@ -1773,7 +1887,8 @@ function initBenchUI(){
   $("#bDelWire").onclick=()=>{ if(B.selWire==null||bLocked()) return; const id=B.selWire; B.wires=B.wires.filter(w=>w.id!==id); bSelWire(null); bSave(); Sound.snap(); benchUpdate(); };
   $("#bCancelWire").onclick=()=>bSelWire(null);
   $("#bResetAll").onclick=()=>{ X.resetPower(B); B.amFuse=false; if(!bWipe(true)) return; B.readings=[]; B.latch=X.steps.map(()=>false); B.graphSeen=false; B.quizOk=0; B.memo={};
-    ["readings","latch","quiz","memo"].forEach(k=>saveKey(k,B[k==="quiz"?"quizOk":k])); if(X.onReset) X.onReset(B); benchUpdate(); toast("التجربة رجعت من الأول"); };
+    ["readings","latch","quiz","memo"].forEach(k=>saveKey(k,B[k==="quiz"?"quizOk":k])); if(X.onReset) X.onReset(B); else if(RB) rlRebuild(); benchUpdate(); toast("التجربة رجعت من الأول"); };
+  $("#bPosReset").onclick=()=>{ if(bLocked()) return; resetPositions(); };
   $("#bCustom").onclick=e=>{ if(X.ctrlClick) X.ctrlClick(e); };
   $("#bIntro").onclick=()=>{ Sound.tick(); showIntro(); };
   $$(".bsw").forEach(b=>b.onclick=()=>{ B.color=b.dataset.c; $$(".bsw").forEach(x=>x.setAttribute("aria-pressed",x===b)); Sound.tick(); });
@@ -2122,7 +2237,7 @@ function coderCheck(){ const fb=$("#cFb");
   if(CS.tab==="build"){ if(!CS.bands.every(x=>x!=null)){ ctoast("لسه فيه حلقات فاضية"); Sound.buzz(); return; }
     const got=bandsValue(CS.bands,CS.n), ok=Math.abs(got.v-CS.q.val.v)<CS.q.val.v*1e-6&&got.t===CS.q.val.t;
     if(ok){ CS.prog.build++; coderSave(); Sound.chime(); vibrate(15); fb.innerHTML=`<div class="fb ok">صح! <bdi>${CS.q.target.map(i=>CLR[i].n).join("، ")}</bdi></div>`; CS.q=null; setTimeout(()=>{ if(CS.tab==="build") renderCoder(); },1300); }
-    else { Sound.buzz(); fb.innerHTML=`<div class="fb no">لأ، ده ${fmtVal(got.v)} ±${got.t}%. الصح: <bdi>${CS.q.target.map(i=>CLR[i].n).join("، ")}</bdi></div>`; }
+    else { Sound.buzz(); markWrong(); fb.innerHTML=`<div class="fb no">لأ، ده ${fmtVal(got.v)} ±${got.t}%. الصح: <bdi>${CS.q.target.map(i=>CLR[i].n).join("، ")}</bdi></div>`; }
     coderSteps(); return; }
   const raw=($("#cIn").value||"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[٫,]/g,"."), v=parseFloat(raw)*CS.unit;
   if(!isFinite(v)){ ctoast("اكتب رقم الأول"); Sound.buzz(); return; }
@@ -2130,10 +2245,10 @@ function coderCheck(){ const fb=$("#cFb");
     if(CS.tol==null){ ctoast("اختار السماحية كمان"); Sound.buzz(); return; }
     const exp=`${q.target.map(i=>CLR[i].n).join("، ")}: <bdi dir="ltr">${q.val.base} × 10${sup(q.val.m)} = ${fmtVal(q.val.v)} ±${q.val.t}%</bdi>`;
     if(okV&&okT){ q.n===4?CS.prog.r4++:CS.prog.r5++; coderSave(); Sound.chime(); vibrate(15); fb.innerHTML=`<div class="fb ok">صح! ${exp}</div>`; CS.q=null; setTimeout(()=>{ if(CS.tab==="read") renderCoder(); },1600); }
-    else { Sound.buzz(); fb.innerHTML=`<div class="fb no">${okV?"القيمة صح بس السماحية غلط.":"مش مظبوط."} الحل: ${exp}</div>`; }
+    else { Sound.buzz(); markWrong(); fb.innerHTML=`<div class="fb no">${okV?"القيمة صح بس السماحية غلط.":"مش مظبوط."} الحل: ${exp}</div>`; }
   } else if(CS.tab==="aquiz"){ const p=CS.q.p, ok=Math.abs(v-p.v)/p.v<.005;
     if(ok){ CS.prog.alpha++; coderSave(); Sound.chime(); vibrate(15); fb.innerHTML=`<div class="fb ok">صح! ${p.how}</div>`; CS.q=null; setTimeout(()=>{ if(CS.tab==="aquiz") renderCoder(); },1600); }
-    else { Sound.buzz(); fb.innerHTML=`<div class="fb no">مش مظبوط. ${p.how}</div>`; } }
+    else { Sound.buzz(); markWrong(); fb.innerHTML=`<div class="fb no">مش مظبوط. ${p.how}</div>`; } }
   coderSteps(); }
 function initCoderUI(){
   $("#cTabs").onclick=e=>{ const b=e.target.closest("[data-tab]"); if(!b) return; CS.tab=b.dataset.tab; CS.q=null; if(CS.tab==="calc"&&CS.bands.some(x=>x==null)) CS.bands=CS.n===4?[1,0,2,10]:[1,0,0,1,1]; Sound.tick(); renderCoder(); };
@@ -2245,7 +2360,7 @@ function makeRLab(mode){ const cfg={conn:{id:"rconn",key:"rl_conn",done:"done_rc
     onReset(B){ B.rs=cfg.def.map((v,i)=>({slot:i+1,val:v})); store.set(cfg.key+"_rs",B.rs); rlRebuild(); },
     build(R){ const C=this.C; silkLabel(R,"مصدر جهد مستمر","G1",-1.5,2.42); silkLabel(R,"الأميتر","P1",.05,2.42); silkLabel(R,"الفولتميتر","P2",1.55,2.42);
       buildPSU(R,"psu",C.psu,-.42); R.amLCD=buildMeter(R,"am",C.am,-.42,"am","الأميتر"); R.vmLCD=buildMeter(R,"vm",C.vm,-.42,"vm","الفولتميتر");
-      R.rh=B.rs.map(r=>{ const p=RL_SLOT(r.slot); silkLabel(R,`R${r.slot}  ${fmtR(r.val)}`,"",p.x,p.y+.52); const h=buildResistor(R,"r"+r.slot,C["r"+r.slot],-.2,"2 W  ±5%"); h.slot=r.slot; return h; }); },
+      R.rh=B.rs.map(r=>{ const p0=C["r"+r.slot].c, p={x:p0[0],y:p0[1]}; _silk(R,`R${r.slot}  ${fmtR(r.val)}`,"",p.x,p.y+.52); const h=buildResistor(R,"r"+r.slot,C["r"+r.slot],-.2,"2 W  ±5%"); h.slot=r.slot; return h; }); },
     comps(){ const o={psu:psuInfo,am:Object.assign({},amInfo,{en:"Ammeter  0 to 2 A",kv:[["طريقة التوصيل","توالي"],["المقاومة الداخلية","≈ 0.01 Ω"],["المدى","2 A"]]}),vm:vmInfo}; B.rs.forEach(r=>o["r"+r.slot]=resInfo("R"+r.slot,r.val)); return o; },
     get sch(){ const pts={"psu.p":[40,140,3],"psu.n":[40,220,1],"am.a":[100,50,2],"am.c":[180,50,0],"vm.c":[100,345,2],"vm.v":[180,345,0]}, boxes=[[10,140,70,220],[100,30,180,70],[100,325,180,365]],
         lbl={"psu.p":[28,132],"psu.n":[28,234],"am.a":[98,38],"am.c":[182,38],"vm.c":[98,333],"vm.v":[182,333]};
@@ -2475,7 +2590,7 @@ function renderTQuiz(P2){ if(!CS.q){ const t=pick(RTYPES), opts=[t]; while(opts.
     const P2=$("#cPanel"); if(CS.tab==="types") renderTypes(P2); else if(CS.tab==="pot") renderPot(P2); else renderTQuiz(P2); coderSteps(); };
   $("#cPanel").addEventListener("click",e=>{ if(CS.mod!=="types") return; const c=e.target.closest("[data-ti]"), rt=e.target.closest("[data-rt]"), tp=e.target.closest("[data-tp]"), tq=e.target.closest("[data-tq]");
     if(tq){ const ok=tq.dataset.tq===CS.q.t.k, fb=$("#cFb"); if(ok){ CS.prog.tq=(CS.prog.tq||0)+1; coderSave(); Sound.chime(); vibrate(15); fb.innerHTML=`<div class="fb ok">صح! ${CS.q.t.n}: ${CS.q.t.use}.</div>`; CS.q=null; setTimeout(()=>{ if(CS.tab==="tquiz") renderCoder(); },1300); }
-      else { Sound.buzz(); fb.innerHTML=`<div class="fb no">لأ، ده <b>${CS.q.t.n}</b>. ${CS.q.t.d}</div>`; CS.q=null; setTimeout(()=>{ if(CS.tab==="tquiz") renderCoder(); },2600); } coderSteps(); return; }
+      else { Sound.buzz(); markWrong(); fb.innerHTML=`<div class="fb no">لأ، ده <b>${CS.q.t.n}</b>. ${CS.q.t.d}</div>`; CS.q=null; setTimeout(()=>{ if(CS.tab==="tquiz") renderCoder(); },2600); } coderSteps(); return; }
     if(rt){ POT.Rt=+rt.dataset.rt; Sound.tick(); renderCoder(); return; }
     if(tp){ POT.taper=tp.dataset.tp; if(tp.dataset.tp==="A"){ CS.prog.taper=true; coderSave(); } Sound.tick(); renderCoder(); return; }
     if(c){ const i=+c.dataset.ti; CS.openT=CS.openT===i?null:i; const k=RTYPES[i].k; CS.prog.types=CS.prog.types||[]; if(!CS.prog.types.includes(k)){ CS.prog.types.push(k); coderSave(); } Sound.tick(); renderCoder(); } });
@@ -2765,7 +2880,7 @@ function makeCL(kind){ const isC=kind==="C", P0=isC?"c":"l", letter=isC?"C":"L";
       :[["+","التوالي","زي المقاومات: L = L1 + L2 + …"],["∥","التوازي","1/L = 1/L1 + 1/L2 + …: المكافئ أصغر من أصغر ملف."],["τ×R","القياس","التطبيق بيقيس τ لما التيار بيزيد، ويحسب L = τ × R."],["+","ضيف وغيّر","لحد 4 ملفات بأي قيمة، واضغط على أي واحد تغيّره."]]},
     build(R){ const C=this.C; silkLabel(R,"مصدر جهد مستمر","G1",-1.5,2.42); silkLabel(R,"الأميتر","P1",.05,2.42); silkLabel(R,"الفولتميتر","P2",1.55,2.42); silkLabel(R,"مفتاح التحويل","S1",-1.1,.97); silkLabel(R,"المقاومة المعروفة","R",1.1,.97);
       buildPSU(R,"psu",C.psu,-.42); R.amLCD=buildMeter(R,"am",C.am,-.42,"am","الأميتر"); R.vmLCD=buildMeter(R,"vm",C.vm,-.42,"vm","الفولتميتر"); buildChangeover(R,"sw",C.sw,-.28); R.rh=buildResistor(R,"res",C.res,-.2,"2 W  ±5%");
-      R.ch=B.rs.map(r=>{ const p=CL_SLOT(r.slot); silkLabel(R,`${letter}${r.slot}  ${cfg.fmt(r.val)}`,"",p.x,p.y+.52); const h=isC?buildCap(R,P0+r.slot,C[P0+r.slot],-.25):buildInd(R,P0+r.slot,C[P0+r.slot],-.25); h.slot=r.slot; relabel(isC?h.capLab:h.indLab,isC?`${fmtC(r.val)}  25 V`:`L = ${fmtL(r.val)}`); return h; }); },
+      R.ch=B.rs.map(r=>{ const p0=C[P0+r.slot].c, p={x:p0[0],y:p0[1]}; _silk(R,`${letter}${r.slot}  ${cfg.fmt(r.val)}`,"",p.x,p.y+.52); const h=isC?buildCap(R,P0+r.slot,C[P0+r.slot],-.25):buildInd(R,P0+r.slot,C[P0+r.slot],-.25); h.slot=r.slot; relabel(isC?h.capLab:h.indLab,isC?`${fmtC(r.val)}  25 V`:`L = ${fmtL(r.val)}`); return h; }); },
     comps(){ const o={psu:psuInfo,am:Object.assign({},amInfo,{en:"Ammeter  0 to 2 A"}),vm:vmInfo,sw:swInfo,res:resInfo("R",B.R,"مقاومة معروفة القيمة، بنقيس بيها الثابت الزمني.")}; return o; }
   };
   Object.defineProperty(X0,"powerTxt",{configurable:true,enumerable:true,get(){ const t=["حوّل على 1","حوّل على 2","افصل OFF"][B&&B.dyn?B.dyn.sw:0]; return [t,t]; }}); return X0; }
@@ -2865,10 +2980,10 @@ function buildLampAC(R,id,c,ty){ const g=new THREE.Group();
   const blk=rbox(c.w,.5,.28,.1,R.mat.white); blk.position.set(0,-c.h/2+.25,0); blk.userData={t:"comp",id}; g.add(blk); R.pick.push(blk);
   const sock=new THREE.Mesh(new THREE.CylinderGeometry(.14,.16,.22,32),new THREE.MeshPhysicalMaterial({color:lin(0x2E2A27),roughness:.45})); sock.position.set(0,-c.h/2+.6,.16); g.add(sock);
   const bp=[[.12,0],[.13,.05],[.16,.12],[.21,.2],[.25,.29],[.26,.36],[.25,.43],[.22,.5],[.16,.55],[.09,.585],[0,.6]].map(([r,y])=>new THREE.Vector2(r,y));
-  R.lampGlass=new THREE.MeshPhysicalMaterial({color:lin(0xFFFFFF),roughness:.35,clearcoat:1,transparent:true,opacity:.9,emissive:lin(0xFFC775),emissiveIntensity:0});
+  R.lampGlass=new THREE.MeshPhysicalMaterial({color:lin(0xFFFFFF),roughness:.35,clearcoat:1,transparent:true,opacity:.6,emissive:lin(0xFFB35C),emissiveIntensity:0});
   const bulb=new THREE.Mesh(new THREE.LatheGeometry(bp,40),R.lampGlass); bulb.position.set(0,-c.h/2+.7,.16); bulb.userData={t:"comp",id}; g.add(bulb); R.pick.push(bulb);
   R.lampLight=new THREE.PointLight(0xFFC677,0,3,2); R.lampLight.position.set(0,-c.h/2+1.05,.4); g.add(R.lampLight);
-  R.lampGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:R.glowT,blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:0,color:0xFFD9A0})); R.lampGlow.position.set(0,-c.h/2+1.0,.3); R.lampGlow.scale.set(1.5,1.5,1); g.add(R.lampGlow);
+  R.lampGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:R.glowT,blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:0,color:0xFFD9A0})); R.lampGlow.position.set(0,-c.h/2+.95,.32); R.lampGlow.scale.set(.9,.9,1); R.lampGlow.material.color.setHex(0xFFC98A); g.add(R.lampGlow);
   termDecal(g,c,[["1",-.3,"#46525B"],["2",.3,"#46525B"]],ty+.12); [-.3,.3].forEach(x=>{ const sc=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,.04,24),R.mat.nickel); sc.rotation.x=Math.PI/2; sc.position.set(x,ty,.3); g.add(sc); });
   g.position.set(...c.c,0); R.scene.add(g); }
 function buildMotor(R,id,c,ty){ const g=new THREE.Group();
@@ -2888,7 +3003,7 @@ EXPS.power={ id:"power", key:"acp", doneKey:"done_power", title:"القدرة ا
   T:{ "src.L":["src",[.3,-.5],3],"src.N":["src",[-.3,-.5],3],"pa.l":["pa",[-.4,-.5],3],"pa.o":["pa",[0,-.5],3],"pa.n":["pa",[.4,-.5],3],"lamp.1":["lamp",[-.3,-.6],3],"lamp.2":["lamp",[.3,-.6],3],"mot.1":["mot",[-.3,-.6],3],"mot.2":["mot",[.3,-.6],3],"cap.1":["cap",[-.4,-.25],3],"cap.2":["cap",[.4,-.25],3] },
   terms:["src.L","src.N","pa.l","pa.o","pa.n","lamp.1","lamp.2","mot.1","mot.2","cap.1","cap.2"], gnd:"src.N", meters:{},
   get lbl(){ return {"src.L":TLABEL["src.L"],"src.N":TLABEL["src.N"],"pa.l":P.id==="IEC"?"L":"H","pa.o":P.id==="IEC"?"L'":"H'","pa.n":"N","lamp.1":"1","lamp.2":"2","mot.1":"U1","mot.2":"U2","cap.1":"1","cap.2":"2"}; },
-  wireSw:()=>[["L",P.wire.L.css,P.wire.L.name+"، فاز"],["N",P.wire.N.css,P.wire.N.name+"، نيوترال"]], wireHex:()=>({L:P.wire.L.hex,N:P.wire.N.hex,R:0xC62828,K:0x1C1C1E}),
+  wireSw:()=>[["L",P.wire.L.css,P.wire.L.name+"، فاز"],["N",P.wire.N.css,P.wire.N.name+"، نيوترال"],["Y",P.wire.Y.css,"أصفر، راجع"]], wireHex:()=>({L:P.wire.L.hex,N:P.wire.N.hex,Y:P.wire.Y.hex,R:0xC62828,K:0x1C1C1E}),
   slider:null, chipLabel:"مكثف تحسين القدرة", chipLabel1:"مكثف تحسين معامل القدرة", get chips(){ return capChips(); }, chipDef:2, chipRender:v=>v+" µF", chipFmt:v=>v+" µF",
   footNote:"المحلل بيقيس الجهد بين L وN، والتيار اللي داخل من L وخارج من L'", powerTxt:["تشغيل","فصل"], lockMsg:"افصل المصدر الأول قبل ما تعدّل التوصيل",
   power:B=>B.out, togglePower:B=>{ B.out=!B.out; }, resetPower:B=>{ B.out=false; }, locked:B=>B.out, isLive:B=>B.out, hiV:()=>0,
@@ -2913,7 +3028,7 @@ EXPS.power={ id:"power", key:"acp", doneKey:"done_power", title:"القدرة ا
     if(s.paOK&&s.motOn&&!s.capOn&&s.pf<.85) o.push(`معامل القدرة ${s.pf.toFixed(2)} ضعيف: الموتور بيسحب قدرة غير فعالة Q، والتيار أكبر من اللازم. ركّب مكثف توازي.`); return o; },
   scene3D(R,s){ R.acLCD.draw(String(P.V),B.out); R.led.emissive.setHex(B.out?0x22FF77:0); R.mcbLev.position.y=B.out?.26:.14;
     R.paLCD.draw(s.paOK?Math.round(s.P):"0",s.paOK?`${s.U.toFixed(0)}V ${s.I.toFixed(2)}A`:"0V 0A",s.paOK?"PF "+s.pf.toFixed(2):"PF —");
-    const b=Math.min(1,(s.Vl/P.V)**2); R.lampGlass.emissiveIntensity=b*2.2; R.lampLight.intensity=b*2.2; R.lampGlow.material.opacity=b*.85;
+    const b=Math.min(1,(s.Vl/P.V)**2); R.lampGlass.emissiveIntensity=b*.75; R.lampLight.intensity=b*1.6; R.lampGlow.material.opacity=b*.36;
     R.motSpeed=s.Vm/P.V; if(R.lastC!==B.R){ R.lastC=B.R; relabel(R.capLab,`${B.R} µF  450 V~`); } },
   onFrame(R,dt){ if(R.shaft) R.shaft.rotation.x+=dt*(R.motSpeed||0)*25; },
   steps:["وصّل: L من المصدر ← L في المحلل، وL' ← اللمبة ← N. وطرف N في المحلل ← N. وشغّل","افصل، ووصّل الموتور توازي مع اللمبة، وشغّل، ولاحظ معامل القدرة","افصل، ووصّل مكثف التحسين توازي مع الموتور، وشغّل، ولاحظ التيار قل","سجّل 3 قراءات بأحمال مختلفة","افتح مثلث القدرة وقارن","حل 3 أسئلة في التحدي"],
@@ -3097,7 +3212,7 @@ function dquizGen(kind){ const V=P.V;
 function renderDQuiz(P2,kind){ if(!CS.q||CS.q.t!==kind){ CS.q=Object.assign({t:kind},dquizGen(kind)); }
   P2.innerHTML=`<div class="pane"><h4>اختبر نفسك</h4><p>${CS.q.text}</p><div class="ans"><input id="cIn" inputmode="decimal" placeholder="${CS.q.unit}"></div><div class="row2"><button class="go" id="dCheck">صحّح</button><button class="btn2" id="cSkip">غيرها</button></div><div id="cFb"></div></div>`; }
 function numIn(){ return parseFloat(($("#cIn").value||"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[٫,]/g,".")); }
-function qfb(ok,msg,key){ const fb=$("#cFb"); if(ok){ CS.prog[key]=(CS.prog[key]||0)+1; coderSave(); Sound.chime(); vibrate(15); fb.innerHTML=`<div class="fb ok">صح! ${msg}</div>`; CS.q=null; setTimeout(()=>{ if(["meter","equiz","fquiz","cquiz","vquiz"].includes(CS.tab)) renderCoder(); },1500); } else { Sound.buzz(); fb.innerHTML=`<div class="fb no">مش مظبوط. ${msg}</div>`; } coderSteps(); }
+function qfb(ok,msg,key){ const fb=$("#cFb"); if(ok){ CS.prog[key]=(CS.prog[key]||0)+1; coderSave(); Sound.chime(); vibrate(15); fb.innerHTML=`<div class="fb ok">صح! ${msg}</div>`; CS.q=null; setTimeout(()=>{ if(["meter","equiz","fquiz","cquiz","vquiz"].includes(CS.tab)) renderCoder(); },1500); } else { Sound.buzz(); markWrong(); fb.innerHTML=`<div class="fb no">مش مظبوط. ${msg}</div>`; } coderSteps(); }
 (function(){ const base=renderCoder, DM=["energy","fuse_select","cable_select","vdrop"];
   renderCoder=function(){ if(!DM.includes(CS.mod)){ base(); return; } $("#cCard").hidden=true; $$("#cTabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===CS.tab)); CODER_MODS[CS.mod].render(CS.tab,$("#cPanel")); coderSteps(); };
   const out=()=>{ if(CS.tab==="fcalc") fcalcOut(); if(CS.tab==="ccalc") ccalcOut(); if(CS.tab==="vcalc") vcalcOut(); };
@@ -3164,7 +3279,7 @@ EXPS.prot={ id:"prot", key:"prot", doneKey:"done_prot", title:"الحماية ا
       "rcd.L1":["rcd",[-.2,.45],1],"rcd.N1":["rcd",[.2,.45],1],"rcd.L2":["rcd",[-.2,-.45],3],"rcd.N2":["rcd",[.2,-.45],3],"load.L":["load",[-.5,-.65],3],"load.N":["load",[0,-.65],3],"load.PE":["load",[.5,-.65],3] },
   terms:["src.L","src.N","src.PE","mcb.1","mcb.2","rcd.L1","rcd.N1","rcd.L2","rcd.N2","load.L","load.N","load.PE"], extraNodes:["earth"], gnd:"src.N", meters:{},
   get lbl(){ const L=TLABEL["src.L"], G=P.id==="IEC"?"PE":"G"; return {"src.L":L,"src.N":"N","src.PE":G,"mcb.1":"1","mcb.2":"2","rcd.L1":L,"rcd.N1":"N","rcd.L2":L,"rcd.N2":"N","load.L":L,"load.N":"N","load.PE":G}; },
-  wireSw:()=>[["L",P.wire.L.css,P.wire.L.name+"، فاز"],["N",P.wire.N.css,P.wire.N.name+"، نيوترال"],["PE",P.wire.PE.css,P.wire.PE.name+"، أرضي"]], wireHex:()=>({L:P.wire.L.hex,N:P.wire.N.hex,PE:P.wire.PE.hex,R:0xC62828,K:0x1C1C1E}),
+  wireSw:()=>[["L",P.wire.L.css,P.wire.L.name+"، فاز"],["N",P.wire.N.css,P.wire.N.name+"، نيوترال"],["Y",P.wire.Y.css,"أصفر، راجع"],["PE",P.wire.PE.css,P.wire.PE.name+"، أرضي"]], wireHex:()=>({L:P.wire.L.hex,N:P.wire.N.hex,Y:P.wire.Y.hex,PE:P.wire.PE.hex,R:0xC62828,K:0x1C1C1E}),
   slider:null, chipLabel:"قدرة السخان", chips:PR_P, chipDef:1, chipRender:v=>v+" W", chipFmt:v=>v+" W",
   get chips2(){ return {label:"القاطع MCB",vals:PR_BRK(),def:1,render:v=>"B"+v+" A"}; },
   footNote:"نظام تأريض TN-C-S: النيوترال والأرضي متربطين عند المصدر، والأرض بمقاومة 10 Ω", powerTxt:["تشغيل","فصل"], lockMsg:"افصل المصدر الأول قبل ما تعدّل التوصيل",
@@ -3385,7 +3500,7 @@ EXPS.meters={ graphAlways:true, id:"meters", key:"dmm", doneKey:"done_meters", t
   intro:{title:"أجهزة القياس الافتراضية",items:[["V","الجهد","المفتاح على V⎓ للمستمر أو V~ للمتردد، والأحمر في VΩ، والتوصيل توازي."],["A","التيار","المفتاح على mA أو A، والأحمر في فتحة mA أو 10A، وتفتح الدائرة وتحط الجهاز توالي."],["Ω","المقاومة","الأحمر في VΩ، والعنصر لازم يبقى من غير تغذية. ابدأ بمدى كبير لو مش عارف القيمة."],["🔔","التوصيل","صفارة لو فيه مسار مقاومته صغيرة. مفيد لاختبار الأسلاك والفيوزات."],["⊂","الكلّابة","بتقيس التيار المتردد من غير ما تفصل. امسك سلك واحد بس، مش الكابل كله."]]},
   build(R){ const C=this.C; silkLabel(R,"مصدر جهد مستمر","G1",-1.4,2.42); silkLabel(R,"الأفوميتر الرقمي","DMM",1.45,2.42); silkLabel(R,"كارت الاختبار","PCB",-.6,.62); silkLabel(R,"مقاومة مجهولة","R3",-1.5,-.75); silkLabel(R,"بريزة","~",.1,-.7); silkLabel(R,"لمبة على البريزة","",1.5,-.62);
     buildPSU(R,"psu",C.psu,-.42); buildDMM(R,"mm",C.mm,-.9); buildCard(R,"card",C.card,-.35); const h=buildResistor(R,"r3",C.r3,-.2,"R3  ?"); setBandsH(h,R3V,false); buildSocket(R,"sk",C.sk,-.4); buildLampAC(R,"lamp",C.lamp,-.55);
-    R.lampGlass.emissiveIntensity=2; R.lampLight.intensity=1.8; R.lampGlow.material.opacity=.8; buildClamp(R,"clamp",{c:[2.0,-2.3]}); },
+    R.lampGlass.emissiveIntensity=.75; R.lampLight.intensity=1.4; R.lampGlow.material.opacity=.36; buildClamp(R,"clamp",{c:[2.0,-2.3]}); },
   comps(){ return {psu:psuInfo,
     mm:{name:"الأفوميتر الرقمي",ref:"DMM",en:"Digital multimeter",sym:"V",text:(B.memo.fuseMA||B.memo.fuseA)?"فيوز الجهاز محروق. اضغط تاني على الأفوميتر عشان تغيّره.":"جهاز قياس متعدد: جهد مستمر ومتردد، وتيار، ومقاومة، واختبار توصيل. فيه 4 فتحات: COM للأسود دايمًا، وVΩ للجهد والمقاومة، وmA للتيار الصغير، و10A للتيار الكبير.",kv:[["فيوز mA","200 mA"],["فيوز 10A","10 A"],["مقاومة الدخول على الجهد","10 MΩ"]]},
     card:{name:"كارت الاختبار",ref:"PCB",en:"R1 1 kΩ + R2 2.2 kΩ",sym:"R",text:"دايرة صغيرة فيها R1 وR2 توالي. الجمبر J1–J2 هو المكان اللي تفتح فيه الدائرة عشان تحط الأفوميتر توالي وتقيس التيار. TP هي النقطة اللي بين المقاومتين.",kv:[["R1","1 kΩ"],["R2","2.2 kΩ"]]},
@@ -3435,7 +3550,7 @@ function buildHDev(R,id,ty,c){ const g=new THREE.Group(), D=DEV[ty], zt=c.zt; co
   const H={};
   if(ty==="sup"){ plate(R.mat.graphite); const dl=decal(1.2,.16,(x,w,h)=>{ txt(x,0,42,"#FFC72C",600)(`~ ${P.V} V  ${P.f} Hz`,w/2,h/2+2); }); dl.position.set(0,.3,zt+.001); g.add(dl);
     H.led=new THREE.MeshStandardMaterial({color:lin(0x1C3A26),emissive:new THREE.Color(0)}); const led=new THREE.Mesh(new THREE.SphereGeometry(.04,16,12),H.led); led.position.set(.45,.3,zt+.02); g.add(led); }
-  else if(["s1","s2g","sw2","swi","pb"].includes(ty)){ plate(); const nR=ty==="s2g"?2:1;
+  else if(["s1","s2g","sw2","swi","pb"].includes(ty)){ plate(); { const bz=rbox(ty==="s2g"?.8:.6,.64,.025,.07,new THREE.MeshPhysicalMaterial({color:lin(0xE6E7E3),roughness:.3,clearcoat:.6})); bz.position.set(0,.18,zt); g.add(bz); } [-1,1].forEach(sd=>{ const sc=screwMesh(R.mat); sc.scale.set(.55,.55,.55); sc.position.set(sd*(D.w/2-.1),.18,zt+.01); g.add(sc); }); const nR=ty==="s2g"?2:1;
     H.rk=[...Array(nR)].map((_,i)=>{ const piv=new THREE.Group(); piv.position.set(nR===2?(i?.2:-.2):0,.18,zt+.01); g.add(piv);
       const r=rbox(nR===2?.32:.42,.5,.07,.06,new THREE.MeshPhysicalMaterial({color:lin(ty==="pb"?0xF2F2EF:0xFAFAF8),roughness:.3,clearcoat:.7})); piv.add(r); r.userData={t:"sw",id,bit:i}; R.pick.push(r);
       if(ty==="pb"){ const bell=decal(.3,.3,(x,w,h)=>{ txt(x,0,150,"#2B323A",700)("🔔",w/2,h/2+10); }); bell.position.set(0,0,.075); piv.add(bell); }
@@ -3443,18 +3558,21 @@ function buildHDev(R,id,ty,c){ const g=new THREE.Group(), D=DEV[ty], zt=c.zt; co
       return piv; }); }
   else if(ty==="lamp"){ const blk=rbox(D.w,.5,zt,.1,R.mat.white); blk.position.y=-D.h/2+.25; blk.userData={t:"comp",id}; g.add(blk); R.pick.push(blk);
     const bp=[[.1,0],[.11,.04],[.14,.1],[.19,.18],[.22,.26],[.23,.32],[.22,.38],[.19,.44],[.14,.48],[.08,.51],[0,.52]].map(([r,y])=>new THREE.Vector2(r,y));
-    H.glass=new THREE.MeshPhysicalMaterial({color:lin(0xFFFFFF),roughness:.35,clearcoat:1,transparent:true,opacity:.9,emissive:lin(0xFFC775),emissiveIntensity:0});
+    H.glass=new THREE.MeshPhysicalMaterial({color:lin(0xFFFFFF),roughness:.35,clearcoat:1,transparent:true,opacity:.6,emissive:lin(0xFFB35C),emissiveIntensity:0});
     const sock=new THREE.Mesh(new THREE.CylinderGeometry(.12,.14,.18,24),new THREE.MeshPhysicalMaterial({color:lin(0x2E2A27)})); sock.position.set(0,-D.h/2+.58,.14); g.add(sock);
     const b=new THREE.Mesh(new THREE.LatheGeometry(bp,32),H.glass); b.position.set(0,-D.h/2+.66,.14); g.add(b);
-    H.glow=new THREE.Sprite(new THREE.SpriteMaterial({map:R.glowT,blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:0,color:0xFFD9A0})); H.glow.position.set(0,-D.h/2+.95,.3); H.glow.scale.set(1.3,1.3,1); g.add(H.glow);
+    H.fil=new THREE.MeshStandardMaterial({color:lin(0x6B4A2A),emissive:lin(0xFF9A3A),emissiveIntensity:0,roughness:.5}); { const pts=[]; for(let i=0;i<=40;i++){ const t=i/40; pts.push(new THREE.Vector3(-.07+t*.14,.02*Math.sin(t*Math.PI*10),0)); }
+      const fl=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),60,.006,6,false),H.fil); fl.position.set(0,-D.h/2+.92,.14); g.add(fl);
+      [-1,1].forEach(sd=>{ const w=new THREE.Mesh(new THREE.CylinderGeometry(.004,.004,.2,6),R.mat.nickel); w.position.set(sd*.07,-D.h/2+.82,.14); g.add(w); }); }
+    H.glow=new THREE.Sprite(new THREE.SpriteMaterial({map:R.glowT,blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:0,color:0xFFD9A0})); H.glow.position.set(0,-D.h/2+.9,.32); H.glow.scale.set(.8,.8,1); H.glow.material.color.setHex(0xFFC98A); g.add(H.glow);
     R.nLights=(R.nLights||0)+1; if(R.nLights<=2){ H.light=new THREE.PointLight(0xFFC677,0,2.4,2); H.light.position.set(0,-D.h/2+.95,.4); g.add(H.light); } else H.light={intensity:0}; }
-  else if(ty==="sock"){ plate(); const face=rbox(.56,.56,.04,.28,R.mat.grey); face.position.set(0,.16,zt); g.add(face);
+  else if(ty==="sock"){ plate(); [-1,1].forEach(sd=>{ const sc=screwMesh(R.mat); sc.scale.set(.55,.55,.55); sc.position.set(sd*(D.w/2-.1),.16,zt+.01); g.add(sc); }); const face=rbox(.58,.58,.03,.1,new THREE.MeshPhysicalMaterial({color:lin(0xE6E7E3),roughness:.3,clearcoat:.6})); face.position.set(0,.16,zt); g.add(face); const well=new THREE.Mesh(new THREE.CylinderGeometry(.23,.21,.05,40),new THREE.MeshStandardMaterial({color:lin(0xC9CCCF),roughness:.5})); well.rotation.x=Math.PI/2; well.position.set(0,.16,zt+.02); g.add(well); [-1,1].forEach(sd=>{ const cl=rbox(.08,.05,.03,.01,R.mat.nickel); cl.position.set(0,.16+sd*.2,zt+.03); g.add(cl); });
     [-.11,.11].forEach(x=>{ const h=new THREE.Mesh(new THREE.CylinderGeometry(.04,.04,.05,20),R.mat.dark); h.rotation.x=Math.PI/2; h.position.set(x,.16,zt+.04); g.add(h); });
     H.led=new THREE.MeshStandardMaterial({color:lin(0x3A1C18),emissive:new THREE.Color(0)}); const l=new THREE.Mesh(new THREE.SphereGeometry(.035,14,10),H.led); l.position.set(.3,.38,zt+.02); g.add(l); }
-  else if(ty==="bell"){ plate(R.mat.grey); const dome=new THREE.Mesh(new THREE.SphereGeometry(.26,32,16,0,Math.PI*2,0,Math.PI/2),new THREE.MeshStandardMaterial({color:lin(0xD4AF63),metalness:1,roughness:.25})); dome.rotation.x=Math.PI/2; dome.position.set(0,.18,zt); g.add(dome); H.dome=dome; }
-  else if(ty==="neon"){ plate(R.mat.grey); H.nm=new THREE.MeshStandardMaterial({color:lin(0x5A1C18),emissive:new THREE.Color(0)}); const n=new THREE.Mesh(new THREE.SphereGeometry(.1,20,14),H.nm); n.position.set(0,.14,zt+.04); g.add(n); }
-  else if(ty==="bal"){ plate(new THREE.MeshStandardMaterial({color:lin(0x3A3F45),metalness:.6,roughness:.4})); const dl=decal(.9,.2,(x,w,h)=>{ txt(x,0,44,"#EEF3FB",700)("BALLAST 36W",w/2,h/2+2); }); dl.position.set(0,.12,zt+.001); g.add(dl); }
-  else if(ty==="st"){ plate(R.mat.grey); H.sm=new THREE.MeshPhysicalMaterial({color:lin(0x2F6BD3),roughness:.4,emissive:new THREE.Color(0)}); const cy=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.3,24),H.sm); cy.rotation.x=Math.PI/2; cy.position.set(0,.12,zt+.15); g.add(cy); }
+  else if(ty==="bell"){ plate(R.mat.grey); const dome=new THREE.Mesh(new THREE.SphereGeometry(.26,32,16,0,Math.PI*2,0,Math.PI/2),new THREE.MeshStandardMaterial({color:lin(0xD4AF63),metalness:1,roughness:.25})); dome.rotation.x=Math.PI/2; dome.position.set(0,.18,zt); g.add(dome); H.dome=dome; const coil=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,.18,16),R.mat.copper); coil.rotation.z=Math.PI/2; coil.position.set(-.3,-.05,zt+.06); g.add(coil); const arm=rbox(.26,.025,.02,.01,R.mat.nickel); arm.position.set(-.18,.05,zt+.1); arm.rotation.z=.7; g.add(arm); const ham=new THREE.Mesh(new THREE.SphereGeometry(.035,12,10),R.mat.nickel); ham.position.set(-.08,.14,zt+.12); g.add(ham); H.ham=ham; }
+  else if(ty==="neon"){ plate(R.mat.grey); H.nm=new THREE.MeshStandardMaterial({color:lin(0x5A1C18),emissive:new THREE.Color(0)}); const n=new THREE.Mesh(new THREE.SphereGeometry(.1,20,14),H.nm); n.position.set(0,.14,zt+.04); g.add(n); const rg=new THREE.Mesh(new THREE.TorusGeometry(.115,.022,10,28),R.mat.nickel); rg.position.set(0,.14,zt+.03); g.add(rg); }
+  else if(ty==="bal"){ plate(new THREE.MeshStandardMaterial({color:lin(0x3A3F45),metalness:.6,roughness:.4})); const dl=decal(.9,.2,(x,w,h)=>{ txt(x,0,44,"#EEF3FB",700)("BALLAST",w/2,h/2+2); }); dl.position.set(0,.22,zt+.006); dl.scale.set(.8,.8,1); g.add(dl); [-1,1].forEach(sd=>{ const ear=rbox(.14,.2,.02,.03,R.mat.alu); ear.position.set(sd*(D.w/2-.02),.12,.005); g.add(ear); const hole=new THREE.Mesh(new THREE.CylinderGeometry(.025,.025,.03,12),R.mat.dark); hole.rotation.x=Math.PI/2; hole.position.set(sd*(D.w/2-.02),.12,.02); g.add(hole); }); for(let i=0;i<5;i++){ const rb=rbox(.02,.34,.01,.005,new THREE.MeshStandardMaterial({color:lin(0x2B3036),metalness:.6,roughness:.4})); rb.position.set(-.3+i*.15,.02,zt+.002); rb.scale.y=.45; g.add(rb); } }
+  else if(ty==="st"){ plate(R.mat.grey); H.sm=new THREE.MeshPhysicalMaterial({color:lin(0x2F6BD3),roughness:.4,emissive:new THREE.Color(0)}); const cy=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.3,24),H.sm); cy.rotation.x=Math.PI/2; cy.position.set(0,.12,zt+.15); g.add(cy); const lb=decal(.22,.22,(x,w,h)=>{ x.fillStyle="#EEF3FB"; x.beginPath(); x.arc(w/2,h/2,w*.45,0,7); x.fill(); txt(x,0,120,"#1E3F8F",700)("S",w/2,h/2+8); }); lb.position.set(0,.12,zt+.301); g.add(lb); }
   else if(ty==="tube"){ const base=rbox(D.w,D.h,zt,.1,R.mat.white); base.userData={t:"comp",id}; g.add(base); R.pick.push(base);
     H.tm=new THREE.MeshPhysicalMaterial({color:lin(0xF4F6F8),roughness:.3,emissive:lin(0xE8F4FF),emissiveIntensity:0}); const t=new THREE.Mesh(new THREE.CylinderGeometry(.1,.1,D.w-.3,32),H.tm); t.rotation.z=Math.PI/2; t.position.set(0,.12,zt+.14); g.add(t);
     [-1,1].forEach(s=>{ const cap=new THREE.Mesh(new THREE.CylinderGeometry(.11,.11,.1,24),R.mat.nickel); cap.rotation.z=Math.PI/2; cap.position.set(s*(D.w/2-.15),.12,zt+.14); g.add(cap); });
@@ -3470,7 +3588,7 @@ EXPS.house={ id:"house", key:"house", doneKey:"done_house", title:"التمدي�
   get terms(){ return hcDevs().flatMap(([id,ty])=>DEV[ty].t.map(n=>`${id}.${n}`)); },
   get lbl(){ const l={}; hcDevs().forEach(([id,ty])=>DEV[ty].t.forEach(n=>l[`${id}.${n}`]=HT_LBL(n))); return l; },
   gnd:"sup.N", meters:{},
-  wireSw:()=>[["L",P.wire.L.css,P.wire.L.name+"، فاز"],["N",P.wire.N.css,P.wire.N.name+"، نيوترال"],["PE",P.wire.PE.css,P.wire.PE.name+"، أرضي"]], wireHex:()=>({L:P.wire.L.hex,N:P.wire.N.hex,PE:P.wire.PE.hex,R:0xC62828,K:0x1C1C1E}),
+  wireSw:()=>[["L",P.wire.L.css,P.wire.L.name+"، فاز"],["N",P.wire.N.css,P.wire.N.name+"، نيوترال"],["Y",P.wire.Y.css,"أصفر، راجع"],["PE",P.wire.PE.css,P.wire.PE.name+"، أرضي"]], wireHex:()=>({L:P.wire.L.hex,N:P.wire.N.hex,Y:P.wire.Y.hex,PE:P.wire.PE.hex,R:0xC62828,K:0x1C1C1E}),
   slider:null, chips:[], chipLabel:"الدائرة", chipFmt:()=>`${((B&&B.memo&&B.memo.ci)||0)+1}. ${hcCur().n}`, footNote:"اضغط على المفاتيح على اللوحة عشان تغيّر وضعها", powerTxt:["شغّل اللوحة","افصل اللوحة"], lockMsg:"افصل اللوحة الأول قبل ما تعدّل التوصيل",
   power:B=>B.out, togglePower:B=>{ B.out=!B.out; B.memo.ft=0; }, resetPower:B=>{ B.out=false; }, locked:B=>B.out, isLive:B=>B.out, hiV:()=>0,
   initState(B){ B.memo.ci=B.memo.ci||0; B.memo.wb=B.memo.wb||{}; B.memo.hdone=B.memo.hdone||{}; B.wires=B.memo.wb[B.memo.ci]||B.wires||[]; B.latch=this.steps.map(()=>false); },
@@ -3572,7 +3690,9 @@ const WT={
   rcd:{n:"قاطع تسريب",t:["L1","N1","L2","N2"],cat:3}, am:{n:"أميتر",t:["A","COM"],cat:4}, vm:{n:"فولتميتر",t:["V","COM"],cat:4} };
 const WCAT=["","مفاتيح","أحمال","حماية","قياس"];
 const WCOL=[-1.5,0,1.5], WROW=[1.95,.75,-.45,-1.65];
-function wsPos(c){ const r=Math.floor(c.slot/3), col=c.slot%3, wide=WT[c.ty].wide&&WT[c.ty].wide(c.p); return {x:wide?(WCOL[col]+WCOL[col+1])/2:WCOL[col], y:WROW[r], w:wide?2.6:(c.ty==="tube"?1.2:c.ty==="rcd"||c.ty==="swi"?1.2:1.05), h:.9}; }
+function wsPos(c){ const p=wsPos0(c); if(WIDE){ const q=c.xyW||wsWide()[c.id]; if(q){ p.x=q[0]; p.y=q[1]; } } else if(c.xy){ p.x=c.xy[0]; p.y=c.xy[1]; } return p; }
+function wsWide(){ const base={}; wsComps().forEach(c=>{ const q=wsPos0(c); base[c.id]={c:[q.x,q.y],w:q.w,h:q.h}; }); return wideLayout(base); }
+function wsPos0(c){ const r=Math.floor(c.slot/3), col=c.slot%3, wide=WT[c.ty].wide&&WT[c.ty].wide(c.p); return {x:wide?(WCOL[col]+WCOL[col+1])/2:WCOL[col], y:WROW[r], w:wide?2.6:(c.ty==="tube"?1.2:c.ty==="rcd"||c.ty==="swi"?1.2:1.05), h:.9}; }
 function wsSlots(list){ const used=new Set(); list.forEach(c=>{ used.add(c.slot); if(WT[c.ty].wide&&WT[c.ty].wide(c.p)) used.add(c.slot+1); }); return used; }
 function wsFree(list,wide){ const u=wsSlots(list); for(let s=1;s<12;s++){ if(u.has(s)) continue; if(wide){ if(s%3===2||u.has(s+1)) continue; } return s; } return -1; }
 function tx(c,i){ const n=WT[c.ty].t.length, P0=wsPos(c); if(c.ty==="tube"){ const w=P0.w; return [-(w/2-.15),-(w/2-.45),w/2-.45,w/2-.15][i]; } return (i-(n-1)/2)*.3; }
@@ -3618,7 +3738,7 @@ function wsDev(id){ const d=wsBox().dev; return d[id]=d[id]||{}; }
 function wsParam(c){ const p=WT[c.ty].par; return c.p!=null?c.p:(p?p.d:null); }
 /* ---------- electrical model ---------- */
 function wsEls(st,opt={}){ const V=P.V, e=[]; const box=wsBox();
-  wsComps().forEach(c=>{ const id=c.id, ty=c.ty, p=wsParam(c), s=st[id]||0, D=box.dev[id]||{}, k=(a,b,r)=>e.push({a:`${id}.${a}`,b:`${id}.${b}`,r});
+  wsComps().forEach(c=>{ const id=c.id, ty=c.ty, p=wsParam(c), s=st[id]||0, D=box.dev[id]||{}, k=(a,b,r)=>e.push({a:`${id}.${a}`,b:`${id}.${b}`,r}); if(dgSkip(id)&&ty!=="tube"){ if(ty==="lamp"||ty==="bell") return; if(["s1","s2g","sw2","mcb","fuse","st","bal"].includes(ty)) return; }
     if(ty==="sup"){ if(B.out||opt.forceOn) e.push({a:"sup.L",b:"sup.N",r:.1,v:V}); e.push({a:"sup.PE",b:"sup.N",r:.2}); }
     if(ty==="s1"||ty==="pb"){ if(s) k(WT[ty].t[0],WT[ty].t[1],.01); }
     if(ty==="mcb"){ if(s&&!D.trip) k("1","2",.01); } if(ty==="fuse"){ if(!D.blown) k("1","2",.01); }
@@ -3630,7 +3750,7 @@ function wsEls(st,opt={}){ const V=P.V, e=[]; const box=wsBox();
     if(ty==="bal") k("1","2",BALZ(p)*V); if(ty==="st"&&!opt.noDyn&&D.heat>0) k("1","2",5);
     if(ty==="tube"){ const T=TUBE[p]; if(!D.dead){ k("A1","A2",8); k("B1","B2",8); } if(!opt.noDyn&&(D.lit||D.trying)&&!D.dead) k("A2","B1",T.kV*V/T.It); }
     if(ty==="am") k("A","COM",.01); if(ty==="vm") k("V","COM",1e6); });
-  B.wires.forEach(w=>e.push({a:w.a,b:w.b,r:.005})); return e; }
+  B.wires.forEach(w=>{ if(!dgWireOpen(w)) e.push({a:w.a,b:w.b,r:.005}); }); return e; }
 function wsSolve(st,opt){ const V=mna(X.terms,"sup.N",wsEls(st,opt)), d=(a,b)=>V[a]-V[b], r={V,d,c:{}};
   wsComps().forEach(c=>{ const ty=c.ty, p=wsParam(c), t=WT[ty].t, v=Math.abs(d(`${c.id}.${t[0]}`,`${c.id}.${t[1]}`)), o={v};
     if(ty==="lamp"){ o.I=v/(P.V*P.V/p); o.on=v/P.V; } if(ty==="fan"||ty==="heat"){ o.I=v/(P.V*P.V/(ty==="fan"?60:2000)); o.on=v/P.V; }
@@ -3668,7 +3788,7 @@ function buildWDev(R,c){ const P0=wsPos(c), ty=c.ty, p=wsParam(c), zt=ty==="sup"
   const std=WT[ty].base&&ty!=="tube"; let H;
   if(std){ H=buildHDev(R,id,WT[ty].base,cc); }
   else { const g=new THREE.Group(); H={}; const D={w:P0.w,h:P0.h}; const plate=m=>{ const b=rbox(D.w,D.h,zt,.1,m||R.mat.white); b.userData={t:"comp",id}; g.add(b); R.pick.push(b); return b; };
-    if(ty==="tube"){ plate(); H.tm=new THREE.MeshPhysicalMaterial({color:lin(0xF4F6F8),roughness:.3,emissive:lin(0xE8F4FF),emissiveIntensity:0}); const t=new THREE.Mesh(new THREE.CylinderGeometry(.085,.085,D.w-.25,28),H.tm); t.rotation.z=Math.PI/2; t.position.set(0,.1,zt+.12); g.add(t);
+    if(ty==="tube"){ plate(); { const ch=rbox(D.w-.1,.34,.08,.05,R.mat.alu); ch.position.set(0,.1,zt); g.add(ch); [-1,1].forEach(sd=>{ const hd=rbox(.16,.36,.2,.04,new THREE.MeshPhysicalMaterial({color:lin(0xE9EAE6),roughness:.35})); hd.position.set(sd*(D.w/2-.1),.1,zt); g.add(hd); }); } H.tm=new THREE.MeshPhysicalMaterial({color:lin(0xF4F6F8),roughness:.3,emissive:lin(0xE8F4FF),emissiveIntensity:0}); const t=new THREE.Mesh(new THREE.CylinderGeometry(.085,.085,D.w-.25,28),H.tm); t.rotation.z=Math.PI/2; t.position.set(0,.1,zt+.12); g.add(t);
       H.ends=[-1,1].map(s=>{ const m=new THREE.MeshStandardMaterial({color:lin(0xB9C0C6),metalness:.8,roughness:.3,emissive:new THREE.Color(0)}); const cap=new THREE.Mesh(new THREE.CylinderGeometry(.095,.095,.09,20),m); cap.rotation.z=Math.PI/2; cap.position.set(s*(D.w/2-.12),.1,zt+.12); g.add(cap); return m; });
       H.glow=new THREE.Sprite(new THREE.SpriteMaterial({map:R.glowT,blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:0,color:0xDDEEFF})); H.glow.position.set(0,.1,zt+.3); H.glow.scale.set(D.w+.4,.8,1); g.add(H.glow);
       const lb=decal(.9,.13,(x,w,h)=>{ txt(x,0,40,"#46525B",700)(`${p} سم  ${TUBE[p].P} W`,w/2,h/2+2); }); lb.position.set(0,-.1,zt+.001); g.add(lb); }
@@ -3685,15 +3805,15 @@ function buildWDev(R,c){ const P0=wsPos(c), ty=c.ty, p=wsParam(c), zt=ty==="sup"
   if(ty==="lamp"||ty==="bal"||ty==="mcb"){ const lb=decal(.7,.12,(x,w,h)=>{ txt(x,0,44,"#6B5A3C",700)(ty==="mcb"?`B${p}`:`${p} W`,w/2,h/2+2); }); lb.position.set(ty==="lamp"?.3:0,ty==="lamp"?-.08:-.12,zt+.002); lb.position.x+=P0.x; lb.position.y+=P0.y; R.scene.add(lb); }
   return H; }
 /* ---------- experiment ---------- */
-EXPS.house={ id:"house", key:"ws", doneKey:"done_house", title:"ورشة التمديدات", formula:"اختار، ووصّل، واختبر", dynamic:true, maxStep:.05, timeScale:1, wireR:.005, graphAlways:true,
+EXPS.house={ wireOpen:w=>dgWireOpen(w), onTermTap:t=>dgOn()?dgTerm(t):false, onWireTap:id=>{ const d=dgBox().diag; if(dgOn()&&d.tool==="pick") return dgPick(id,"wire"); return dgOn(); }, id:"house", key:"ws", doneKey:"done_house", title:"ورشة التمديدات", formula:"اختار، ووصّل، واختبر", dynamic:true, maxStep:.05, timeScale:1, wireR:.005, graphAlways:true,
   get C(){ const o={}; wsComps().forEach(c=>{ const q=wsPos(c); o[c.id]={c:[q.x,q.y],w:q.w,h:q.h,zt:c.ty==="sup"?.36:c.ty==="lamp"?.26:.12}; }); return o; },
   get T(){ const o={}; wsComps().forEach(c=>WT[c.ty].t.forEach((n,i)=>{ o[`${c.id}.${n}`]=[c.id,[tx(c,i),-.9/2+.17],3]; })); return o; },
   get terms(){ return wsComps().flatMap(c=>WT[c.ty].t.map(n=>`${c.id}.${n}`)); },
   get lbl(){ const l={}; wsComps().forEach(c=>WT[c.ty].t.forEach(n=>l[`${c.id}.${n}`]=HT_LBL(n))); return l; },
   gnd:"sup.N", meters:{},
-  wireSw:()=>[["L",P.wire.L.css,P.wire.L.name+"، فاز"],["N",P.wire.N.css,P.wire.N.name+"، نيوترال"],["PE",P.wire.PE.css,P.wire.PE.name+"، أرضي"]], wireHex:()=>({L:P.wire.L.hex,N:P.wire.N.hex,PE:P.wire.PE.hex,R:0xC62828,K:0x1C1C1E}),
-  slider:null, chips:[], chipLabel:"", chipFmt:()=>{ const ch=wsCh(); return ch?ch.n:FREE.n; }, footNote:"اضغط على أي مكون تغيّر قيمته أو تشيله، وعلى المفاتيح تغيّر وضعها",
-  powerTxt:["شغّل اللوحة","افصل اللوحة"], lockMsg:"افصل اللوحة الأول قبل ما تعدّل", power:B=>B.out, togglePower:B=>{ B.out=!B.out; }, resetPower:B=>{ B.out=false; }, locked:B=>B.out, isLive:B=>B.out, hiV:()=>0,
+  wireSw:()=>[["L",P.wire.L.css,P.wire.L.name+"، فاز"],["N",P.wire.N.css,P.wire.N.name+"، نيوترال"],["Y",P.wire.Y.css,"أصفر، راجع"],["PE",P.wire.PE.css,P.wire.PE.name+"، أرضي"]], wireHex:()=>({L:P.wire.L.hex,N:P.wire.N.hex,Y:P.wire.Y.hex,PE:P.wire.PE.hex,R:0xC62828,K:0x1C1C1E}),
+  slider:null, chips:[], chipLabel:"", chipFmt:()=>{ const ch=wsCh(); return (dgOn()?"🔧 ":"")+(ch?ch.n:FREE.n); }, footNote:"اضغط على أي مكون تغيّر قيمته أو تشيله، وعلى المفاتيح تغيّر وضعها",
+  powerTxt:["شغّل اللوحة","افصل اللوحة"], lockMsg:"افصل اللوحة الأول قبل ما تعدّل", power:B=>B.out, togglePower:B=>{ B.out=!B.out; }, resetPower:B=>{ B.out=false; }, locked:B=>B.out||dgOn(), isLive:B=>B.out, hiV:()=>0,
   initState(B){ B.memo.mode=B.memo.mode||"free"; B.memo.cdone=B.memo.cdone||{}; B.wires=wsBox().wires; B.latch=[]; if(!store.get("ws_list_seen",false)){ store.set("ws_list_seen",true); setTimeout(openWsList,400); } },
   elements(B){ return wsEls(wsSt()); },
   derive(s,d){ wsBox().wires=B.wires; s.hot=false; s.hotList=[]; const st=wsSt(); s.r=wsSolve(st); s.Isrc=s.r.Isrc;
@@ -3701,7 +3821,7 @@ EXPS.house={ id:"house", key:"ws", doneKey:"done_house", title:"ورشة الت�
     if(ch&&ch.func&&this._sig!==sig){ this._sig=sig; this._enum=wsEnum(ch.func,ch.init); } s.enumRes=this._enum; s.goals=wsGoals(s); },
   advance(s,dt){ const V=P.V, st=wsSt(), box=wsBox(), r=s.r; if(!r) return;
     wsComps().forEach(c=>{ const D=wsDev(c.id), o=r.c[c.id], p=wsParam(c);
-      if(c.ty==="st"){ if(D.cool>0) D.cool-=dt; if(D.heat>0){ D.heat-=dt; if(D.heat<=0){ D.opened=true; D.cool=.8; } } else if(o.vo>V*.4&&B.out&&!(D.cool>0)){ const same=hcNets2(); const tubeLit=wsComps().some(t=>t.ty==="tube"&&wsDev(t.id).lit&&[`${t.id}.A2`,`${t.id}.B1`,`${t.id}.A1`,`${t.id}.B2`].some(n=>same(n,`${c.id}.1`)||same(n,`${c.id}.2`))); if(!tubeLit) D.heat=1.2; } }
+      if(c.ty==="st"){ if(D.cool>0) D.cool-=dt; if(D.heat>0){ D.heat-=dt; if(D.heat<=0){ D.opened=true; D.cool=.8; } } else if(o.vo>V*.4&&B.out&&!(D.cool>0)&&!dgSkip(c.id)){ const same=hcNets2(); const tubeLit=wsComps().some(t=>t.ty==="tube"&&wsDev(t.id).lit&&[`${t.id}.A2`,`${t.id}.B1`,`${t.id}.A1`,`${t.id}.B2`].some(n=>same(n,`${c.id}.1`)||same(n,`${c.id}.2`))); if(!tubeLit) D.heat=1.2; } }
       if(c.ty==="tube"&&!D.dead){ const T=TUBE[p], heated=o.Ia>.05&&o.Ib>.05;
         if(heated&&!D.lit) D.warm=(D.warm||0)+dt; if(!B.out||(!heated&&!D.lit)) { if(!B.out){ D.lit=false; D.warm=0; D.litT=0; D.hotT=0; D.hot=false; } }
         if(D.lit){ const I=o.Iarc; D.litT=(D.litT||0)+dt; if(I<.02){ D.lit=false; D.litT=0; } if(I>T.It*1.3){ D.hot=true; D.hotT=(D.hotT||0)+dt; if(D.hotT>3){ D.dead=true; D.lit=false; box.evDead=c.id; } } else { D.hot=false; D.hotT=0; } } }
@@ -3724,7 +3844,7 @@ EXPS.house={ id:"house", key:"ws", doneKey:"done_house", title:"ورشة الت�
     const ring=wsComps().some(c=>c.ty==="bell"&&s.r.c[c.id].on); Sound.tone&&Sound.tone(ring&&!$("#bench").hidden); },
   hud:s=>{ const r=s.r, lamps=wsComps().filter(c=>["lamp","tube","fan","heat","bell","neon"].includes(c.ty)); const on=lamps.filter(c=>c.ty==="tube"?wsDev(c.id).lit:(r.c[c.id].on||0)>.3).length;
     return [[r.Isrc.toFixed(2),"A كلي"],[`${on}/${lamps.length}`,"شغال"],[(r.Isrc*P.V).toFixed(0),"VA"]]; },
-  eq(s){ const r=s.r, bits=[]; wsComps().forEach(c=>{ const o=r.c[c.id]; if(c.ty==="am") bits.push(`${c.id}: <b>${o.I.toFixed(3)} A</b>`); if(c.ty==="vm") bits.push(`${c.id}: <b>${o.V.toFixed(1)} V</b>`); });
+  eq(s){ const dd=dgBox().diag; if(dd&&dd.fault){ return dd.fixed?`✅ العطل كان: <b>${FAULTS[dd.fault.k].n}</b>. ${FAULTS[dd.fault.k].fix}، والدائرة رجعت تشتغل ${"⭐".repeat(dd.stars||1)}`:`🔧 شكوى العميل: <b>${FAULTS[dd.fault.k].sym}</b><br>القياسات: ${dd.meas}  |  محاولات غلط: ${dd.wrong}`; } const r=s.r, bits=[]; wsComps().forEach(c=>{ const o=r.c[c.id]; if(c.ty==="am") bits.push(`${c.id}: <b>${o.I.toFixed(3)} A</b>`); if(c.ty==="vm") bits.push(`${c.id}: <b>${o.V.toFixed(1)} V</b>`); });
     const ch=wsCh(); const g=s.goals||[]; const head=ch?`${ch.n}: ${g.filter(x=>x[1]).length} من ${g.length} أهداف`:"الورشة الحرة"; return head+(bits.length?"<br>"+bits.join("  |  "):""); },
   status(s){ if(!B.out) return ["off","اللوحة مفصولة"]; const bad=wsComps().some(c=>{ const D=wsDev(c.id); return D.trip||D.blown||D.dead; }); if(bad) return ["fault","فيه حماية فصلت أو عنصر اتحرق"]; return ["on","اللوحة شغالة"]; },
   notes(s){ const o=[], r=s.r, ch=wsCh();
@@ -3740,8 +3860,8 @@ EXPS.house={ id:"house", key:"ws", doneKey:"done_house", title:"ورشة الت�
     (R.wd||[]).forEach(([c,H])=>{ const id=c.id, ty=c.ty, v=st[id]||0, o=r.c[id]||{}, D=wsDev(id);
       if(H.rk) H.rk.forEach((p,i)=>{ const on=ty==="s2g"?!!(v&(1<<i)):ty==="rcd"?!D.trip:ty==="mcb"?(v&&!D.trip):!!v; p.rotation.x=(ty==="mcb"||ty==="rcd")?(on?-.4:.4):on?.16:-.16; });
       if(ty==="sup"&&H.led) H.led.emissive.setHex(B.out?0x22FF77:0);
-      if(ty==="lamp"){ const b=Math.min(1,Math.pow(o.on||0,2)); H.glass.emissiveIntensity=b*2.2; H.light.intensity=b*1.6; H.glow.material.opacity=b*.85; }
-      if(ty==="sock"&&H.led) H.led.emissive.setHex(o.on?0xFF3A22:0); if(ty==="bell"&&H.dome) H.dome.position.x=o.on?Math.sin(now/15)*.012:0; if(ty==="neon") H.nm.emissive.setHex(o.on?0xFF5A1A:0);
+      if(ty==="lamp"){ const b=Math.min(1,Math.pow(o.on||0,2)); H.glass.emissiveIntensity=b*.75; H.light.intensity=b*1.4; H.glow.material.opacity=b*.36; if(H.fil) H.fil.emissiveIntensity=b*9; }
+      if(ty==="sock"&&H.led) H.led.emissive.setHex(o.on?0xFF3A22:0); if(ty==="bell"&&H.dome){ H.dome.position.x=o.on?Math.sin(now/15)*.012:0; if(H.ham) H.ham.position.x=-.08+(o.on?Math.abs(Math.sin(now/25))*.04:0); } if(ty==="neon") H.nm.emissive.setHex(o.on?0xFF5A1A:0);
       if(ty==="st") H.sm.emissive.setRGB(D.heat>0?(.6+Math.random()*.6):0,D.heat>0?.3:0,0);
       if(ty==="tube"){ const lit=D.lit&&!D.dead, fl=lit&&(D.litT||0)<.4?(Math.random()>.5?1:.3):1; H.tm.emissiveIntensity=lit?(D.hot?1.8:1.3)*fl:0; H.glow.material.opacity=lit?.7*fl:0; H.tm.color=lin(D.dead?0x6C7A82:0xF4F6F8);
         H.ends.forEach(m=>m.emissive.setRGB(o.Ia>.05&&!lit?.8:0,o.Ia>.05&&!lit?.3:0,0)); }
@@ -3753,13 +3873,17 @@ EXPS.house={ id:"house", key:"ws", doneKey:"done_house", title:"ورشة الت�
     if(c.ty==="mcb"&&D.trip){ D.trip=false; D.th=0; Sound.clack(); benchUpdate(); return; }
     if(c.ty==="s2g") st[c.id]^=(1<<u.bit); else if(c.ty==="pb"){ st[c.id]=1; Sound.click(); if(B.out) wsBox().tried=true; benchUpdate(); clearTimeout(this._pb); this._pb=setTimeout(()=>{ st[c.id]=0; benchUpdate(); },1200); return; } else st[c.id]=st[c.id]?0:1;
     if(B.out) wsBox().tried=true; Sound.click(); vibrate(10); benchUpdate(); },
-  onComp(id){ openWsComp(id); return true; },
-  ctrlHTML(){ const ch=wsCh(), n=wsComps().length; return `<div class="rbar"><button data-wl="1" style="border-color:#FFC72C;background:rgba(255,199,44,.14)"><b>☰</b><span>التحديات</span></button>${!ch||!ch.lockComps?`<button class="radd" data-wadd="1">+ مكون</button>`:""}${ch?`<button data-wreset="1"><b>↺</b><span>من الأول</span></button>`:""}<button data-wfree="1"><b>🛠</b><span>ورشة حرة</span></button></div>`; },
-  ctrlClick(e){ const t=e.target.closest("button"); if(!t) return; if(t.dataset.wl) openWsList(); if(t.dataset.wadd){ if(bLocked()) return; openWsPal(); }
+  onComp(id){ if(dgOn()){ const d=dgBox().diag; if(d.tool==="pick") return dgPick(id,"comp"); toast("اختار أداة تحت، أو اضغط «حدد العطل» واضغط على المكون"); return true; } openWsComp(id); return true; },
+  ctrlHTML(){ const ch=wsCh(), d=dgBox().diag;
+    if(d&&d.fault&&!d.fixed){ const T=[["tester","🪛 مفك اختبار"],["volt","V~ جهد"],["cont","🔔 توصيل"],["pick","🎯 حدد العطل"]];
+      return `<div class="dgbar"><div class="rbar">${T.map(([k,t])=>`<button data-dgt="${k}" style="${d.tool===k?"border-color:#FFC72C;background:rgba(255,199,44,.16)":""}"><b style="font-size:.78rem">${t}</b></button>`).join("")}<button data-dgq="1"><b>✕</b><span>انسحب</span></button></div>
+        <div class="dglog">${d.log.length?d.log.map(x=>`<div>${x}</div>`).join(""):`<div>${{tester:"اضغط على أي طرف عشان تختبر فيه فاز ولا لأ",volt:"اضغط على طرفين عشان تقيس الجهد بينهم",cont:"افصل اللوحة، واضغط على طرفين عشان تختبر التوصيل",pick:"اضغط على المكون أو السلك أو الطرف اللي فيه العطل"}[d.tool]}</div>`}</div></div>`; }
+    const fst=(B.memo.fst||{})[wsKey()]; const n=wsComps().length; return `<div class="rbar">${ch&&B.memo.cdone&&B.memo.cdone[ch.id]?`<button data-dgs="1" style="border-color:#2FD08A;background:rgba(47,208,138,.14)"><b>🔧 مهمة صيانة</b><span>${fst?"⭐".repeat(fst):"جديد"}</span></button>`:""}<button data-wl="1" style="border-color:#FFC72C;background:rgba(255,199,44,.14)"><b>☰</b><span>التحديات</span></button>${!ch||!ch.lockComps?`<button class="radd" data-wadd="1">+ مكون</button>`:""}${ch?`<button data-wreset="1"><b>↺</b><span>من الأول</span></button>`:""}<button data-wfree="1"><b>🛠</b><span>ورشة حرة</span></button></div>`; },
+  ctrlClick(e){ const t=e.target.closest("button"); if(!t) return; if(t.dataset.dgs){ if(B.out){ B.out=false; } dgStart(); return; } if(t.dataset.dgq){ dgQuit(); return; } if(t.dataset.dgt){ const d=dgBox().diag; d.tool=t.dataset.dgt; d.probes=[]; clearProbeMarks(); Sound.tick(); benchControls(); benchUpdate(); if(d.tool==="pick") toast("اضغط على المكون أو السلك أو الطرف اللي شاكك فيه"); return; } if(t.dataset.wl) openWsList(); if(t.dataset.wadd){ if(bLocked()) return; openWsPal(); }
     if(t.dataset.wreset){ if(bLocked()) return; wsResetMode(wsKey()); } if(t.dataset.wfree){ if(bLocked()) return; wsGo("free"); } },
-  get steps(){ const ch=(B&&B.memo)?wsCh():null; if(!ch) return ["ضيف مكونات ووصّل الدائرة اللي في دماغك","شغّل اللوحة وجرّب"]; const g=[]; if(ch.func){ g.push("الدائرة بتشتغل صح في كل أوضاع المفاتيح","المفاتيح بتقطع الفاز مش النيوترال"); } (ch.goals||[]).forEach(x=>g.push(x[0])); g.push("شغّل اللوحة وجرّب المفاتيح بنفسك"); return g; },
-  get doneTxt(){ return wsCh()?"برافو! التحدي اتحل صح ✓":"جرّب تألّف دوائر جديدة"; },
-  latchNow(s){ const ch=wsCh(); if(!ch) return [B.wires.length>2,B.out&&(s.r.Isrc>.05)];
+  get steps(){ if(B&&B.memo&&dgBox().diag) return ["شغّل اللوحة وجرّب المفاتيح، ولاحظ العطل","قيس بأجهزة الاختبار لحد ما تعرف مكان العطل","حدد العطل وصلّحه"]; const ch=(B&&B.memo)?wsCh():null; if(!ch) return ["ضيف مكونات ووصّل الدائرة اللي في دماغك","شغّل اللوحة وجرّب"]; const g=[]; if(ch.func){ g.push("الدائرة بتشتغل صح في كل أوضاع المفاتيح","المفاتيح بتقطع الفاز مش النيوترال"); } (ch.goals||[]).forEach(x=>g.push(x[0])); g.push("شغّل اللوحة وجرّب المفاتيح بنفسك"); return g; },
+  get doneTxt(){ const d=dgBox&&B&&B.memo&&dgBox().diag; if(d&&d.fixed) return `برافو يا فني! صلّحت العطل ${"⭐".repeat(d.stars||1)}. اضغط «مهمة صيانة» عشان عطل جديد`; return wsCh()?"برافو! التحدي اتحل صح ✓":"جرّب تألّف دوائر جديدة"; },
+  latchNow(s){ const dd=dgBox().diag; if(dd){ if(B.out) dd.seenOn=true; return [!!dd.seenOn,dd.meas>=1,!!dd.fixed]; } const ch=wsCh(); if(!ch) return [B.wires.length>2,B.out&&(s.r.Isrc>.05)];
     const g=(s.goals||[]).map(x=>x[1]); if(g.length&&g.every(Boolean)&&!B.memo.cdone[ch.id]){ B.memo.cdone[ch.id]=true; saveKey("memo",B.memo); Sound.chime(); toast(`برافو! حليت تحدي: ${ch.n} ✓`,"ok"); vibrate([15,60,15]); if(CHAL.every(c=>B.memo.cdone[c.id])) store.set("done_house",true); }
     return g; },
   record(){ return "التحديات بتتسجل لوحدها لما تتحل"; },
@@ -3781,8 +3905,8 @@ EXPS.house={ id:"house", key:"ws", doneKey:"done_house", title:"ورشة الت�
     if(k===1) return {text:"أنبوبتين 60 سم متوصلين توالي. قدرة البلاست الواحد المناسب ليهم كام وات؟",ans:40,unit:"W",sol:"كل أنبوبة 20 W، والاتنين توالي على بلاست 40 W، بستارتر لكل أنبوبة."};
     if(k===2) return {text:`3 لمبات 60 W توالي على ${V} V. الجهد على كل لمبة كام فولت؟`,ans:V/3,unit:"V",sol:`${V} ÷ 3 = ${(V/3).toFixed(1)} V`};
     return {text:`3 لمبات 100 W توازي على ${V} V. التيار الكلي كام أمبير؟`,ans:300/V,unit:"A",sol:`I = 300 ÷ ${V} = ${(300/V).toFixed(2)} A`}; },
-  intro:{title:"ورشة التمديدات والتحديات",items:[["☰","التحديات",`${CHAL.length} تحدي متنوع. كل تحدي بيتعلّم عليه ✓ لما يتحل، وتقدر ترجّعه من الأول بـ ↺.`],["🛠","الورشة الحرة","ضيف لحد 11 مكون من مفاتيح وأحمال وحماية وأجهزة قياس، وركّب أي دائرة."],["⚙","القيم","اضغط على أي مكون عشان تغيّر قيمته: قدرة اللمبة، وطول الأنبوبة، وقدرة البلاست، وقيمة القاطع."],["✓","الاختبار","التطبيق بيجرّب كل أوضاع المفاتيح لوحده ويتأكد إن الدائرة صح وآمنة."]]},
-  build(R){ R.wd=wsComps().map(c=>{ const q=wsPos(c); silkLabel(R,WT[c.ty].n+"  "+(c.id==="sup"?"":c.id),"",q.x,q.y+q.h/2+.14); return [c,buildWDev(R,c)]; }); },
+  intro:{title:"ورشة التمديدات والتحديات",items:[["☰","التحديات",`${CHAL.length} تحدي متنوع. كل تحدي بيتعلّم عليه ✓ لما يتحل، وتقدر ترجّعه من الأول بـ ↺.`],["🛠","الورشة الحرة","ضيف لحد 11 مكون من مفاتيح وأحمال وحماية وأجهزة قياس، وركّب أي دائرة."],["⚙","القيم","اضغط على أي مكون عشان تغيّر قيمته: قدرة اللمبة، وطول الأنبوبة، وقدرة البلاست، وقيمة القاطع."],["✓","الاختبار","التطبيق بيجرّب كل أوضاع المفاتيح لوحده ويتأكد إن الدائرة صح وآمنة."],["🔧","مهام الصيانة","بعد ما تحل أي تحدي، اضغط «مهمة صيانة»: هيتعمل عطل مستخبي في دايرتك، ودوّر عليه بمفك الاختبار والأفوميتر وصلّحه."]]},
+  build(R){ R.wd=wsComps().map(c=>{ const q=wsPos(c); _silk(R,WT[c.ty].n+"  "+(c.id==="sup"?"":c.id),"",q.x,q.y+q.h/2+.14); return [c,buildWDev(R,c)]; }); },
   comps(){ const o={}; wsComps().forEach(c=>o[c.id]={name:WT[c.ty].n,ref:c.id,en:c.ty,sym:"S",text:"",kv:[]}); return o; }
 };
 function wsTubeIt(c){ return TUBE[wsParam(c)].It; }
@@ -3790,7 +3914,7 @@ function wsGo(mode){ B.memo.mode=mode; B.wires=wsBox().wires; B.latch=[]; B.out=
 function wsResetMode(mode){ delete B.memo.sb[mode]; delete B.memo.cdone[mode]; B.wires=wsBox().wires; B.latch=[]; EXPS.house._sig=null; saveKey("memo",B.memo); saveKey("wires",B.wires); rlRebuild(); toast("التحدي رجع من الأول"); }
 function openWsList(){ const grp={}; CHAL.forEach(c=>(grp[c.grp]=grp[c.grp]||[]).push(c)); const done=B.memo.cdone||{}, n=CHAL.filter(c=>done[c.id]).length;
   $("#wlSum").textContent=`حليت ${n} من ${CHAL.length} تحدي`;
-  $("#wlList").innerHTML=`<button class="wl-item${wsKey()==="free"?" cur":""}" data-go="free"><span class="wl-ic">🛠</span><span class="wl-t"><b>${FREE.n}</b><small>${FREE.d}</small></span></button>`+Object.entries(grp).map(([g,a])=>`<h5 class="wl-g">${g}</h5>`+a.map(c=>{ const cs=chalState(c.id); if(cs.state!=="open") return `<div class="wl-row"><button class="wl-item" data-lock="${cs.state==="premium"?"⭐ التحدي ده للأعضاء المميزين":cs.state==="locked"?(cs.date?"التحدي ده هيتفتح يوم "+fmtDate(cs.date):"التحدي ده مقفول حاليًا"):"التحدي ده قريبًا"}" style="opacity:.55"><span class="wl-ic">${cs.state==="premium"?"⭐":"🔒"}</span><span class="wl-t"><b>${c.n}</b><small>${cs.state==="premium"?"للأعضاء المميزين":cs.state==="locked"?"مقفول":"قريبًا"}</small></span></button></div>`; return `<div class="wl-row"><button class="wl-item${wsKey()===c.id?" cur":""}" data-go="${c.id}"><span class="wl-ic ${done[c.id]?"ok":""}">${done[c.id]?"✓":""}</span><span class="wl-t"><b>${c.n}</b><small>${c.d}</small></span></button>${(done[c.id]||(B.memo.sb||{})[c.id])?`<button class="wl-rs" data-rs="${c.id}" aria-label="من الأول">↺</button>`:""}</div>`; }).join("")).join("");
+  $("#wlList").innerHTML=`<button class="wl-item${wsKey()==="free"?" cur":""}" data-go="free"><span class="wl-ic">🛠</span><span class="wl-t"><b>${FREE.n}</b><small>${FREE.d}</small></span></button>`+Object.entries(grp).map(([g,a])=>`<h5 class="wl-g">${g}</h5>`+a.map(c=>{ const cs=chalState(c.id); if(cs.state!=="open") return `<div class="wl-row"><button class="wl-item" data-lock="${cs.state==="premium"?"⭐ التحدي ده للأعضاء المميزين":cs.state==="locked"?(cs.date?"التحدي ده هيتفتح يوم "+fmtDate(cs.date):"التحدي ده مقفول حاليًا"):"التحدي ده قريبًا"}" style="opacity:.55"><span class="wl-ic">${cs.state==="premium"?"⭐":"🔒"}</span><span class="wl-t"><b>${c.n}</b><small>${cs.state==="premium"?"للأعضاء المميزين":cs.state==="locked"?"مقفول":"قريبًا"}</small></span></button></div>`; return `<div class="wl-row"><button class="wl-item${wsKey()===c.id?" cur":""}" data-go="${c.id}"><span class="wl-ic ${done[c.id]?"ok":""}">${done[c.id]?"✓":""}</span><span class="wl-t"><b>${c.n}${(B.memo.fst||{})[c.id]?` <span style="font-size:.72rem;color:#FFD86B">🔧${"⭐".repeat(B.memo.fst[c.id])}</span>`:""}</b><small>${c.d}</small></span></button>${(done[c.id]||(B.memo.sb||{})[c.id])?`<button class="wl-rs" data-rs="${c.id}" aria-label="من الأول">↺</button>`:""}</div>`; }).join("")).join("");
   openModal("wslist"); }
 function openWsPal(){ const cnt=wsComps().length; $("#wpList").innerHTML=[1,2,3,4].map(cat=>`<h5 class="wl-g">${WCAT[cat]}</h5><div class="wp-grid">${Object.entries(WT).filter(([,t])=>t.cat===cat).map(([k,t])=>`<button data-add="${k}">${t.n}</button>`).join("")}</div>`).join("");
   $("#wpSum").textContent=`على اللوحة ${cnt-1} مكون، وفيه مكان لـ ${12-wsSlots(wsComps()).size} كمان`; openModal("wspal"); }
@@ -3816,7 +3940,7 @@ function initWs(){
 /* ============================================================
    ADMIN PANEL, MEMBERSHIP, SCHEDULED CLOSING, FORCED UPDATE, PWA, STARTUP SOUND
    ============================================================ */
-const APP_VERSION="1.0.0";
+const APP_VERSION="1.6.0";
 function sha256(str){ // compact pure-JS SHA-256 (works even where crypto.subtle is unavailable)
   const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
   const b=unescape(encodeURIComponent(str)), l=b.length, w=[]; for(let i=0;i<l;i++) w[i>>2]|=b.charCodeAt(i)<<(24-(i%4)*8); w[l>>2]|=0x80<<(24-(l%4)*8); w[((l+8>>6)<<4)+15]=l*8;
@@ -3857,7 +3981,7 @@ function admEntry(map,id){ const e=map[id]; if(typeof e==="boolean") return {sta
 function admRow(kind,id,title){ const e=admEntry(ADM[kind],id), S=[["open","مفتوحة"],["soon","قريبًا"],["closed","مقفولة"],["premium","⭐ للأعضاء"]];
   return `<div class="am-row"><b>${title}</b><div class="am-ctl" data-k="${kind}" data-id="${id}">${S.map(([v,t])=>`<button data-st="${v}" aria-pressed="${e.state===v}">${t}</button>`).join("")}<input type="date" data-date="1" value="${e.open_date||""}" title="تفتح تلقائي يوم"></div></div>`; }
 function admRender(){ if(!ADM.member_salt){ const A="abcdefghijkmnpqrstuvwxyz23456789"; let x=""; const r=crypto.getRandomValues?crypto.getRandomValues(new Uint8Array(16)):Array.from({length:16},()=>Math.random()*256|0); for(let i=0;i<16;i++) x+=A[r[i]%A.length]; ADM.member_salt=x; ADM.revoked_devices=ADM.revoked_devices||[]; admApply(); } admDevRender(); $("#aEnabled").setAttribute("aria-pressed",ADM.app_enabled!==false); $("#aUntil").value=ADM.closed_until?ADM.closed_until.slice(0,16):""; $("#aMsg").value=ADM.maintenance_message||"";
-  $("#aMods").innerHTML=MODULES.map(g=>`<h5 class="wl-g">${g.g}</h5>`+g.items.map(([id,t])=>admRow("modules",id,t)).join("")).join("");
+  $("#aMods").innerHTML=MODULES.map(g=>`<h5 class="wl-g">${g.g}</h5>`+g.items.map(([id,t])=>admRow("modules",id,t)).join("")).join("")+`<h5 class="wl-g">الامتحان والشهادة</h5>`+admRow("modules","exam","الامتحان النهائي والشهادة");
   $("#aChal").innerHTML=`<details><summary style="cursor:pointer;color:#FFD86B;font-size:.86rem">اعرض ${CHAL.length} تحدي</summary>${CHAL.map(c=>admRow("challenges",c.id,c.n)).join("")}</details>`;
   $$("#aStd button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.std2===(ADM.standard||"IEC"))); $("#aStdSw").setAttribute("aria-pressed",ADM.allow_standard_switch!==false);
   $("#aMinV").value=ADM.min_version||""; $("#aCurV").textContent=APP_VERSION; $("#aCodeN").textContent=`عدد الأكواد الفعالة: ${ADM.member_codes.length}`; $("#aGhRepo").value=store.get("gh_repo","")||""; $("#aGhTok").value=store.get("gh_tok","")||""; }
@@ -3909,7 +4033,7 @@ async function admPublish(){ const repo=store.get("gh_repo",""), tok=store.get("
     const p=await fetch(url,{method:"PUT",headers:H,body}); if(p.ok){ st.textContent="✓ اتنشر. الطلاب هيشوفوا التعديل خلال دقايق"; store.set("cfg_local",false); store.set("salt_pub",true); admDevRender(); Sound.chime(); } else st.textContent="النشر فشل: "+p.status+". اتأكد من اسم المشروع وصلاحية الـ token";
   }catch(e){ st.textContent="مقدرتش أوصل لـ GitHub. لو بتجرّب من جوه Claude، النشر المباشر بيشتغل بعد ما التطبيق يترفع على GitHub Pages"; } }
 function toastAny(m){ if(!$("#admin").hidden||!$("#home").hidden){ pageToast(m); } else toast(m); }
-function resetCurrentUnit(){ if(!$("#bench").hidden){ $("#bResetAll").click(); } else if(!$("#lab").hidden){ if(S.power) togglePower(); $("#resetBtn").click(); store.set("done_simple",false); S.completed=false; update(); } else if(!$("#coder").hidden){ $("#cReset").click(); } else pageToast("افتح الوحدة اللي عايز تبدأها من الأول، وبعدين اضغط الزرار ده"); }
+function resetCurrentUnit(){ resetUnitStars(CUR_UNIT); if(!$("#bench").hidden){ $("#bResetAll").click(); } else if(!$("#lab").hidden){ if(S.power) togglePower(); $("#resetBtn").click(); store.set("done_simple",false); S.completed=false; update(); } else if(!$("#coder").hidden){ $("#cReset").click(); } else pageToast("افتح الوحدة اللي عايز تبدأها من الأول، وبعدين اضغط الزرار ده"); }
 /* ---------- startup sound ---------- */
 Sound.startup=function(){ if(!this.ctx) return; const c=this.ctx,t=c.currentTime; const n=this.n(.6), f=c.createBiquadFilter(), g=c.createGain(); f.type="bandpass"; f.Q.value=2; f.frequency.setValueAtTime(300,t); f.frequency.exponentialRampToValueAtTime(5000,t+.45);
   g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.35,t+.3); g.gain.exponentialRampToValueAtTime(.0001,t+.55); n.connect(f); f.connect(g); g.connect(this.master); n.start(t); n.stop(t+.6);
@@ -3920,6 +4044,280 @@ Sound.startup=function(){ if(!this.ctx) return; const c=this.ctx,t=c.currentTime
   navigator.serviceWorker.register("sw.js").then(reg=>{ reg.addEventListener("updatefound",()=>{ const w=reg.installing; w&&w.addEventListener("statechange",()=>{ if(w.state==="installed"&&navigator.serviceWorker.controller) w.postMessage("skip"); }); }); }).catch(()=>{});
   let reloaded=false; navigator.serviceWorker.addEventListener("controllerchange",()=>{ if(reloaded) return; reloaded=true; location.reload(); }); })();
 
+/* ---------- capacitor connections: capacitors only + capacitance meter (no resistor) ---------- */
+const CM_SLOT=k=>({x:[-1.5,0,1.5][(k-1)%3],y:[.35,-1.4][Math.floor((k-1)/3)]});
+const CM_SCH=k=>({x:[190,260,330][(k-1)%3],y:[[120,185],[250,315]][Math.floor((k-1)/3)]});
+const CM_VALS=[10e-6,22e-6,47e-6,100e-6,220e-6,470e-6,1000e-6];
+function cmMeasure(){ const T=X.terms, els=[{a:"cm.a",b:"cm.b",y:[1e-12,0],j:[1,0]}], w=2*Math.PI*1000;
+  B.rs.forEach(r=>els.push({a:`c${r.slot}.1`,b:`c${r.slot}.2`,y:[0,w*r.val]})); B.wires.forEach(x=>els.push({a:x.a,b:x.b,y:[200,0]}));
+  const V=mnaC(T,"cm.b",els), Z=csub(V["cm.a"],V["cm.b"]); if(cabs(Z)<1e-6) return {short:true}; const C=-1/(w*Z[1]); return {C:C>0&&C<1?C:0}; }
+function buildCMeter(R,id,c){ const g=new THREE.Group(); const body=rbox(c.w,c.h,c.zt,.14,new THREE.MeshPhysicalMaterial({color:lin(0x1F4FD6),roughness:.45,clearcoat:.5})); body.userData={t:"comp",id}; g.add(body); R.pick.push(body);
+  const bez=rbox(c.w-.3,.4,.03,.06,R.mat.dark); bez.position.set(0,.12,c.zt); g.add(bez);
+  R.cmLCD=lcdTex((x,v,u)=>drawLCD(x,v,u,{bg:"#B9D6A6",fg:"#16240F"})); const scr=new THREE.Mesh(new THREE.PlaneGeometry(c.w-.38,.32),new THREE.MeshBasicMaterial({map:R.cmLCD.t,toneMapped:false})); scr.position.set(0,.12,c.zt+.032); g.add(scr);
+  const lb=decal(c.w,.13,(x,w,h)=>{ txt(x,0,42,"#EEF3FB",700)("جهاز قياس السعة  C-METER",w/2,h/2+2); }); lb.position.set(0,.38,c.zt+.001); g.add(lb);
+  termDecal(g,c,[["+",-.25,"#FF8A80"],["COM",.25,"#EEF3FB"]],-.3); [[-.25,0xD32F2F],[.25,0x1E1F22]].forEach(([x,h])=>{ const p=bindingPost(R,h); p.position.set(x,-.3,c.zt); g.add(p); });
+  g.position.set(...c.c,0); R.scene.add(g); }
+EXPS.cconn={ id:"cconn", key:"cm_c", doneKey:"done_cconn", title:"توصيل المكثفات", formula:"C المكافئة", slotPrefix:"c", pickName:"C", pickVals:CM_VALS, pickFmt:fmtC, pickDel:"شيل المكثف", addVal:100e-6, maxN:6,
+  slider:null, chips:[], chipLabel:"جهاز قياس السعة", chipFmt:()=>{ const m=B.res&&B.res.meas; return m?(m.short?"قصر":fmtC(m.C||0)):"—"; },
+  footNote:"مكثفات بس من غير مقاومات. جهاز القياس بيقيس السعة المكافئة بين طرفيه", powerTxt:["",""], power:null, lockMsg:"", locked:()=>false, resetPower:()=>{}, togglePower:()=>{}, isLive:()=>true, hiV:()=>0, meters:{},
+  get C(){ const c={cm:{c:[0,1.75],w:1.6,h:1.0,zt:.3}}; (B.rs||[]).forEach(r=>{ const p=CM_SLOT(r.slot); c["c"+r.slot]={c:[p.x,p.y],w:1.2,h:.8,zt:.2}; }); return c; },
+  get T(){ const t={"cm.a":["cm",[-.25,-.3],3],"cm.b":["cm",[.25,-.3],3]}; (B.rs||[]).forEach(r=>{ t[`c${r.slot}.1`]=["c"+r.slot,[-.4,-.25],3]; t[`c${r.slot}.2`]=["c"+r.slot,[.4,-.25],3]; }); return t; },
+  get terms(){ return ["cm.a","cm.b",...(B.rs||[]).flatMap(r=>[`c${r.slot}.1`,`c${r.slot}.2`])]; },
+  get lbl(){ const l={"cm.a":"+","cm.b":"COM"}; (B.rs||[]).forEach(r=>{ l[`c${r.slot}.1`]="1"; l[`c${r.slot}.2`]="2"; }); return l; }, gnd:"cm.b",
+  initState(B){ if(!B.rs) B.rs=store.get("cm_c_rs",null)||[{slot:1,val:100e-6},{slot:2,val:220e-6}]; },
+  elements(B){ const e=[{a:"cm.a",b:"cm.b",r:1e9}]; B.rs.forEach(r=>e.push({a:`c${r.slot}.1`,b:`c${r.slot}.2`,r:1e9})); return e; },
+  derive(s){ s.hot=false; s.hotList=[]; s.meas=cmMeasure(); const p={}; X.terms.forEach(t=>p[t]=t); const f=x=>p[x]===x?x:(p[x]=f(p[x])); B.wires.forEach(w=>{ p[f(w.a)]=f(w.b); });
+    const edges=B.rs.map(r=>({a:f(`c${r.slot}.1`),b:f(`c${r.slot}.2`),v:r.val,id:"C"+r.slot})); s.net=f("cm.a")===f("cm.b")?{short:true}:spNet(edges,f("cm.a"),f("cm.b"),(a,b)=>1/(1/a+1/b),(a,b)=>a+b); s.wI={}; },
+  hud:s=>[[s.meas.short?"قصر":fmtC(s.meas.C||0),"المقاسة"],[s.net&&s.net.v?fmtC(s.net.v):"—","المحسوبة"],[String(B.rs.length),"مكثفات"]],
+  eq(s){ const n=s.net, m=s.meas; if(m.short||n.short) return "أطراف الجهاز متوصلة ببعض مباشرة: قصر"; if(n.open||!m.C) return "وصّل المكثفات بين طرفي جهاز القياس + وCOM"; if(n.complex) return `شبكة مركبة، والجهاز بيقرا <b>${fmtC(m.C)}</b>`;
+    return `${KIND_AR[n.kind]}: ${capEx(n,true)} = <b>${fmtC(n.v)}</b><br>جهاز القياس بيقرا: <b>${fmtC(m.C)}</b>`; },
+  status(s){ const n=s.net; if(s.meas.short) return ["fault","قصر على الجهاز"]; if(!s.meas.C) return ["open","الجهاز مش شايف مكثفات"]; return ["on",KIND_AR[n.kind]||"شبكة"]; },
+  notes(s){ const o=[]; if(s.net.shorted&&s.net.shorted.length) o.push(`${s.net.shorted.join(" و")} طرفيه متوصلين ببعض، فمش داخل في القياس.`); const un=B.rs.filter(r=>!(s.net.ids||[]).includes("C"+r.slot)).map(r=>"C"+r.slot); if(s.net.ids&&un.length) o.push(`${un.join(" و")} مش داخل في الدائرة.`); return o; },
+  scene3D(R,s){ R.cmLCD.draw(s.meas.short?"0.000":fmtC(s.meas.C||0).split(" ")[0],s.meas.short?"":(fmtC(s.meas.C||1e-6).split(" ")[1]||"µF")); },
+  onComp(id){ if(/^c\d$/.test(id)){ openRPick(+id.slice(1)); return true; } },
+  ctrlHTML(){ return `<div class="rbar">${B.rs.map(r=>`<button data-rs="${r.slot}"><b>C${r.slot}</b><span>${fmtC(r.val)}</span></button>`).join("")}${B.rs.length<6?`<button class="radd" data-radd="1">+ مكثف</button>`:""}</div>`; },
+  ctrlClick(e){ const b=e.target.closest("[data-rs]"), a=e.target.closest("[data-radd]"); if(b) openRPick(+b.dataset.rs); if(a) rlAdd(); },
+  onReset(B){ B.rs=[{slot:1,val:100e-6},{slot:2,val:220e-6}]; store.set("cm_c_rs",B.rs); rlRebuild(); },
+  steps:["وصّل مكثفين أو أكتر توالي بين طرفي جهاز القياس، وسجّل","وصّلهم توازي، وسجّل","اعمل توصيلة مختلطة من 3 مكثفات، وسجّل","غيّر القيم أو ضيف مكثفات، وسجّل قياس رابع","افتح المقارنة: المقاسة مع المحسوبة","حل 3 أسئلة في التحدي"],
+  doneTxt:"برافو! المكثفات بعكس المقاومات: التوازي بيجمع السعات، والتوالي بيقللها",
+  latchNow(s){ const r=B.readings, has=k=>r.some(x=>x.kind===k&&x.n>=2); return [has("series"),has("parallel"),r.some(x=>x.kind==="mixed"&&x.n>=3),new Set(r.map(x=>x.ex+"|"+x.vals)).size>=4,B.graphSeen&&r.length>=2,B.quizOk>=3]; },
+  record(s){ const n=s.net; if(!s.meas.C||!n.v) return "وصّل المكثفات بين طرفي الجهاز الأول"; return {key:n.ex+"|"+B.rs.map(r=>r.slot+":"+r.val).join(","),kind:n.kind,n:n.n,ex:n.ex,vals:B.rs.map(r=>r.slot+":"+r.val).join(","),calc:n.v,meas:s.meas.C,msg:`اتسجلت: ${KIND_AR[n.kind]}، C = ${fmtC(s.meas.C)}`}; },
+  graph(){ const rows=B.readings.slice(-6); if(!rows.length) return ""; const mx=Math.max(...rows.map(r=>Math.max(r.calc,r.meas)))*1.12, W=360, bh=26, H=16+rows.length*(bh*2+16);
+    let g=`<svg viewBox="0 0 ${W} ${H}" direction="ltr" role="img" aria-label="مقارنة السعة"><rect width="${W}" height="${H}" fill="#fff" rx="12"/>`;
+    rows.forEach((r,i)=>{ const y=10+i*(bh*2+16), wc=r.calc/mx*(W-150), wm=r.meas/mx*(W-150);
+      g+=`<text x="10" y="${y+14}" font-size="10.5" font-weight="600" fill="#1B2730" font-family="Readex Pro">${KIND_AR[r.kind]}  |  ${capEx({kind:r.kind,ex:r.ex,ids:r.ex.split(/[^A-Z0-9]+/).filter(Boolean)},true)}</text>`;
+      g+=`<rect x="10" y="${y+20}" width="${Math.max(2,wm)}" height="${bh-10}" rx="4" fill="#1E5BD8"/><text x="${16+wm}" y="${y+31}" font-size="10" fill="#1E5BD8" font-family="Readex Pro">${fmtC(r.meas)} مقاسة</text>`;
+      g+=`<rect x="10" y="${y+20+bh-6}" width="${Math.max(2,wc)}" height="${bh-10}" rx="4" fill="#E08A00"/><text x="${16+wc}" y="${y+20+bh+5}" font-size="10" fill="#B36A00" font-family="Readex Pro">${fmtC(r.calc)} محسوبة</text>`; });
+    return g+`</svg><p class="paper-note">القاعدة معكوسة عن المقاومات: التوازي <bdi dir="ltr">C = C1 + C2</bdi>، والتوالي <bdi dir="ltr">1/C = 1/C1 + 1/C2</bdi>. وفي التوالي السعة المكافئة أصغر من أصغر مكثف.</p>`; },
+  get sch(){ const pts={"cm.a":[40,150,3],"cm.b":[40,250,1]}, boxes=[[10,150,70,250]], lbl={"cm.a":[28,142],"cm.b":[28,266]};
+    B.rs.forEach(r=>{ const q=CM_SCH(r.slot); pts[`c${r.slot}.1`]=[q.x,q.y[0],3]; pts[`c${r.slot}.2`]=[q.x,q.y[1],1]; boxes.push([q.x-16,q.y[0],q.x+16,q.y[1]]); lbl[`c${r.slot}.1`]=[q.x-10,q.y[0]-5]; lbl[`c${r.slot}.2`]=[q.x-10,q.y[1]+11]; });
+    return {pts,boxes,lbl,symbols(iec,s,T){ let d=`<g fill="none" stroke="#1B2730" stroke-width="2.2" stroke-linecap="round"><path d="M40 150V182M40 218V250"/><circle cx="40" cy="200" r="18"/>`;
+      B.rs.forEach(r=>{ const q=CM_SCH(r.slot), m=(q.y[0]+q.y[1])/2; d+=`<path d="M${q.x} ${q.y[0]}V${m-5}M${q.x} ${m+5}V${q.y[1]}M${q.x-14} ${m-5}H${q.x+14}M${q.x-14} ${m+5}H${q.x+14}" />`; }); d+=`</g>`;
+      d+=T(40,205,"C","middle",14,700)+T(40,290,s.meas&&s.meas.C?fmtC(s.meas.C):"—","middle",10,600,"#0E7A45"); B.rs.forEach(r=>{ const q=CM_SCH(r.slot), m=(q.y[0]+q.y[1])/2; d+=T(q.x+15,m+4,"C"+r.slot,"start",9.5,700); }); return d; }}; },
+  schNote:"جهاز قياس السعة على الشمال، والمكثفات متوصلة بين طرفيه زي ما وصّلتها.",
+  quiz:null, comps(){ const o={cm:{name:"جهاز قياس السعة",ref:"CM",en:"Capacitance meter",sym:"V",text:"بيقيس السعة المكافئة للمكثفات المتوصلة بين طرفيه، بإشارة صغيرة من جواه. زي خاصية قياس السعة في الأفوميتر.",kv:[["بيقيس","السعة µF"]]}}; B.rs.forEach(r=>o["c"+r.slot]={name:"المكثف C"+r.slot,ref:"C"+r.slot,en:fmtC(r.val),sym:"R",text:"اضغط عليه عشان تغيّر قيمته أو تشيله.",kv:[["السعة",fmtC(r.val)]]}); return o; },
+  build(R){ const C=this.C; silkLabel(R,"جهاز قياس السعة","CM",0,2.4); buildCMeter(R,"cm",C.cm);
+    R.ch=B.rs.map(r=>{ const p0=C["c"+r.slot].c, p={x:p0[0],y:p0[1]}; _silk(R,`C${r.slot}  ${fmtC(r.val)}`,"",p.x,p.y+.52); const h=buildCap(R,"c"+r.slot,C["c"+r.slot],-.25); h.slot=r.slot; relabel(h.capLab,fmtC(r.val)); return h; }); }
+};
+EXPS.cconn.quiz=EXPS.lconn&&makeCL?makeCL("C").quiz:null; EXPS.cconn.intro={title:"توصيل المكثفات",items:[["∥","التوازي","السعات بتتجمع: C = C1 + C2 + …، عكس المقاومات."],["+","التوالي","1/C = 1/C1 + 1/C2 + …: المكافئ أصغر من أصغر مكثف."],["C","جهاز القياس","بيقيس السعة المكافئة مباشرة، زي الأفوميتر في وضع قياس السعة."],["+","ضيف وغيّر","لحد 6 مكثفات بأي قيمة، واضغط على أي واحد تغيّره."]]};
+
+/* ============================================================
+   FREE COMPONENT PLACEMENT — ✋ move mode: drag any component, wires re-route
+   ============================================================ */
+let MOVE=false, DRAG=null, AUTOFOCUS=null;
+const posKey=id=>X&&X.id==="house"?wsKey()+":"+id:id;
+/* ---------- wide (landscape) board: auto re-layout that keeps neighbours next to each other ---------- */
+const WL_CACHE={};
+function wideLayout(base){ const key=BW+"|"+JSON.stringify(Object.entries(base).map(([k,c])=>[k,c.c,c.w,c.h])); if(WL_CACHE[key]) return WL_CACHE[key];
+  const kx=(BW/2-.95)/1.95, it=Object.entries(base).map(([k,c])=>({k,w:c.w,h:c.h,x:c.c[1]*kx,y:-c.c[0]*.86})), mx=BW/2-.12, my=BH/2-.12, M=.22;
+  const clamp=a=>{ a.x=Math.max(-mx+a.w/2,Math.min(mx-a.w/2,a.x)); a.y=Math.max(-my+a.h/2,Math.min(my-a.h/2,a.y)); };
+  it.forEach(clamp);
+  for(let n=0;n<200;n++){ let mv=false; for(let i=0;i<it.length;i++) for(let j=i+1;j<it.length;j++){ const a=it[i],b=it[j], dx=b.x-a.x, dy=b.y-a.y, ox=(a.w+b.w)/2+M-Math.abs(dx), oy=(a.h+b.h)/2+M-Math.abs(dy);
+      if(ox>0&&oy>0){ mv=true; if(ox<oy){ const s=(dx>=0?1:-1)*ox/2; a.x-=s; b.x+=s; } else { const s=(dy>=0?1:-1)*oy/2; a.y-=s; b.y+=s; } } } it.forEach(clamp); if(!mv) break; }
+  const out={}; it.forEach(a=>out[a.k]=[Math.round(a.x/.05)*.05,Math.round(a.y/.05)*.05]); return WL_CACHE[key]=out; }
+function wrapPositions(x){ if(x._cWrapped||x.id==="house") return; const d=Object.getOwnPropertyDescriptor(x,"C"); if(!d) return; const base=d.get?d.get:(()=>d.value);
+  x._baseC=function(){ return base.call(x); };
+  Object.defineProperty(x,"C",{configurable:true,get(){ const c=base.call(x), r={}, o=(B&&B.memo&&(WIDE?B.memo.posW:B.memo.pos))||{}, L=WIDE?wideLayout(c):null;
+    for(const k in c){ const q=o[k]||(L&&L[k]); r[k]=q?Object.assign({},c[k],{c:q.slice()}):c[k]; } return r; }}); x._cWrapped=true; }
+function labLayout(){ const o=store.get("lab_pos",{p:{},w:{}}), L=WIDE?wideLayout(C3B):null; for(const k in C3){ const q=WIDE?(o.w[k]||L[k]):(o.p[k]||C3B[k].c); C3[k].c=q.slice(); } }
+function labRebuild(){ if(R3){ R3.ro&&R3.ro.disconnect(); R3.renderer.dispose(); R3.renderer.domElement.remove(); R3=null; } initScene(); resize(); update(); }
+/* landscape = board fills the whole screen automatically */
+let AUTO_FOCUS=null;
+function autoLandscape(){ const scr=["lab","bench"].find(k=>!$("#"+k).hidden); const land=innerWidth>innerHeight*1.15;
+  if(scr&&land&&!$("#"+scr).classList.contains("focus")){ const el=$("#"+scr); el.classList.add("focus"); el.querySelectorAll("[data-focus]").forEach(b=>b.setAttribute("aria-pressed",true)); AUTO_FOCUS=scr; refit(scr); }
+  if(AUTO_FOCUS&&(!land||$("#"+AUTO_FOCUS).hidden)){ const el=$("#"+AUTO_FOCUS); el.classList.remove("focus","tools-open"); el.querySelectorAll("[data-focus]").forEach(b=>b.setAttribute("aria-pressed",false)); const k=AUTO_FOCUS; AUTO_FOCUS=null; if(!el.hidden) refit(k); } }
+const STANDALONE=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+document.addEventListener("pointerdown",()=>{ try{ if(!STANDALONE&&innerWidth>innerHeight*1.15&&!document.fullscreenElement&&["lab","bench"].some(k=>!$("#"+k).hidden)&&document.documentElement.requestFullscreen) document.documentElement.requestFullscreen({navigationUI:"hide"}).catch(()=>{}); }catch(e){} },{passive:true});
+setInterval(()=>{ try{ autoLandscape(); if(wantWide()!==WIDE) checkWide(); }catch(e){} },500);
+function setBoardDims(){ BH=WIDE?4.2:5.2; BW=WIDE?Math.round(Math.max(6.8,Math.min(11.5,BH*(innerWidth-96)/(innerHeight-66)))*10)/10:4.6; X0=-BW/2; Y0=-BH/2; }
+function wantWide(){ const f=["lab","bench"].find(k=>!$("#"+k).hidden&&$("#"+k).classList.contains("focus")); return !!f&&innerWidth>innerHeight*1.15; }
+function checkWide(){ const w=wantWide(); if(w===WIDE){ if(w){ const bw=BW; setBoardDims(); if(Math.abs(bw-BW)>.3){ if(!$("#lab").hidden&&R3) labRebuild(); else if(!$("#bench").hidden&&RB) rlRebuild(); return true; } BW=bw; X0=-BW/2; } return false; } WIDE=w; setBoardDims(); if(!$("#lab").hidden&&R3) labRebuild(); else if(!$("#bench").hidden&&RB) rlRebuild(); return true; }
+/* silk labels follow the component they caption */
+const _silk=silkLabel;
+silkLabel=function(R,name,ref,x,y){ try{ if(X&&X._baseC){ const bc=X._baseC(), fc=X.C; let best=null,bd=1e9;
+      for(const k in bc){ const c=bc[k], dx=Math.abs(x-c.c[0]), dy=y-c.c[1]; if(dx<c.w/2+.3&&dy>-.2&&dy<c.h/2+.6){ const dd=dx+Math.abs(dy-c.h/2); if(dd<bd){ bd=dd; best=k; } } }
+      if(best&&fc[best]){ x+=fc[best].c[0]-bc[best].c[0]; y+=fc[best].c[1]-bc[best].c[1]; } } }catch(e){} return _silk(R,name,ref,x,y); };
+/* ---------- ✋ move mode (works on the wiring lab and every bench) ---------- */
+function dctx(){ if(!$("#lab").hidden&&R3) return {R:R3,C:()=>C3,lab:true}; return {R:RB,C:()=>X.C,lab:false}; }
+function planeHit(e,R){ const el=R.renderer.domElement, r=el.getBoundingClientRect(), rc=new THREE.Raycaster(); rc.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),R.camera);
+  const p=new THREE.Vector3(); return rc.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,0,1),0),p)?p:null; }
+function dragStart(e){ const cx=dctx(); if(!MOVE||!cx.R) return false; const R=cx.R, C=cx.C(), p=planeHit(e,R); if(!p) return false; let id=null;
+  const el=R.renderer.domElement, r=el.getBoundingClientRect(), rc=new THREE.Raycaster(); rc.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),R.camera);
+  const h=rc.intersectObjects(R.pick,false)[0]; if(h){ const u=h.object.userData, k=u.t==="term"?String(u.id).split(".")[0]:u.id; if(C[k]) id=k; }
+  if(!id){ for(const k in C){ const q=C[k]; if(Math.abs(p.x-q.c[0])<=q.w/2&&Math.abs(p.y-q.c[1])<=q.h/2+.25){ id=k; break; } } } if(!id) return false;
+  const c=C[id]; const g=new THREE.Mesh(new THREE.PlaneGeometry(c.w,c.h),new THREE.MeshBasicMaterial({color:0xFFC72C,transparent:true,opacity:.35,depthTest:false}));
+  g.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(c.w,c.h)),new THREE.LineBasicMaterial({color:0xFFC72C,depthTest:false}))); g.renderOrder=99; g.position.set(c.c[0],c.c[1],.7); R.scene.add(g);
+  DRAG={cx,id,off:[c.c[0]-p.x,c.c[1]-p.y],g,w:c.w,h:c.h,pos:c.c.slice(),ok:true}; Sound.tick(); vibrate(8); return true; }
+function dragFits(C,id,x,y,w,h){ if(Math.abs(x)+w/2>BW/2-.08||Math.abs(y)+h/2>BH/2-.08) return false; for(const k in C){ if(k===id) continue; const c=C[k]; if(Math.abs(c.c[0]-x)<(c.w+w)/2+.12&&Math.abs(c.c[1]-y)<(c.h+h)/2+.12) return false; } return true; }
+function dragMove(e){ if(!DRAG) return; const p=planeHit(e,DRAG.cx.R); if(!p) return; const sn=v=>Math.round(v/.05)*.05, x=sn(p.x+DRAG.off[0]), y=sn(p.y+DRAG.off[1]);
+  DRAG.pos=[x,y]; DRAG.ok=dragFits(DRAG.cx.C(),DRAG.id,x,y,DRAG.w,DRAG.h); DRAG.g.position.set(x,y,.7); const col=DRAG.ok?0xFFC72C:0xFF5B4F; DRAG.g.material.color.setHex(col); DRAG.g.children[0].material.color.setHex(col); }
+function dragEnd(){ if(!DRAG) return; const d=DRAG; DRAG=null; d.cx.R.scene.remove(d.g); d.g.geometry.dispose();
+  if(!d.ok){ Sound.buzz(); (d.cx.lab?toast:toast)("مفيش مكان هنا، المكون رجع مكانه"); return; }
+  if(d.cx.lab){ const o=store.get("lab_pos",{p:{},w:{}}); (WIDE?o.w:o.p)[d.id]=d.pos; store.set("lab_pos",o); Sound.snap(); vibrate(10); labRebuild(); return; }
+  if(X.id==="house"){ const c=wsComps().find(q=>q.id===d.id); if(c){ if(WIDE) c.xyW=d.pos; else c.xy=d.pos; } } else { const k=WIDE?"posW":"pos"; B.memo[k]=B.memo[k]||{}; B.memo[k][posKey(d.id)]=d.pos; }
+  saveKey("memo",B.memo); Sound.snap(); vibrate(10); rlRebuild(); }
+function moveHint(){ if(store.get("hint_move",false)) return; store.set("hint_move",true); setTimeout(()=>{ const b=[...document.querySelectorAll("[data-move]")].find(x=>x.offsetParent); if(b){ b.classList.add("pulse"); setTimeout(()=>b.classList.remove("pulse"),6000); } toast("جديد: زرار الأسهم الأربعة ✥ بيخليك تحرّك المكونات على اللوحة"); },1600); }
+function setMove(on){ MOVE=on; $$('[data-move]').forEach(b=>b.setAttribute("aria-pressed",on)); if(on) toast("اسحب أي مكون لمكانه الجديد. اضغط الزرار تاني لما تخلص"); }
+function resetPositions(){ if(!$("#lab").hidden){ store.set("lab_pos",{p:{},w:{}}); labRebuild(); } else if(X.id==="house"){ wsComps().forEach(c=>{ delete c.xy; delete c.xyW; }); saveKey("memo",B.memo); rlRebuild(); } else { B.memo.pos={}; B.memo.posW={}; saveKey("memo",B.memo); rlRebuild(); } toast("المكونات رجعت لأماكنها الأصلية"); }
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-move]"); if(!b) return; const lab=!$("#lab").hidden; if(lab?S.power:bLocked()){ if(lab) toast("افصل التغذية الأول قبل ما تحرّك المكونات"); return; } setMove(!MOVE); Sound.tick(); });
+
+/* ============================================================
+   FAULT DIAGNOSIS — maintenance missions on the student's own solved circuit
+   hidden fault → symptom → test with neon tester / voltmeter / continuity → locate & repair → stars
+   ============================================================ */
+const FAULTS={
+  lamp:{n:"لمبة محروقة",fix:"غيّر اللمبة",sym:"اللمبة مش بتنوّر خالص"},
+  wire:{n:"سلك مقطوع من جوه",fix:"غيّر السلك",sym:"فيه جزء من الدائرة مش شغال"},
+  term:{n:"طرف سايب ومش مربوط",fix:"اربط الطرف كويس",sym:"فيه حاجة مش شغالة، والتوصيل شكله سليم"},
+  sw:{n:"كونتاكت المفتاح بايظ",fix:"غيّر المفتاح",sym:"المفتاح بيتحرك بس مش بيشغّل"},
+  fuse:{n:"فيوز محروق",fix:"غيّر الفيوز",sym:"مفيش أي حاجة شغالة في الدائرة"},
+  mcb:{n:"قاطع بايظ من جوه",fix:"غيّر القاطع",sym:"القاطع مرفوع بس الكهربا مش واصلة"},
+  st:{n:"ستارتر بايظ",fix:"غيّر الستارتر",sym:"الأنبوبة مش بتولّع"},
+  bal:{n:"ملف البلاست مقطوع",fix:"غيّر البلاست",sym:"الأنبوبة مش بتولّع، ولا الستارتر بيلمع"},
+  bell:{n:"جرس محروق",fix:"غيّر الجرس",sym:"الجرس مش بيرن"}
+};
+function dgBox(){ return (B&&B.memo&&B.memo.sb)?wsBox():{}; }
+function dgOn(){ const d=dgBox().diag; return !!(d&&d.fault&&!d.fixed); }
+function dgFault(){ const d=dgBox().diag; return d&&!d.fixed?d.fault:null; }
+/* electrical effect of the hidden fault */
+function dgWireOpen(w){ const f=dgFault(); if(!f) return false; if(f.k==="wire") return w.id===f.id; if(f.k==="term") return w.a===f.id||w.b===f.id; return false; }
+function dgSkip(id){ const f=dgFault(); return !!f&&["lamp","sw","fuse","mcb","st","bal","bell"].includes(f.k)&&f.id===id; }
+function dgCandidates(){ const ch=wsCh(), cs=wsComps(), out=[]; cs.forEach(c=>{ const t=c.ty;
+    if(t==="lamp") out.push({k:"lamp",id:c.id}); if(t==="bell") out.push({k:"bell",id:c.id}); if(t==="fuse") out.push({k:"fuse",id:c.id}); if(t==="mcb") out.push({k:"mcb",id:c.id});
+    if(["s1","s2g","sw2"].includes(t)) out.push({k:"sw",id:c.id}); if(t==="st") out.push({k:"st",id:c.id}); if(t==="bal") out.push({k:"bal",id:c.id}); });
+  B.wires.forEach(w=>{ out.push({k:"wire",id:w.id}); });
+  const used=new Set(B.wires.flatMap(w=>[w.a,w.b])); [...used].filter(t=>!t.startsWith("sup.")).forEach(t=>out.push({k:"term",id:t}));
+  return out; }
+function dgHasSymptom(f,ch){ const bx=wsBox(); const prev=bx.diag; bx.diag={fault:f}; let bad=false;
+  try{ if(ch.func){ bad=!wsEnum(ch.func,ch.init).ok; } else { // fluorescent: check heating path or the arc path is broken
+      const st=Object.assign({},wsSt()); Object.keys(st).forEach(k=>st[k]=1); const r=wsSolve(st,{forceOn:true});
+      bad=wsComps().filter(c=>c.ty==="tube").some(c=>r.c[c.id].Ia<.05||r.c[c.id].Ib<.05)||f.k==="st"||f.k==="bal"; } }catch(e){}
+  bx.diag=prev; return bad; }
+function dgStart(){ const ch=wsCh(); if(!ch) return; const cand=dgCandidates().sort(()=>Math.random()-.5); let f=null;
+  for(const c of cand){ if(dgHasSymptom(c,ch)){ f=c; break; } }
+  if(!f){ toast("مقدرتش أعمل عطل في الدائرة دي، جرّب تحدي تاني"); return; }
+  B.out=false; wsBox().diag={fault:f,tool:"tester",probes:[],meas:0,wrong:0,t0:Date.now(),log:[],seenOn:false,fixed:false}; if(MOVE) setMove(false);
+  saveKey("memo",B.memo); Sound.clack(); vibrate([20,40,20]); B.latch=[]; benchControls(); benchUpdate();
+  toast(`🔧 مهمة صيانة: العميل بيشتكي: "${FAULTS[f.k].sym}". شغّل اللوحة واختبر بنفسك`); }
+function dgQuit(){ const bx=wsBox(); bx.diag=null; saveKey("memo",B.memo); B.latch=[]; clearProbeMarks(); benchControls(); benchUpdate(); toast("انسحبت من مهمة الصيانة"); }
+/* tools */
+function termLabel(t){ const [id,n]=t.split("."), c=wsComps().find(q=>q.id===id); return c?`${WT[c.ty].n} ${id} (${HT_LBL(n)})`:t; }
+function dgMeasure(a,b,kind){ const d=wsBox().diag, st=wsSt();
+  if(kind==="tester"){ if(!B.out){ return {t:"مفك الاختبار منوّرش، واللوحة مفصولة أصلًا. شغّل اللوحة الأول",v:null}; } const r=wsSolve(st), v=Math.abs(r.d(a,"sup.PE")); const on=v>P.V*.3;
+    return {t:`مفك الاختبار على ${termLabel(a)}: ${on?"نوّر 🔴، فيه فاز":"منوّرش، مفيش فاز"}`,v:on}; }
+  if(kind==="volt"){ if(!B.out) return {t:"الأفوميتر على الجهد محتاج اللوحة تبقى شغالة",v:null}; const r=wsSolve(st), v=Math.abs(r.d(a,b)); return {t:`الجهد بين ${termLabel(a)} و${termLabel(b)} = ${v.toFixed(0)} V`,v}; }
+  if(B.out) return {t:"⚠ افصل اللوحة الأول قبل ما تقيس التوصيل، وإلا الجهاز هيتلف",v:null};
+  const T=X.terms, els=wsEls(st,{noDyn:true}).filter(e=>!(e.a==="sup.L"&&e.b==="sup.N"&&e.v)); els.push({a,b,r:1e6,v:1e6});
+  const V=mna(T,"sup.N",els), R=Math.abs(V[a]-V[b]); const txt=R<2?"🔔 فيه توصيل (≈ 0 Ω)":R>5e5?"OL، مفيش توصيل":`R ≈ ${R<1000?R.toFixed(0)+" Ω":(R/1000).toFixed(1)+" kΩ"}`;
+  return {t:`التوصيل بين ${termLabel(a)} و${termLabel(b)}: ${txt}`,v:R}; }
+function dgTerm(t){ const d=wsBox().diag; if(!d||d.fixed) return false; if(d.tool==="pick"){ return dgPick(t.split(".")[0],"term",t); }
+  if(d.tool==="tester"){ const m=dgMeasure(t,null,"tester"); dgLog(m); probeMark(t,0xFF3A22); return true; }
+  d.probes.push(t); probeMark(t,d.probes.length===1?0xD32F2F:0x1E1F22); Sound.tick();
+  if(d.probes.length===2){ const m=dgMeasure(d.probes[0],d.probes[1],d.tool); dgLog(m); d.probes=[]; setTimeout(clearProbeMarks,900); } else toast("حط الطرف التاني للجهاز"); return true; }
+function dgLog(m){ const d=wsBox().diag; if(m.v!==null){ d.meas++; } d.log.unshift(m.t); d.log=d.log.slice(0,6); Sound[m.v===true||(typeof m.v==="number"&&m.v<2&&d.tool==="cont")?"chime":"tick"](); toast(m.t); saveKey("memo",B.memo); benchUpdate(); }
+function dgPick(id,kind,extra){ const d=wsBox().diag, f=d.fault; let ok=false;
+  if(kind==="wire") ok=(f.k==="wire"&&f.id===id)||(f.k==="term"&&B.wires.some(w=>w.id===id&&(w.a===f.id||w.b===f.id)));
+  else if(kind==="term") ok=(f.k==="term"&&f.id===extra);
+  else ok=["lamp","sw","fuse","mcb","st","bal","bell"].includes(f.k)&&f.id===id;
+  if(ok){ d.fixed=true; const sec=Math.round((Date.now()-d.t0)/1000), stars=d.wrong===0&&d.meas<=6?3:d.wrong<=1&&d.meas<=12?2:1; d.stars=stars;
+    const k=wsKey(); B.memo.fst=B.memo.fst||{}; B.memo.fst[k]=Math.max(B.memo.fst[k]||0,stars); B.memo.fcount=(B.memo.fcount||0)+1; saveKey("memo",B.memo);
+    Sound.chime(); vibrate([15,60,15,60,15]); clearProbeMarks(); benchControls(); benchUpdate();
+    toast(`✅ صح! العطل: ${FAULTS[f.k].n}. ${FAULTS[f.k].fix}. خلصت في ${sec} ثانية بـ ${d.meas} قياسات ${"⭐".repeat(stars)}`,"ok"); }
+  else { d.wrong++; Sound.buzz(); vibrate(40); saveKey("memo",B.memo); toast("مش ده مكان العطل. كمّل قياس وحاول تاني"); benchUpdate(); }
+  return true; }
+/* probe markers on the board */
+function probeMark(t,col){ if(!RB||!RB.term[t]) return; const m=new THREE.Mesh(new THREE.SphereGeometry(.07,16,12),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.85,depthTest:false})); m.position.copy(RB.term[t].p).setZ(RB.term[t].p.z+.18); m.renderOrder=98; RB.scene.add(m); (RB.probes=RB.probes||[]).push(m); }
+function clearProbeMarks(){ (RB&&RB.probes||[]).forEach(m=>{ RB.scene.remove(m); m.geometry.dispose(); }); if(RB) RB.probes=[]; }
+
+/* ============================================================
+   STARS, BADGES, FINAL EXAM, CERTIFICATE
+   ============================================================ */
+const DONE_KEYS={simple_circuit:"done_simple",vire:"done_vire",ohms_law:"done_ohms",conductor_r:"done_cond",resistors:"done_rtypes",nonlinear:"done_nlin",color_code:"done_color",alpha_code:"done_alpha",
+  r_connections:"done_rconn",v_divider:"done_vdiv",i_divider:"done_idiv",capacitors:"done_cap",c_connections:"done_cconn",inductors:"done_ind",l_connections:"done_lconn",power:"done_power",energy:"done_energy",
+  protection:"done_prot",fuse_select:"done_fsel",cable_select:"done_csel",vdrop:"done_vdrop",meters:"done_meters",residential:"done_house"};
+let CUR_UNIT=null;
+const _openModule=openModule; openModule=function(id){ CUR_UNIT=id; return _openModule(id); };
+function markWrong(){ if(!CUR_UNIT) return; const m=store.get("mist",{}); m[CUR_UNIT]=(m[CUR_UNIT]||0)+1; store.set("mist",m); }
+const _toastA=toast; toast=function(m,k){ if(k==="danger") markWrong(); return _toastA(m,k); };
+function unitStars(id){ const S=store.get("ustars",{}); if(S[id]) return S[id]; if(!store.get(DONE_KEYS[id],false)) return 0; const m=(store.get("mist",{})[id])||0, st=m<=1?3:m<=4?2:1; S[id]=st; store.set("ustars",S); return st; }
+function resetUnitStars(id){ if(!id) return; const S=store.get("ustars",{}), M=store.get("mist",{}); delete S[id]; delete M[id]; store.set("ustars",S); store.set("mist",M); }
+function totalStars(){ return Object.keys(DONE_KEYS).reduce((a,id)=>a+unitStars(id),0); }
+function doneCount(){ return Object.keys(DONE_KEYS).filter(id=>store.get(DONE_KEYS[id],false)).length; }
+function groupDone(g){ const G=MODULES.find(x=>x.g===g); return !!G&&G.items.every(([id])=>!DONE_KEYS[id]||store.get(DONE_KEYS[id],false)); }
+function wsStats(){ const st=(typeof BSTATE!=="undefined"&&BSTATE.house&&BSTATE.house.memo)||store.get("ws_memo",{})||{}; return {ch:Object.keys(st.cdone||{}).length,miss:st.fcount||0}; }
+const BADGES=[
+  ["⚡","أول دائرة","خلّصت الدائرة الكهربية البسيطة",()=>store.get("done_simple",false)],
+  ["Ω","صديق أوم","خلّصت قانون أوم",()=>store.get("done_ohms",false)],
+  ["🎨","قارئ الألوان","خلّصت كود ألوان المقاومات",()=>store.get("done_color",false)],
+  ["▭","خبير المقاومات","خلّصت كل وحدات المقاومات",()=>groupDone("المقاومات")],
+  ["⫞","سيد المكثفات والملفات","خلّصت مجموعة المكثفات والملفات",()=>groupDone("المكثفات والملفات")],
+  ["⚙","مهندس القدرة","خلّصت مجموعة القدرة والحماية",()=>groupDone("القدرة والحماية")],
+  ["🔍","فني قياس","خلّصت أجهزة القياس",()=>store.get("done_meters",false)],
+  ["🏠","كهربائي منازل","حليت 10 تحديات في الورشة",()=>wsStats().ch>=10],
+  ["🔧","صائد الأعطال","صلّحت 5 أعطال في مهام الصيانة",()=>wsStats().miss>=5],
+  ["⭐","نجم المعمل","جمعت 3 نجوم في 10 وحدات",()=>Object.keys(DONE_KEYS).filter(id=>unitStars(id)===3).length>=10],
+  ["🎓","ناجح في الامتحان","نجحت في الامتحان النهائي",()=>(store.get("exam",{}).best||0)>=70],
+  ["🏆","المعمل كله","خلّصت كل وحدات المعمل",()=>doneCount()>=Object.keys(DONE_KEYS).length]];
+/* home: stars on units + achievements card */
+const _renderHomeA=renderHome; renderHome=function(){ _renderHomeA(); try{ $$("#groups .unit").forEach(u=>{ const id=u.dataset.id, n=unitStars(id); if(n&&!u.querySelector(".ustar")){ const sp=document.createElement("span"); sp.className="ustar"; sp.textContent="★".repeat(n)+"☆".repeat(3-n); (u.querySelector(".t small")||u).after?u.querySelector(".t").appendChild(sp):0; } });
+  const earned=BADGES.filter(b=>{ try{ return b[3](); }catch(e){ return false; } }).length; $("#achStars").textContent=totalStars(); $("#achBadges").textContent=`${earned}/${BADGES.length}`;
+  const ex=store.get("exam",{}), es=moduleState("exam",true); $("#achExam").textContent=es.state==="open"?(ex.best!=null?`أحسن نتيجة ${ex.best}%`:"جاهز؟"):es.state==="premium"?"⭐ للأعضاء":es.state==="soon"?"قريبًا":"مقفول"; }catch(e){} };
+function openAch(){ const earned=BADGES.map(b=>{ let ok=false; try{ ok=!!b[3](); }catch(e){} return [b,ok]; }), ex=store.get("exam",{});
+  $("#achBody").innerHTML=`<div class="bill"><div><small>النجوم</small><b>⭐ ${totalStars()} / ${Object.keys(DONE_KEYS).length*3}</b></div><div><small>الوحدات</small><b>${doneCount()} / ${Object.keys(DONE_KEYS).length}</b></div><div><small>الامتحان</small><b>${ex.best!=null?ex.best+"%":"—"}</b></div></div>
+    <h5 class="wl-g">الشارات</h5><div class="badges">${earned.map(([b,ok])=>`<div class="badge ${ok?"on":""}"><i>${b[0]}</i><b>${b[1]}</b><small>${b[2]}</small></div>`).join("")}</div>
+    <div class="row2" style="margin-top:14px"><button class="go" id="achExamGo" style="flex:1;justify-content:center">🎓 الامتحان النهائي</button>${ex.best>=70?`<button class="btn2" id="achCert">📜 شهادتي</button>`:""}</div>`;
+  openModal("ach"); }
+/* ---------- final exam ---------- */
+const EXAM_N=10, EXAM_MIN=15, EXAM_PASS=70;
+function examPool(){ const gens=[]; ["ohm","emf","cond","nlin","rconn","vdiv","idiv","cap","ind","cconn","lconn","power","prot","meters","house"].forEach(k=>{ const e=EXPS[k]; if(e&&typeof e.quiz==="function") gens.push(()=>e.quiz.call(e)); });
+  ["f","c","v"].forEach(k=>gens.push(()=>dquizGen(k))); return gens; }
+function examQ(){ const pool=examPool().sort(()=>Math.random()-.5), out=[]; let guard=0;
+  while(out.length<EXAM_N&&guard<80){ const g=pool[guard%pool.length]; guard++; try{ const q=g(); if(q&&isFinite(q.ans)&&q.text&&!out.some(o=>o.text===q.text)) out.push(q); }catch(e){} } return out; }
+let EX=null;
+function examStart(){ const st=moduleState("exam",true); if(st.state!=="open"){ toast(st.state==="premium"?"الامتحان للأعضاء المميزين ⭐":"الامتحان مقفول حاليًا"); return; }
+  EX={qs:examQ(),i:0,score:0,ans:[],t0:Date.now()}; closeModal(); setTimeout(()=>{ openModal("exam"); examRender(); },200); clearInterval(examRender.tm); examRender.tm=setInterval(examTick,500); }
+function examLeft(){ return Math.max(0,EXAM_MIN*60-Math.floor((Date.now()-EX.t0)/1000)); }
+function examTick(){ if(!EX||$("#exam").hidden){ clearInterval(examRender.tm); return; } const l=examLeft(); $("#exTime").textContent=`${Math.floor(l/60)}:${String(l%60).padStart(2,"0")}`; if(l<=0&&!EX.done) examFinish(); }
+function examRender(){ const q=EX.qs[EX.i]; $("#exProg").style.width=(EX.i/EX.qs.length*100)+"%"; $("#exNum").textContent=`سؤال ${EX.i+1} من ${EX.qs.length}`;
+  $("#exBody").innerHTML=`<p class="exq">${q.text}</p><div class="ans"><input id="exIn" inputmode="decimal" autocomplete="off" placeholder="الإجابة ${q.unit?"("+q.unit+")":""}"></div><button class="go" id="exNext" style="width:100%;justify-content:center">${EX.i<EX.qs.length-1?"السؤال اللي بعده":"سلّم الامتحان"}</button>`;
+  setTimeout(()=>{ const i=$("#exIn"); if(i) i.focus(); },250); examTick(); }
+function examNext(){ const q=EX.qs[EX.i], raw=($("#exIn").value||"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[٫,]/g,"."), v=parseFloat(raw);
+  const ok=isFinite(v)&&(Math.abs(q.ans)<.01?Math.abs(v-q.ans)<.01:Math.abs(v-q.ans)/Math.abs(q.ans)<=.03); if(ok) EX.score++; EX.ans.push({q,v:raw,ok}); Sound.tick();
+  EX.i++; if(EX.i>=EX.qs.length) examFinish(); else examRender(); }
+function examFinish(){ EX.done=true; clearInterval(examRender.tm); const pct=Math.round(EX.score/EX.qs.length*100), pass=pct>=EXAM_PASS, ex=store.get("exam",{});
+  ex.best=Math.max(ex.best||0,pct); ex.last=pct; ex.n=(ex.n||0)+1; if(pass&&!ex.passDate){ ex.passDate=new Date().toISOString(); } if(pass) ex.passPct=Math.max(ex.passPct||0,pct); store.set("exam",ex);
+  (pass?Sound.chime:Sound.buzz).call(Sound); vibrate(pass?[20,60,20,60,20]:60); $("#exProg").style.width="100%";
+  $("#exBody").innerHTML=`<div class="exres ${pass?"ok":"no"}"><b>${pct}%</b><span>${pass?"🎉 مبروك! نجحت في الامتحان":"محتاج تذاكر شوية وتحاول تاني"}</span><small>${EX.score} إجابات صح من ${EX.qs.length}، ونسبة النجاح ${EXAM_PASS}%</small></div>
+    <details class="exrev"><summary>راجع الإجابات</summary>${EX.ans.map((a,i)=>`<div class="${a.ok?"ok":"no"}"><b>${i+1}. ${a.ok?"✓":"✗"}</b> ${a.q.text}<br><small>إجابتك: ${a.v||"—"}  |  الحل: ${a.q.sol}</small></div>`).join("")}</details>
+    <div class="row2" style="margin-top:12px">${pass?`<button class="go" id="exCert" style="flex:1;justify-content:center">📜 اعمل الشهادة</button>`:""}<button class="btn2" id="exAgain" style="flex:1">امتحان جديد</button></div>`;
+  if(!$("#home").hidden) renderHome(); }
+/* ---------- certificate ---------- */
+async function makeCert(name){ const W=1600,H=1130, cv=document.createElement("canvas"); cv.width=W; cv.height=H; const x=cv.getContext("2d"); try{ await document.fonts.ready; }catch(e){}
+  const ex=store.get("exam",{}), F=(w,sz)=>`${w} ${sz}px "Readex Pro",Tahoma,sans-serif`;
+  let g=x.createLinearGradient(0,0,W,H); g.addColorStop(0,"#FFFDF6"); g.addColorStop(1,"#F4EEDD"); x.fillStyle=g; x.fillRect(0,0,W,H);
+  x.strokeStyle="#0A1426"; x.lineWidth=18; x.strokeRect(34,34,W-68,H-68); x.strokeStyle="#C9A24A"; x.lineWidth=5; x.strokeRect(64,64,W-128,H-128);
+  [[64,64],[W-64,64],[64,H-64],[W-64,H-64]].forEach(([cx,cy])=>{ x.fillStyle="#C9A24A"; x.beginPath(); x.arc(cx,cy,16,0,7); x.fill(); });
+  x.fillStyle="#0A1426"; x.beginPath(); x.arc(W/2,168,66,0,7); x.fill(); x.strokeStyle="#C9A24A"; x.lineWidth=4; x.stroke(); x.fillStyle="#FFC72C"; x.beginPath(); [[56,12],[24,56],[46,56],[40,88],[76,40],[54,40],[62,12]].forEach(([a,b],i)=>{ const px=W/2+(a-50)*1.35, py=168+(b-50)*1.35; i?x.lineTo(px,py):x.moveTo(px,py); }); x.closePath(); x.fill();
+  x.direction="rtl"; x.textAlign="center"; x.fillStyle="#0A1426"; x.font=F(700,84); x.fillText("شهادة إتمام",W/2,345);
+  x.font=F(500,34); x.fillStyle="#5F6D76"; x.fillText("المعمل الكهربي الافتراضي",W/2,405);
+  x.font=F(400,36); x.fillStyle="#2E3941"; x.fillText("تشهد إدارة المعمل بأن",W/2,488);
+  x.font=F(700,76); x.fillStyle="#1E4FD6"; x.fillText(name,W/2,585); x.strokeStyle="#C9A24A"; x.lineWidth=3; x.beginPath(); x.moveTo(W/2-360,625); x.lineTo(W/2+360,625); x.stroke();
+  x.font=F(400,36); x.fillStyle="#2E3941"; x.fillText(`اجتاز الامتحان النهائي بنسبة ${ex.passPct||ex.best||0}%`,W/2,695);
+  x.fillText(`وأنهى ${doneCount()} وحدة من ${Object.keys(DONE_KEYS).length}، وجمع ${totalStars()} نجمة`,W/2,752);
+  const d=new Date(ex.passDate||Date.now()).toLocaleDateString("ar-EG",{day:"numeric",month:"long",year:"numeric"});
+  x.font=F(500,30); x.fillStyle="#5F6D76"; x.textAlign="right"; x.fillText("التاريخ",W-220,900); x.font=F(600,34); x.fillStyle="#0A1426"; x.fillText(d,W-220,950);
+  x.textAlign="left"; x.font=F(500,30); x.fillStyle="#5F6D76"; x.fillText("المدرس",220,900); x.strokeStyle="#0A1426"; x.lineWidth=2; x.beginPath(); x.moveTo(220,960); x.lineTo(560,960); x.stroke();
+  x.textAlign="center"; x.font=F(400,24); x.fillStyle="#8A949B"; x.fillText("تطوير Mohamed _ Eldawly",W/2,H-100); return cv; }
+async function openCert(){ closeModal(); const nm=store.get("cert_name","");
+  setTimeout(()=>{ $("#certBody").innerHTML=`<p>اكتب اسمك زي ما عايزه يظهر على الشهادة:</p><div class="ans"><input id="certName" value="${nm.replace(/"/g,"")}" placeholder="الاسم بالكامل" maxlength="40"></div><button class="go" id="certGo" style="width:100%;justify-content:center">اعمل الشهادة</button><div id="certOut"></div>`; openModal("cert"); },200); }
+async function certRender(){ const n=$("#certName").value.trim(); if(n.length<3){ toast("اكتب اسمك الأول"); return; } store.set("cert_name",n); const cv=await makeCert(n), url=cv.toDataURL("image/png");
+  $("#certOut").innerHTML=`<img src="${url}" alt="الشهادة" style="width:100%;border-radius:10px;margin-top:12px;box-shadow:0 8px 24px rgba(0,0,0,.4)"><div class="row2" style="margin-top:10px"><a class="go" href="${url}" download="شهادة-المعمل-الكهربي.png" style="flex:1;justify-content:center;text-decoration:none">نزّل الشهادة</a><button class="btn2" id="certShare">شارك</button></div><p class="adm-hint" style="margin-top:8px">لو التنزيل مش شغال، اضغط مطوّل على الصورة واختار حفظ.</p>`;
+  Sound.chime(); $("#certShare").onclick=async()=>{ try{ const b=await (await fetch(url)).blob(), f=new File([b],"certificate.png",{type:"image/png"}); if(navigator.canShare&&navigator.canShare({files:[f]})) await navigator.share({files:[f],title:"شهادة المعمل الكهربي"}); else toast("المشاركة مش مدعومة هنا، نزّل الصورة"); }catch(e){} }; }
+function initAch(){ document.addEventListener("click",e=>{ const t=e.target.closest("button,a"); if(!t) return;
+    if(t.id==="achOpen") openAch(); if(t.id==="achExamGo"||t.id==="exAgain") examStart(); if(t.id==="exNext") examNext(); if(t.id==="achCert"||t.id==="exCert") openCert(); if(t.id==="certGo") certRender();
+    if(t.id==="exQuit"){ if(EX&&!EX.done){ if(!t.dataset.sure){ t.dataset.sure=1; t.textContent="متأكد؟"; setTimeout(()=>{ delete t.dataset.sure; t.textContent="إنهاء"; },3000); return; } examFinish(); } else closeModal(); } });
+  document.addEventListener("keydown",e=>{ if(e.key==="Enter"&&e.target.id==="exIn") examNext(); if(e.key==="Enter"&&e.target.id==="certName") certRender(); }); }
+
 /* ---------- focus mode, step pill, collapsible notes ---------- */
 const NOTE_OPEN={notes:false,bnotes:false};
 function renderNotes(id,list){ const el=$("#"+id); el._list=list; if(!list.length){ el.innerHTML=""; NOTE_OPEN[id]=false; return; }
@@ -3929,24 +4327,38 @@ function setStepPill(id,num,text,done){ const el=$("#"+id); el.querySelector("i"
 function refit(scr){ requestAnimationFrame(()=>{ if(scr==="lab") resize(); else if(RB) fitCam(RB,$("#bstage"),$("#bhud"),$("#bbottom")); }); }
 function toggleFocus(scr){ const el=$("#"+scr), on=!el.classList.contains("focus"); el.classList.toggle("focus",on); if(!on) el.classList.remove("tools-open");
   el.querySelectorAll("[data-focus]").forEach(b=>b.setAttribute("aria-pressed",on)); const t=el.querySelector(".ftools"); if(t) t.setAttribute("aria-pressed","false");
-  Sound.tick(); vibrate(8); if(on) toast("اللوحة بكل الشاشة. اضغط على شريط الخطوة فوق عشان تقراها كاملة"); refit(scr); }
+  Sound.tick(); vibrate(8); goLandscape(on); if(!on) AUTOFOCUS=null; if(on) toast("اللوحة بكل الشاشة. السهم اللي على الجنب بيفتح الخطوة"); refit(scr); setTimeout(()=>{ if(!checkWide()) refit(scr); },450); }
+function goLandscape(on){ const d=document, el=d.documentElement;
+  try{ if(on){ const p=el.requestFullscreen?el.requestFullscreen({navigationUI:"hide"}):el.webkitRequestFullscreen?el.webkitRequestFullscreen():null; Promise.resolve(p).then(()=>screen.orientation&&screen.orientation.lock&&screen.orientation.lock("landscape")).catch(()=>{}); }
+    else { if(screen.orientation&&screen.orientation.unlock) screen.orientation.unlock(); if(d.fullscreenElement&&d.exitFullscreen) d.exitFullscreen().catch(()=>{}); else if(d.webkitFullscreenElement&&d.webkitExitFullscreen) d.webkitExitFullscreen(); } }catch(e){} }
+let _rzT=0; window.addEventListener("resize",()=>{ clearTimeout(_rzT); _rzT=setTimeout(()=>{ const scr=["lab","bench"].find(k=>!$("#"+k).hidden); if(!scr) return; const land=innerWidth>innerHeight*1.15, el=$("#"+scr);
+    if(land&&!el.classList.contains("focus")){ AUTOFOCUS=scr; toggleFocus(scr); return; }
+    if(!land&&AUTOFOCUS===scr&&el.classList.contains("focus")){ AUTOFOCUS=null; toggleFocus(scr); return; }
+    if(!checkWide()) refit(scr); },220); });
 $$("[data-focus]").forEach(b=>b.onclick=()=>toggleFocus(b.dataset.focus));
 $$(".fstep").forEach(b=>b.onclick=()=>{ b.dataset.open=b.dataset.open!=="true"; Sound.tick(); refit(b.id==="fstep"?"lab":"bench"); });
 $("#bTools").onclick=()=>{ const el=$("#bench"), on=!el.classList.contains("tools-open"); el.classList.toggle("tools-open",on); $("#bTools").setAttribute("aria-pressed",on); Sound.tick(); refit("bench"); };
 
+
+/* ---------- wire colour selector (compact) ---------- */
+function wselSync(){ $$(".wires").forEach(w=>{ const on=w.querySelector('.sw[aria-pressed="true"]:not([hidden])')||w.querySelector(".sw:not([hidden])"); const i=w.querySelector(".wsel i"), t=w.querySelector(".wsel span"); if(!on||!i) return; const ii=on.querySelector("i");
+    if(ii.style.background) i.style.background=ii.style.background; else { const cs=getComputedStyle(ii); i.style.background=cs.backgroundImage!=="none"?cs.backgroundImage:cs.backgroundColor; } t.textContent=(on.querySelector("b")||{}).textContent||"لون السلك"; }); }
+document.addEventListener("click",e=>{ const sel=e.target.closest(".wsel"); if(sel){ const pop=sel.parentElement.querySelector(".wpop"); pop.hidden=!pop.hidden; Sound.tick(); return; }
+  const sw=e.target.closest(".wpop .sw"); if(sw){ setTimeout(()=>{ sw.closest(".wpop").hidden=true; wselSync(); },0); return; }
+  if(!e.target.closest(".wpop")) $$(".wpop").forEach(p=>p.hidden=true); });
 /* ---------- navigation ---------- */
 function openModule(id){ const m={ohms_law:"ohm",vire:"emf",conductor_r:"cond",nonlinear:"nlin",r_connections:"rconn",capacitors:"cap",inductors:"ind",c_connections:"cconn",l_connections:"lconn",power:"power",protection:"prot",meters:"meters",residential:"house",v_divider:"vdiv",i_divider:"idiv"}, c={color_code:"color",alpha_code:"alpha",resistors:"types",energy:"energy",fuse_select:"fuse_select",cable_select:"cable_select",vdrop:"vdrop"}; if(m[id]) openBench(m[id]); else if(c[id]) openCoder(c[id]); else openLab(); }
 function nextModule(){ const order=["simple_circuit","vire","ohms_law","conductor_r","resistors","nonlinear","color_code","alpha_code","r_connections","v_divider","i_divider","capacitors","c_connections","inductors","l_connections","power","energy","protection","fuse_select","cable_select","vdrop","meters","residential"], done={residential:store.get("done_house",false),meters:store.get("done_meters",false),protection:store.get("done_prot",false),energy:store.get("done_energy",false),fuse_select:store.get("done_fsel",false),cable_select:store.get("done_csel",false),vdrop:store.get("done_vdrop",false),power:store.get("done_power",false),c_connections:store.get("done_cconn",false),l_connections:store.get("done_lconn",false),capacitors:store.get("done_cap",false),inductors:store.get("done_ind",false),resistors:store.get("done_rtypes",false),nonlinear:store.get("done_nlin",false),r_connections:store.get("done_rconn",false),v_divider:store.get("done_vdiv",false),i_divider:store.get("done_idiv",false),simple_circuit:store.get("done_simple",false),vire:store.get("done_vire",false),ohms_law:store.get("done_ohms",false),conductor_r:store.get("done_cond",false),color_code:store.get("done_color",false),alpha_code:store.get("done_alpha",false)};
   const avail=order.filter(id=>moduleState(id,true).state==="open"); return avail.find(id=>!done[id])||avail[avail.length-1]||"simple_circuit"; }
 
-function show(id){ ["home","lab","bench","coder","maint","admin"].forEach(s=>$("#"+s).hidden=s!==id); }
-function openLab(){ Sound.init(); show("lab"); if(!R3) initScene(); resize(); update();
+function show(id){ if(MOVE) setMove(false); if(WIDE&&id!=="lab"&&id!=="bench"){ WIDE=false; setBoardDims(); if(R3){ R3.ro&&R3.ro.disconnect(); R3.renderer.dispose(); R3.renderer.domElement.remove(); R3=null; } if(RB) disposeBench(); } ["home","lab","bench","coder","maint","admin"].forEach(s=>$("#"+s).hidden=s!==id);  if((id==="lab"||id==="bench")&&innerWidth>innerHeight*1.15&&!$("#"+id).classList.contains("focus")) setTimeout(()=>{ if(!$("#"+id).hidden&&!$("#"+id).classList.contains("focus")){ AUTOFOCUS=id; toggleFocus(id); } },120); }
+function openLab(){ Sound.init(); show("lab"); if(!R3) initScene(); resize(); update(); moveHint();
   if(!store.get("hint2",false)){ setTimeout(()=>toast("اضغط على مسمار أي طرف، وبعدين على طرف تاني، يتمد سلك بينهم"),700); store.set("hint2",true); } }
 function setView(v){ S.view=v; $("#v3d").setAttribute("aria-pressed",v==="3d"); $("#vsch").setAttribute("aria-pressed",v==="sch"); $("#schem").hidden=v!=="sch";
   $(".wires").style.visibility=v==="sch"?"hidden":""; if(v==="sch") renderSchematic(); Sound.tick(); }
 
 $("#enterLab").onclick=()=>openModule(nextModule());
-initBenchUI(); initCoderUI(); initRPick(); initWs(); initAdmin();
+initBenchUI(); initCoderUI(); initRPick(); initWs(); initAdmin(); initAch();
 $("#backBtn").onclick=()=>{ Sound.hum(0); show("home"); renderHome(); };
 $("#v3d").onclick=()=>setView("3d"); $("#vsch").onclick=()=>setView("sch");
 $("#powerBtn").onclick=togglePower; $("#delWire").onclick=delWire; $("#cancelWire").onclick=()=>selectWire(null);
@@ -3958,8 +4370,9 @@ $$(".sw:not(.bsw)").forEach(b=>b.onclick=()=>{ S.color=b.dataset.c; $$(".sw:not(
 $$("[data-open-settings]").forEach(b=>b.onclick=()=>{ Sound.init(); syncSettings(); openModal("settings"); });
 $("#tgSound").onclick=()=>{ PREF.sound=!PREF.sound; store.set("sound",PREF.sound); Sound.set(PREF.sound); syncSettings(); Sound.tick(); };
 $("#tgHaptic").onclick=()=>{ PREF.haptic=!PREF.haptic; store.set("haptic",PREF.haptic); syncSettings(); vibrate(15); };
+$("#tgGfx").onclick=()=>{ PREF.gfx=!(PREF.gfx!==false); store.set("gfx",PREF.gfx); syncSettings(); Sound.tick(); [RB&&RB.renderer,R3&&R3.renderer].forEach(r=>{ if(r) gfxApply(r); }); if(!$("#lab").hidden&&R3) labRebuild(); if(!$("#bench").hidden&&RB) rlRebuild(); };
 $$("#settings [data-std]").forEach(b=>b.onclick=()=>{ if(b.dataset.std===P.id) return; store.set("standard",b.dataset.std); setStandard(b.dataset.std); syncSettings(); Sound.tick(); });
-$$(".modal").forEach(m=>m.addEventListener("click",e=>{ if(m.id==="upd") return; if(e.target===m||e.target.closest("[data-close]")) closeModal(); }));
+$$(".modal").forEach(m=>m.addEventListener("click",e=>{ if(m.id==="upd"||m.id==="exam") return; if(e.target===m||e.target.closest("[data-close]")) closeModal(); }));
 document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeModal(); });
 
 (async function boot(){
